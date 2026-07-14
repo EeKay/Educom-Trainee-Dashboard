@@ -21,7 +21,6 @@ export default function Dashboard({ user, leaderboardUsers }) {
 
   const avgWeek = 27000;
     const avgMonth = 100000;
-    const avgYear = 1200000;
 
     return (
         <div>
@@ -34,10 +33,9 @@ export default function Dashboard({ user, leaderboardUsers }) {
                 </div>
             </div>
 
-            <div style={{ display: 'flex', gap: '24px', justifyContent: 'center', marginTop: '32px' }}>
+            <div style={{ display: 'flex', gap: '24px', marginTop: '32px' }}>
                 <StatCard label="average per week" value={avgWeek} color="red" />
                 <StatCard label="average per month" value={avgMonth} color="blue" />
-                <StatCard label="average per year" value={avgYear} color="red" />
             </div>
             </div>
         </div>
