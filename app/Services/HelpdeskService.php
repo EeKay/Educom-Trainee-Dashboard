@@ -35,7 +35,7 @@ class HulpchatService
                 ]);
 
             if ($response->failed()) {
-                Log::warning('Hulpchat: n8n returned an error response', [
+                Log::warning('Helpdesk: n8n returned an error response', [
                     'status' => $response->status(),
                     'traineeId' => $traineeId,
                     'sessionId' => $sessionId,
@@ -46,7 +46,7 @@ class HulpchatService
 
             return $response->json();
         } catch (\Illuminate\Http\Client\ConnectionException $e) {
-            Log::error('Hulpchat: could not reach n8n', [
+            Log::error('Helpdesk: could not reach n8n', [
                 'message' => $e->getMessage(),
                 'traineeId' => $traineeId,
                 'sessionId' => $sessionId,
