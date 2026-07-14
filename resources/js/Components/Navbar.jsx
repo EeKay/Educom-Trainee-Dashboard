@@ -11,7 +11,7 @@ export default function Navbar() {
         <span className = "logo-text">educom</span>
       </Link>
       <div className = "nav-links">
-        <Link href="/dashboard" className = "nav-link">dashboard</Link>
+        <Link href="/dashboard" className = "nav-link">Dashboard</Link>
         <Link href="/faq" className = "nav-link">FAQ</Link>
       </div>
       <div className = "user-menu-wrapper">

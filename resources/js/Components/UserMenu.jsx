@@ -7,7 +7,7 @@ export default function UserMenu() {
   return (
     <div className = "user-menu">
         <button className = "user-avatar" onClick={() => setIsOpen(!isOpen)}>
-            USER
+            <img src="https://placecats.com/200/200" alt="User Avatar" />
         </button>
 
         {isOpen && (
