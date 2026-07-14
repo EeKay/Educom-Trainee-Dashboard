@@ -8,7 +8,7 @@ use App\Models;
 
 class ApiController extends Controller
 {
-    public function AIusage()
+    public function AiUsage()
     {
         $response = Http::withToken(env('API_KEY'))->get('https://ai.educom.nu/team/list');
         $teams = (array)$response->json();
@@ -24,6 +24,8 @@ class ApiController extends Controller
                 continue;
             }
             $data = $response['results'][0];
+
+            $date = date($data['date']);
             
             $models = (array)$data['breakdown']['models'];
             foreach ($models as $key => $model) {
@@ -33,10 +35,10 @@ class ApiController extends Controller
 
                     if ($user !== null)
                     {
-                        if (!\App\Models\AiUsage::where('user_id', $user->id)->where('model', $key)->where('date', $data['date'])->exists())
+                        if (!\App\Models\AiUsage::where('user_id', $user->id)->where('model', $key)->where('date', $date)->exists())
                         {
                             $user->AiUsage()->create([
-                                'date' => $data['date'],
+                                'date' => $date,
                                 'model' => $key,
                                 'spend' => $userData['metrics']['spend'], 
                                 'tokens' => $userData['metrics']['total_tokens']
@@ -45,7 +47,7 @@ class ApiController extends Controller
                         {
                             \App\Models\AiUsage::where('user_id', $user->id)
                                                 ->where('model', $key)
-                                                ->where('date', $data['date'])
+                                                ->where('date', $date)
                                                 ->update([
                                                     'spend' => $userData['metrics']['spend'], 
                                                     'tokens' => $userData['metrics']['total_tokens']
@@ -61,6 +63,37 @@ class ApiController extends Controller
         return('succes');
     }
 
+    public function getAiUsage() 
+    {
+        return \App\Models\AiUsage::latest()->get()->toJson(JSON_PRETTY_PRINT);
+    }
+
+    public function getUserAiUsage(string $id) 
+    {
+        return \App\Models\AiUsage::where('user_id', $id)->latest()->get()->toJson(JSON_PRETTY_PRINT);
+    }
+
+    public function getUsers() 
+    {
+        return \App\Models\User::latest()->get()->toJson(JSON_PRETTY_PRINT);
+    }
+
+    public function getAiUsagePeriod(Request $request)
+    {
+        $start_date = $request->input('start_date', date('Y-m-d'));
+        $end_date = $request->input('end_date', date('Y-m-d'));
+        return \App\Models\AiUsage::whereBetween('date', [$start_date, $end_date])->get()->toJson(JSON_PRETTY_PRINT);
+    }
+
+    public function getUserAiUsagePeriod(Request $request, string $id)
+    {
+        $start_date = $request->input('start_date', date('Y-m-d'));
+        $end_date = $request->input('end_date', date('Y-m-d'));
+        return \App\Models\AiUsage::where('user_id', $id)->whereBetween('date', [$start_date, $end_date])->get()->toJson(JSON_PRETTY_PRINT);
+    }
+
+
+    //TODO make migration to replace this, for testing purposes only
     public function AddMe() {
         //puts me in the database for testing, do not call if already present in database
         $col = \App\Models\User::create([
@@ -70,36 +103,5 @@ class ApiController extends Controller
             'key_alias' => 'educom_openclaw_key_paulhoi541gmailcom',
             'password' => '12345678']);
         dd($col);
-    }
-     
-
-    public function showAIusage() 
-    {
-        //return \App\Models\User::latest()->take(5)->get()->toJson(JSON_PRETTY_PRINT);
-        return \App\Models\AiUsage::where('user_id', 1)->latest()->take(5)->get()->toJson(JSON_PRETTY_PRINT);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

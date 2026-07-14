@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('AiUsage', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnDelete();
-            $table->string('date');
+            $table->date('date');
             $table->string('model');
             $table->float('spend');
             $table->integer('tokens');
