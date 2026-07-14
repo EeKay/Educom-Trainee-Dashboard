@@ -56,5 +56,6 @@ CodeCoverage/
 TestResult.xml
 nunit-*.xml
 
-# Visual Studio Code
-.vscode/*
+# Visual studio code Loek
+n8n/.vscode/*
+n8n/tests/*
