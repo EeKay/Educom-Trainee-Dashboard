@@ -99,6 +99,9 @@ class ApiController extends Controller
 
     /*
     * Returns all AI usage data over a given time period
+    * params
+    * start_date : YYYY-MM-DD
+    * end_date : YYYY-MM-DD
     */
     public function getAiUsagePeriod(Request $request)
     {
@@ -109,6 +112,9 @@ class ApiController extends Controller
 
     /*
     * Returns all AI usage data of the specified user over a given time period
+    * params
+    * start_date : YYYY-MM-DD
+    * end_date : YYYY-MM-DD
     */
     public function getUserAiUsagePeriod(Request $request, string $id)
     {
