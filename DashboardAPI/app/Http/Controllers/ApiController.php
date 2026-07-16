@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use App\Models;
 
 class ApiController extends Controller
 {
@@ -83,6 +82,8 @@ class ApiController extends Controller
 
     /*
     * Returns all AI usage data of the specified user
+    * params
+    * int id
     */
     public function getUserAiUsage(string $id) 
     {
@@ -90,18 +91,10 @@ class ApiController extends Controller
     }
 
     /*
-    * Returns all Users
-    */
-    public function getUsers() 
-    {
-        return \App\Models\User::latest()->get()->toJson(JSON_PRETTY_PRINT);
-    }
-
-    /*
     * Returns all AI usage data over a given time period
     * params
-    * start_date : YYYY-MM-DD
-    * end_date : YYYY-MM-DD
+    * string start_date : YYYY-MM-DD
+    * string end_date : YYYY-MM-DD
     */
     public function getAiUsagePeriod(Request $request)
     {
@@ -113,26 +106,14 @@ class ApiController extends Controller
     /*
     * Returns all AI usage data of the specified user over a given time period
     * params
-    * start_date : YYYY-MM-DD
-    * end_date : YYYY-MM-DD
+    * int id
+    * string start_date : YYYY-MM-DD
+    * string end_date : YYYY-MM-DD
     */
     public function getUserAiUsagePeriod(Request $request, string $id)
     {
         $start_date = $request->input('start_date', date('Y-m-d'));
         $end_date = $request->input('end_date', date('Y-m-d'));
         return \App\Models\AiUsage::where('user_id', $id)->whereBetween('date', [$start_date, $end_date])->get()->toJson(JSON_PRETTY_PRINT);
-    }
-
-
-    //TODO make migration to replace this, for testing purposes only
-    public function AddMe() {
-        //puts me in the database for testing, do not call if already present in database
-        $col = \App\Models\User::create([
-            'team' => 'Trainees Eindhoven',
-            'name' => 'Paul Broeckx',
-            'email' => 'paulhoi541@gmail.com',
-            'key_alias' => 'educom_openclaw_key_paulhoi541gmailcom',
-            'password' => '12345678']);
-        dd($col);
     }
 }
