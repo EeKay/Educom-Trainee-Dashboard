@@ -1,15 +1,15 @@
 <?php
 
-use App\Http\Controllers\ApiController;
+use App\Http\Controllers\UsageController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FaqController;
 use Illuminate\Http\Request;
 
-Route::get('/aii', [ApiController::class, 'AiUsage']); //Updates database with today's AI usage data from LiteLLM API
-Route::get('/ai/', [ApiController::class, 'getAiUsage']); //Retrieves all AI usage data from all users
-Route::get('/ai/user/{id}', [ApiController::class, 'getUserAiUsage']); //Retrieves all AI usage data of user with user_id = {id}
-Route::get('/ai/period', [ApiController::class, 'getAiUsagePeriod']);//Retrieves all AI usage data between the specified start_time and end_time
-Route::get('/ai/period/user/{id}', [ApiController::class, 'getUserAiUsagePeriod']);//Retrieves all AI usage data between the specified start_time and end_time of user with user_id = {id}
+Route::get('/aii', [UsageController::class, 'AiUsage']); //Updates database with today's AI usage data from LiteLLM API
+Route::get('/ai/', [UsageController::class, 'getAiUsage']); //Retrieves all AI usage data from all users
+Route::get('/ai/user/{id}', [UsageController::class, 'getUserAiUsage']); //Retrieves all AI usage data of user with user_id = {id}
+Route::get('/ai/period', [UsageController::class, 'getAiUsagePeriod']);//Retrieves all AI usage data between the specified start_time and end_time
+Route::get('/ai/period/user/{id}', [UsageController::class, 'getUserAiUsagePeriod']);//Retrieves all AI usage data between the specified start_time and end_time of user with user_id = {id}
 
 Route::get('/users', [UserController::class, 'getUsers']);//Retrieves a list of all users
 
