@@ -6,15 +6,14 @@
   padding: 24px;
   background: white;
   border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  /* box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06); */
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  margin-top: 50px;
-  margin-left: 50px;
+  text-align: center;
 }
 
 .profile-avatar {
-  width: 120px;
-  height: 120px;
+  width: 110px;
+  height: 110px;
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 16px;
@@ -25,11 +24,11 @@
   color: #1a1a1a;
   font-weight: bold;
   font-size: 18px;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 }
 
 .profile-tokens {
   color: #706f6c;
   font-size: 14px;
-  text-align: center;
+  line-height: 1.4;
 }

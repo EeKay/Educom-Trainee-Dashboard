@@ -1,0 +1,75 @@
+.date-range-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: #F24452;
+  border-radius: 12px;
+  padding: 28px;
+  width: 260px;
+  height: 220px;
+  color: white;
+  box-sizing: border-box;
+  transition: transform 0.15s ease;
+  cursor: pointer;
+  margin-top: 50px;
+}
+
+.date-range-card:hover {
+  transform: scale(0.98);
+}
+
+.date-range-fields{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-self: flex-start;
+    width: 100%;
+}
+
+.date-range-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: bold;
+  background-color: #3DAEDA;
+  border-radius: 6px;
+  padding: 6px 10px;
+}
+
+.date-range-text {
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.date-range-input {
+  border: none;
+  font-size: 13px;
+  font-weight: bold;
+  font-family: inherit;
+  color: white;
+  background: transparent;
+  text-align: right;
+}
+
+.date-range-input::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+.date-range-result {
+  align-self: flex-end;
+  text-align: right;
+}
+
+.date-range-result-value {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.date-range-result-spend {
+  font-size: 30px;
+  font-weight: bold;
+}
