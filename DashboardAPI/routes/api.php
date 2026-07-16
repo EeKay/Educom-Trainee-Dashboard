@@ -15,9 +15,11 @@ Route::get('/users', [UserController::class, 'getUsers']);//Retrieves a list of 
 
 
 Route::get('/faq', [FaqController::class, 'getAll']);//Retrieves full faq
-Route::get('/faq/create', [FaqController::class, 'create']);//Retrieves full faq
-Route::get('/faq/update/{id}', [FaqController::class, 'update']);//Retrieves full faq
-Route::get('/faq/delete/{id}', [FaqController::class, 'delete']);//Retrieves full faq
+Route::get('/faq/create', [FaqController::class, 'create']);//Creates new faq item
+Route::get('/faq/update/{id}', [FaqController::class, 'update']);//Updates specified faq item
+Route::get('/faq/activate/{id}', [FaqController::class, 'activate']);//Sets specified faq item to active
+Route::get('/faq/deactivate/{id}', [FaqController::class, 'deactivate']);//Sets specified faq item to inactive
+Route::get('/faq/delete/{id}', [FaqController::class, 'delete']);//Deletes specified faq item
 
 
 
