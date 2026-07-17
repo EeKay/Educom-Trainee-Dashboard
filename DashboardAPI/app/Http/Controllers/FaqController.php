@@ -9,7 +9,7 @@ class FaqController extends Controller
     /*
     * Returns all faq items
     */
-    public function getAll()
+    public function getFaqEntries()
     {
         return \App\Models\Faq::latest()->get()->toJson(JSON_PRETTY_PRINT);
     }
@@ -22,6 +22,7 @@ class FaqController extends Controller
     */
     public function create(Request $request) 
     {
+        //TODO remove default values, default values for testing purposes only
         $question = $request->input('question', 'Who am I?');
         $answer = $request->input('question', 'Dunno');
         \App\Models\Faq::create([
@@ -40,6 +41,7 @@ class FaqController extends Controller
     */
     public function update(Request $request, string $id)
     {
+        //TODO remove default values, default values for testing purposes only
         $question = $request->input('question', 'Who am I?');
         $answer = $request->input('question', 'Or maybe I do');
         \App\Models\Faq::where('id', $id)->update([
