@@ -25,4 +25,15 @@ class UserController extends Controller
             'password' => '12345678']);
         dd($col);
     }
+
+    public function AddEdu() {
+        //puts me in the database for testing, do not call if already present in database
+        $col = \App\Models\User::create([
+            'team' => 'Trainees Eindhoven',
+            'name' => 'Educom LLM',
+            'email' => 'email',
+            'key_alias' => 'Educom Dashboard LLM Key',
+            'password' => '12345678']);
+        dd($col);
+    }
 }

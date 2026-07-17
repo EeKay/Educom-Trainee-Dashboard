@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Carbon\Carbon;
 
 class UsageController extends Controller
 {
@@ -75,7 +76,7 @@ class UsageController extends Controller
     /*
     * Returns all AI usage data
     */
-    public function getAiUsage() 
+    public function getUsage() 
     {
         return \App\Models\AiUsage::latest()->get()->toJson(JSON_PRETTY_PRINT);
     }
@@ -85,7 +86,7 @@ class UsageController extends Controller
     * params
     * int id
     */
-    public function getUserAiUsage(string $id) 
+    public function getUserUsage(string $id) 
     {
         return \App\Models\AiUsage::where('user_id', $id)->latest()->get()->toJson(JSON_PRETTY_PRINT);
     }
@@ -96,7 +97,7 @@ class UsageController extends Controller
     * string start_date : YYYY-MM-DD
     * string end_date : YYYY-MM-DD
     */
-    public function getAiUsagePeriod(Request $request)
+    public function getUsagePeriod(Request $request)
     {
         $start_date = $request->input('start_date', date('Y-m-d'));
         $end_date = $request->input('end_date', date('Y-m-d'));
@@ -110,10 +111,172 @@ class UsageController extends Controller
     * string start_date : YYYY-MM-DD
     * string end_date : YYYY-MM-DD
     */
-    public function getUserAiUsagePeriod(Request $request, string $id)
+    public function getUserUsagePeriod(Request $request, string $id)
     {
         $start_date = $request->input('start_date', date('Y-m-d'));
         $end_date = $request->input('end_date', date('Y-m-d'));
         return \App\Models\AiUsage::where('user_id', $id)->whereBetween('date', [$start_date, $end_date])->get()->toJson(JSON_PRETTY_PRINT);
     }
+
+    /*
+    * Returns total spend and tokens used of every user
+    */
+    public function getTotalSpend()
+    {
+        $users = \App\Models\User::get();
+        $result = array();
+        foreach ($users as $user) {
+            $id = $user->id;
+            $name = $user->name;
+            $spend = $user->AiUsage()->sum('spend');
+            $tokens = $user->AiUsage()->sum('tokens');
+            $result[] = ['user_id' => $id, 'name' => $name, 'spend' => $spend, 'tokens' => $tokens];
+            
+        }
+        return json_encode($result);
+    }
+
+    /*
+    * Returns total spend and tokens used of specified user
+    * params
+    * int id
+    */
+    public function getUserSpend(string $id)
+    {
+        $user = \App\Models\User::where('id', $id)->get();
+        $user_id = $user[0]->id;
+        $name = $user[0]->name;
+        $spend = $user[0]->AiUsage()->sum('spend');
+        $tokens = $user[0]->AiUsage()->sum('tokens');
+
+       return json_encode(['user_id' => $user_id, 'name' => $name, 'spend' => $spend, 'tokens' => $tokens]);
+    }
+
+    /*
+    * Returns total spend and tokens used of every user over given period
+    * params
+    * string start_date : YYYY-MM-DD
+    * string end_date : YYYY-MM-DD
+    */
+    public function getTotalSpendPeriod(Request $request)
+    {
+        $start_date = $request->input('start_date', date('Y-m-d'));
+        $end_date = $request->input('end_date', date('Y-m-d'));
+
+        $users = \App\Models\User::get();
+        $result = array();
+        foreach ($users as $user) {
+            $id = $user->id;
+            $name = $user->name;
+            $spend = $user->AiUsage()->whereBetween('date', [$start_date, $end_date])->sum('spend');
+            $tokens = $user->AiUsage()->whereBetween('date', [$start_date, $end_date])->sum('tokens');
+            $result[] = ['user_id' => $id, 'name' => $name, 'spend' => $spend, 'tokens' => $tokens];
+            
+        }
+        return json_encode($result);
+    }
+
+    /*
+    * Returns total spend and tokens used of specified user over given period
+    * params
+    * int id
+    * string start_date : YYYY-MM-DD
+    * string end_date : YYYY-MM-DD
+    */
+    public function getUserSpendPeriod(Request $request, string $id)
+    {
+        $start_date = $request->input('start_date', date('Y-m-d'));
+        $end_date = $request->input('end_date', date('Y-m-d'));
+
+        $user = \App\Models\User::where('id', $id)->get();
+        $user_id = $user[0]->id;
+        $name = $user[0]->name;
+        $spend = $user[0]->AiUsage()->whereBetween('date', [$start_date, $end_date])->sum('spend');
+        $tokens = $user[0]->AiUsage()->whereBetween('date', [$start_date, $end_date])->sum('tokens');
+
+       return json_encode(['user_id' => $user_id, 'name' => $name, 'spend' => $spend, 'tokens' => $tokens]);
+    }
+
+    /*
+    * Returns total spend and tokens used of every user over this month
+    */
+    public function getTotalSpendMonth()
+    {
+        $start_date = Carbon::now()->startOfMonth()->format('Y-m-d');
+        $end_date = date('Y-m-d');
+
+        $users = \App\Models\User::get();
+        $result = array();
+        foreach ($users as $user) {
+            $id = $user->id;
+            $name = $user->name;
+            $spend = $user->AiUsage()->whereBetween('date', [$start_date, $end_date])->sum('spend');
+            $tokens = $user->AiUsage()->whereBetween('date', [$start_date, $end_date])->sum('tokens');
+            $result[] = ['user_id' => $id, 'name' => $name, 'spend' => $spend, 'tokens' => $tokens];
+            
+        }
+        return json_encode($result);
+    }
+
+    /*
+    * Returns total spend and tokens used of specfied user over this month
+    * params
+    * int id
+    */
+    public function getUserSpendMonth(string $id)
+    {
+        $start_date = Carbon::now()->startOfMonth()->format('Y-m-d');
+        $end_date = date('Y-m-d');
+
+        $user = \App\Models\User::where('id', $id)->get();
+        $user_id = $user[0]->id;
+        $name = $user[0]->name;
+        $spend = $user[0]->AiUsage()->whereBetween('date', [$start_date, $end_date])->sum('spend');
+        $tokens = $user[0]->AiUsage()->whereBetween('date', [$start_date, $end_date])->sum('tokens');
+
+       return json_encode(['user_id' => $user_id, 'name' => $name, 'spend' => $spend, 'tokens' => $tokens]);
+    }
+
+    /*
+    * Returns total spend and tokens used of every user over this week
+    */
+    public function getTotalSpendWeek()
+    {
+        $start_date = Carbon::now()->startOfWeek()->format('Y-m-d');
+        $end_date = date('Y-m-d');
+
+        $users = \App\Models\User::get();
+        $result = array();
+        foreach ($users as $user) {
+            $id = $user->id;
+            $name = $user->name;
+            $spend = $user->AiUsage()->whereBetween('date', [$start_date, $end_date])->sum('spend');
+            $tokens = $user->AiUsage()->whereBetween('date', [$start_date, $end_date])->sum('tokens');
+            $result[] = ['user_id' => $id, 'name' => $name, 'spend' => $spend, 'tokens' => $tokens];
+            
+        }
+        return json_encode($result);
+    }
+
+    /*
+    * Returns total spend and tokens used of specfied user over this week
+    * params
+    * int id
+    */
+    public function getUserSpendWeek(string $id)
+    {
+
+        $start_date = Carbon::now()->startOfWeek()->format('Y-m-d');
+        $end_date = date('Y-m-d');
+
+        $user = \App\Models\User::where('id', $id)->get();
+        $user_id = $user[0]->id;
+        $name = $user[0]->name;
+        $spend = $user[0]->AiUsage()->whereBetween('date', [$start_date, $end_date])->sum('spend');
+        $tokens = $user[0]->AiUsage()->whereBetween('date', [$start_date, $end_date])->sum('tokens');
+
+       return json_encode(['user_id' => $user_id, 'name' => $name, 'spend' => $spend, 'tokens' => $tokens]);
+    }
+
+
 }
