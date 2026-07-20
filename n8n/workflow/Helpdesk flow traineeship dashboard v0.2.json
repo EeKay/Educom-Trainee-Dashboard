@@ -1,0 +1,1026 @@
+{
+  "name": "Helpdesk flow traineeship dashboard",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "/helpdesk-chat",
+        "authentication": "headerAuth",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1600,
+        128
+      ],
+      "id": "69c5ae3d-8d88-4086-951e-5e035377a602",
+      "name": "Get question",
+      "webhookId": "a9f47089-4f21-4e44-be07-43a6a25d4338",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "NwqGASeubs0rrHfY",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "WITH matched_faq AS (\n    -- Attempt to find the best valid match\n    SELECT id, question, answer,\n           (\n             ts_rank_cd(\n               question_vector, \n               to_tsquery('dutch', array_to_string(tsvector_to_array(to_tsvector('dutch', $1)), ' | '))\n             ) \n             + \n             similarity(question, $1)\n           ) / 2 AS confidence\n    FROM faq\n    WHERE is_active = true\n      AND (\n        question_vector @@ to_tsquery('dutch', array_to_string(tsvector_to_array(to_tsvector('dutch', $1)), ' | '))\n        OR \n        similarity(question, $1) > 0.3\n      )\n    ORDER BY confidence DESC\n    LIMIT 1\n)\n-- 1. Return the match if it exists\nSELECT id, question, answer, confidence \nFROM matched_faq\n\nUNION ALL\n\n-- 2. If it does NOT exist, return this dummy row with 0 confidence\nSELECT NULL as id, NULL as question, NULL as answer, 0 as confidence\nWHERE NOT EXISTS (SELECT 1 FROM matched_faq);",
+        "options": {
+          "queryReplacement": "={{ $json.question }}"
+        }
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -864,
+        -160
+      ],
+      "id": "aa55a445-9483-49d8-b03d-1ad56f552d99",
+      "name": "Search in FAQ",
+      "alwaysOutputData": false,
+      "credentials": {
+        "postgres": {
+          "id": "UWvR1gL49KBkkxEb",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "73a594e9-c598-4e71-a868-aa1c7cee7d75",
+              "leftValue": "={{ $json.matched }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        96,
+        -48
+      ],
+      "id": "48c73b95-43ff-4595-99c4-1f4fcc6f6de6",
+      "name": "If FAQ was found"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        656,
+        -528
+      ],
+      "id": "0ea9bc5a-435d-4edb-a52c-1fab5b06ab3e",
+      "name": "Respond with FAQ"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ef1fb1d0-12af-4273-b8f3-15b59e6fd85b",
+              "name": "answer",
+              "value": "={{ $json.answer }}",
+              "type": "string"
+            },
+            {
+              "id": "74dd524a-3391-48e5-ba39-2b0338218deb",
+              "name": "flow",
+              "value": "faq",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        368,
+        -528
+      ],
+      "id": "827374e8-69c2-41e2-8c44-8b2a51f17d6a",
+      "name": "Format answer FAQ"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b30b68f1-3bc2-4634-acb8-3260a4f9119f",
+              "name": "answer",
+              "value": "={{ $json.answer }}",
+              "type": "string"
+            },
+            {
+              "id": "1b4b4106-6b00-4adb-8904-a11f58e2ff90",
+              "name": "resolved",
+              "value": "={{ $json.resolved }}",
+              "type": "boolean"
+            },
+            {
+              "id": "d8104945-9220-4d89-9692-4feb3267d5a5",
+              "name": "reason",
+              "value": "={{ $json.reason }}",
+              "type": "string"
+            },
+            {
+              "id": "0c9ca539-77e0-4e5f-9419-27d77086aafa",
+              "name": "traineeId",
+              "value": "={{ $json.traineeId }}",
+              "type": "string"
+            },
+            {
+              "id": "2940dfd2-8a0d-4b51-a6d9-06b5b528638f",
+              "name": "question",
+              "value": "={{ $json.question }}",
+              "type": "string"
+            },
+            {
+              "id": "1a868dad-2c0d-433d-8fe8-08376d69043c",
+              "name": "sessionId",
+              "value": "={{ $json.sessionId }}",
+              "type": "string"
+            },
+            {
+              "id": "3280abf1-95fb-4dfc-b823-39d110960066",
+              "name": "timestamp",
+              "value": "={{ $json.timestamp }}",
+              "type": "string"
+            },
+            {
+              "id": "4de5c394-1d2a-4a13-bbee-522aff1465cb",
+              "name": "flow",
+              "value": "agent",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1568,
+        32
+      ],
+      "id": "737fbf3d-448f-4565-ae70-c9cd70a84cca",
+      "name": "Format answer Agent"
+    },
+    {
+      "parameters": {
+        "text": "=\"Trainee {{  }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1792,
+        224
+      ],
+      "id": "5806b5f8-31bf-46b2-a9b5-895e87ed7909",
+      "name": "Send a text message",
+      "webhookId": "abc58a96-6cd5-4f11-b2f1-3c506f86180b",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        1792,
+        32
+      ],
+      "id": "902dfd01-68b0-4df8-9553-c138bc378ab5",
+      "name": "Respond with Agent"
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        1792,
+        416
+      ],
+      "id": "ad7c79d4-dcf8-49ea-bc91-8d8949131a59",
+      "name": "Respond with escalation"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.traineeId }}",
+        "contextWindowLength": 3
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        576,
+        560
+      ],
+      "id": "af176fd6-c5a7-4292-ae28-98ee3a8fdc54",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.question }}",
+        "options": {
+          "systemMessage": "You are a helpdesk assistant for Educom trainees.\nthe platform, tools, and workflows. You do not have access to take any\nactions on accounts, reset passwords, or modify any data. If asked to do\nsomething that requires an action rather than information, say you can't\ndo that yet and that a docent will need to help. Don't mention it every time someone asks something.\n\nAlways respond with a JSON object containing exactly these fields:\n\"answer\" (your response text), \"resolved\" (true if you have fully and\nconfidently answered the question, false if it requires human help,\nan account action, or you are not sure), and \"reason\" (a short\nexplanation, only when resolved is false).\n\nSet resolved to false whenever the question involves account changes,\npasswords, permissions, anything you cannot verify with certainty or if asked to send a message to the docent. \nWhen in doubt, set resolved to false. \nAlso let them know it is being escalated, this is being done by sending a message to the docent.\n\nRespond with ONLY a raw JSON object, no markdown code fences, no extra\ntext before or after it, and no wrapping under any parent key. Example:\n{\"answer\": \"...\", \"resolved\": true, \"reason\": \"\"}\nThe answer output must be in the languague of the question. The reason output must be in dutch."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        560,
+        -272
+      ],
+      "id": "8b71a162-6f43-4b19-8736-d5bae0d76cc8",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "jsCode": "let raw = $input.item.json.output; // swap in whatever field name you actually see\nraw = raw.trim().replace(/^```json\\s*/i, '').replace(/```$/, '');\n\ntry {\n  let parsed = JSON.parse(raw);\n  if (parsed.output) parsed = parsed.output;\n  return { json: parsed };\n} catch (e) {\n  return { json: { answer: \"Something went wrong\", resolved: false, reason: \"parse_error\" } };\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        912,
+        -272
+      ],
+      "id": "ac5e0a9b-7185-4e73-b388-8b61d75998a2",
+      "name": "Format output agent"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "50abe493-c976-4c88-8d15-c9b0bcf1f958",
+              "name": "traineeId",
+              "value": "={{ $json.traineeId }}",
+              "type": "string"
+            },
+            {
+              "id": "0bd21ee8-e510-4e77-8fa6-4790a2d105a0",
+              "name": "question",
+              "value": "={{ $json.question }}",
+              "type": "string"
+            },
+            {
+              "id": "39512aa1-8629-4c71-ae0d-e4fa1f480452",
+              "name": "sessionId",
+              "value": "={{ $json.sessionId }}",
+              "type": "string"
+            },
+            {
+              "id": "e858560c-2bf1-46bf-84a5-6812a172aa83",
+              "name": "timestamp",
+              "value": "={{ $json.timestamp }}",
+              "type": "string"
+            },
+            {
+              "id": "9d2677d0-9ae7-49cf-b716-3938b8b6e02a",
+              "name": "answer",
+              "value": "={{ $json.answer }}",
+              "type": "string"
+            },
+            {
+              "id": "9bcac78e-1f0d-4f43-83b5-ed4e5d2c3e99",
+              "name": "resolved",
+              "value": "={{ $json.resolved }}",
+              "type": "boolean"
+            },
+            {
+              "id": "f623b75c-c68d-4a83-acb2-d22deb84c808",
+              "name": "reason",
+              "value": "={{ $json.reason }}",
+              "type": "string"
+            },
+            {
+              "id": "99540c20-ce50-44f4-980c-fb14b9818f7d",
+              "name": "flow",
+              "value": "Escalate",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1568,
+        416
+      ],
+      "id": "6462ad05-692c-4bef-a3d5-0e15e74937c7",
+      "name": "Format answer Escalate"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "c0237983-5890-44c5-bd01-3313c2903778",
+              "leftValue": "={{ $json.resolved }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1344,
+        160
+      ],
+      "id": "0157e54e-a9a4-4e6d-9c6a-e09bfb027f67",
+      "name": "If AI can answer"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1120,
+        32
+      ],
+      "id": "a0828e6f-cf1e-4952-849a-a52a4db3c10e",
+      "name": "Merge all data with AI"
+    },
+    {
+      "parameters": {
+        "authentication": "webhook",
+        "content": "=----\n🔔 Escalatie van trainee {{ $json.traineeId }}\nWanneer: {{ $json.timestamp }}\nVraag: {{ $json.question }}\nRede escalatie: {{ $json.reason }}\nAntwoord gegeven door AI: {{ $json.answer }}\"\n----\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        1568,
+        224
+      ],
+      "id": "c8c5281b-7e26-4abb-841c-333e6d139ca1",
+      "name": "Send notification discord",
+      "webhookId": "5c3d2eb0-fb63-41c5-a480-d9a693a45a4f",
+      "credentials": {
+        "discordWebhookApi": {
+          "id": "vW28icEiUIEr4FSJ",
+          "name": "Discord Webhook account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const THRESHOLD = 0.6;\n\nif ($input.all().length === 0) {\n  return { json: { confidence: 0, matched: false } };\n}\n\nconst item = $input.item.json;\nconst matched = item.confidence >= THRESHOLD;\n\nreturn { json: { ...item, matched } };"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -576,
+        -160
+      ],
+      "id": "74da0ef8-d4a0-4e83-a0b3-4549d72675d6",
+      "name": "Give confidence"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -128,
+        -48
+      ],
+      "id": "fe2fbebc-61b5-491b-a1cd-97ca64bd394d",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f3ef4ba0-8a03-4fcb-bbe6-75f945fa54a3",
+              "name": "confidence",
+              "value": "={{ $json.confidence }}",
+              "type": "number"
+            },
+            {
+              "id": "66f76ed5-d8d9-48ad-b14e-75f799664d32",
+              "name": "matched",
+              "value": "={{ $json.matched }}",
+              "type": "boolean"
+            },
+            {
+              "id": "360c37c1-9f0a-42a5-b8ae-be00763fe7d9",
+              "name": "answer",
+              "value": "={{ $json.answer }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -352,
+        -160
+      ],
+      "id": "e70040d9-abe9-46eb-8f64-4588c2d54797",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Map through the items and delete the key from the object\nreturn items.map(item => {\n    delete item.json.answer; // Or just item.answer depending on the platform\n    return item;\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        320,
+        -32
+      ],
+      "id": "1899e5af-9895-4042-9796-ddae324842ea",
+      "name": "Remove answer"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "04df42a3-7ad2-4873-b8a9-74fc2ebe3f2e",
+              "name": "traineeId",
+              "value": "={{ $json.body.traineeId }}",
+              "type": "string"
+            },
+            {
+              "id": "8e0cc51b-059c-49a0-bbf7-15992c7ec168",
+              "name": "question",
+              "value": "={{ $json.body.question }}",
+              "type": "string"
+            },
+            {
+              "id": "b65bc4a2-4330-412f-9d36-2508f618a983",
+              "name": "sessionId",
+              "value": "={{ $json.body.sessionId }}",
+              "type": "string"
+            },
+            {
+              "id": "8c29fc55-f621-41be-bcd0-994ce4639d46",
+              "name": "timestamp",
+              "value": "={{ $json.body.timestamp }}",
+              "type": "string"
+            },
+            {
+              "id": "25ca0880-09a5-454b-8e7d-65e11a166934",
+              "name": "faqRejected",
+              "value": "={{ $json.body.faqRejected }}",
+              "type": "boolean"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1376,
+        128
+      ],
+      "id": "cca181c6-62f0-485f-95b8-6990fdf2d6e3",
+      "name": "Format incoming"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "30176784-e69c-43b9-8b68-c9d0f8b2061e",
+              "leftValue": "={{ $json.faqRejected }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "false",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -1152,
+        128
+      ],
+      "id": "53eef297-3573-4d74-9d5a-70f6786f4072",
+      "name": "If faqRejected"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "openrouter/deepseek/deepseek-v4-flash",
+          "mode": "list",
+          "cachedResultName": "openrouter/deepseek/deepseek-v4-flash"
+        },
+        "builtInTools": {},
+        "options": {
+          "maxTokens": 400
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        448,
+        560
+      ],
+      "id": "ace66ff8-6114-4ed1-b809-f679eb8a1d8b",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "HPQicweo6KJUFRCf",
+          "name": "LiteLLM Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.question }}",
+        "options": {
+          "systemMessage": "You are a helpdesk assistant for Educom trainees.\nthe platform, tools, and workflows. You do not have access to take any\nactions on accounts, reset passwords, or modify any data. If asked to do\nsomething that requires an action rather than information, say you can't\ndo that yet and that a docent will need to help. Don't mention it every time someone asks something.\n\nThe previous answer was given my the FAQ and it didn't work, now it lands at you.\n\nAlways respond with a JSON object containing exactly these fields:\n\"answer\" (your response text), \"resolved\" (true if you have fully and\nconfidently answered the question, false if it requires human help,\nan account action, or you are not sure), and \"reason\" (a short\nexplanation, only when resolved is false).\n\nSet resolved to false whenever the question involves account changes,\npasswords, permissions, anything you cannot verify with certainty or if asked to send a message to the docent. \nWhen in doubt, set resolved to false. \nAlso let them know it is being escalated, this is being done by sending a message to the docent.\n\nRespond with ONLY a raw JSON object, no markdown code fences, no extra\ntext before or after it, and no wrapping under any parent key. Example:\n{\"answer\": \"...\", \"resolved\": true, \"reason\": \"\"}\nThe answer output must be in the languague of the question. The reason output must be in dutch."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -288,
+        336
+      ],
+      "id": "a5fbf8f4-c6f4-4d08-8165-7e22961db197",
+      "name": "AI Agent1"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        336,
+        160
+      ],
+      "id": "7a86a4b5-914c-4e35-9b2b-e7df45c84b82",
+      "name": "Merge all data with AI1"
+    },
+    {
+      "parameters": {
+        "jsCode": "let raw = $input.item.json.output; // swap in whatever field name you actually see\nraw = raw.trim().replace(/^```json\\s*/i, '').replace(/```$/, '');\n\ntry {\n  let parsed = JSON.parse(raw);\n  if (parsed.output) parsed = parsed.output;\n  return { json: parsed };\n} catch (e) {\n  return { json: { answer: \"Something went wrong\", resolved: false, reason: \"parse_error\" } };\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        64,
+        336
+      ],
+      "id": "3c4585c9-f0aa-408e-83a6-415485282424",
+      "name": "Format output agent1"
+    },
+    {
+      "parameters": {
+        "content": "## When faq answer wasn't accepted\n\nSkip FAQ search"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -688,
+        416
+      ],
+      "id": "faf304d9-63c0-4181-ade6-474d0024c9d3",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## First check in FAQ db\n\nWhen found return the answer"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -640,
+        -416
+      ],
+      "id": "c82163b0-c010-440b-a68a-f6e8475153bc",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## FAQ gives answer\n",
+        "height": 112
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        448,
+        -688
+      ],
+      "id": "95b80bbe-4dbf-4116-9318-bbd9df0ad0d9",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "## Agents answered",
+        "height": 112
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2016,
+        16
+      ],
+      "id": "a68e9bc4-dbc8-4160-8cad-923f57017448",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "## Agent escalated\n\nCouldn't answer it himself"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2016,
+        288
+      ],
+      "id": "97a37133-e701-4752-b8f3-1cf86a3ca48f",
+      "name": "Sticky Note4"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Get question": {
+      "main": [
+        [
+          {
+            "node": "Format incoming",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search in FAQ": {
+      "main": [
+        [
+          {
+            "node": "Give confidence",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If FAQ was found": {
+      "main": [
+        [
+          {
+            "node": "Format answer FAQ",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Remove answer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format answer FAQ": {
+      "main": [
+        [
+          {
+            "node": "Respond with FAQ",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format answer Agent": {
+      "main": [
+        [
+          {
+            "node": "Respond with Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Format output agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format output agent": {
+      "main": [
+        [
+          {
+            "node": "Merge all data with AI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format answer Escalate": {
+      "main": [
+        [
+          {
+            "node": "Respond with escalation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If AI can answer": {
+      "main": [
+        [
+          {
+            "node": "Format answer Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send notification discord",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Format answer Escalate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge all data with AI": {
+      "main": [
+        [
+          {
+            "node": "If AI can answer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send notification discord": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          },
+          {
+            "node": "AI Agent1",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Give confidence": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "If FAQ was found",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Remove answer": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge all data with AI",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Format incoming": {
+      "main": [
+        [
+          {
+            "node": "If faqRejected",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If faqRejected": {
+      "main": [
+        [
+          {
+            "node": "Search in FAQ",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ],
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge all data with AI1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent1": {
+      "main": [
+        [
+          {
+            "node": "Format output agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge all data with AI1": {
+      "main": [
+        [
+          {
+            "node": "If AI can answer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format output agent1": {
+      "main": [
+        [
+          {
+            "node": "Merge all data with AI1",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "d97ed8d7-3918-49e4-ac15-f66e0032b8ee",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "4d4224babc70d562b6f165b6b177d4f48f69369fadc0f016dcd0145da987e138"
+  },
+  "nodeGroups": [],
+  "id": "Nrzo8nYLxIalt4oo",
+  "tags": []
+}
