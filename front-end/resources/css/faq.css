@@ -1,0 +1,29 @@
+.faq-container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 40px 32px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin-top: 50px;
+}
+
+.faq-heading {
+  text-align: center;
+}
+
+.faq-eyebrow {
+  color: #F24452;
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.faq-title {
+  color: #3DAEDA;
+  font-size: 28px;
+  margin: 0;
+}
+
+.faq-subheading {
+  font-size: 20px;
+  margin-bottom: 8px;
+}

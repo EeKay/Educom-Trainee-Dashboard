@@ -32,3 +32,18 @@
   font-size: 14px;
   line-height: 1.4;
 }
+
+.stat-card,
+.profile-card,
+.leaderboard,
+.date-range-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover,
+.profile-card:hover,
+.leaderboard:hover,
+.date-range-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
