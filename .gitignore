@@ -9,3 +9,4 @@
 
 .env
 DashboardAPI/storage/logs/laravel.log
+/DashboardAPI/storage/logs
