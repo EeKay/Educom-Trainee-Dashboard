@@ -31,8 +31,8 @@ class User extends Authenticatable
         ];
     }
 
-    public function Usage(): HasMany
+    public function AiUsage(): HasMany
     {
-        return $this->hasMany(Usage::class);
+        return $this->hasMany(AiUsage::class);
     }
 }

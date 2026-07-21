@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class UserSeeder extends Seeder
+class DatabaseSeeder extends Seeder
 {
     use WithoutModelEvents;
 
@@ -15,12 +15,11 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        // User::factory(10)->create();
+
         User::factory()->create([
-            'team' => 'Trainees Eindhoven',
-            'name' => 'Paul Broeckx',
-            'email' => 'paulhoi541@gmail.com',
-            'key_alias' => 'educom_openclaw_key_paulhoi541gmailcom',
-            'password' => '12345678'
+            'name' => 'Test User',
+            'email' => 'test@example.com',
         ]);
     }
 }
