@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class AiUsage extends Model
+class Usage extends Model
 {
-    protected $table = 'AiUsage';
+    protected $table = 'Usage';
     protected $fillable = ['date', 'model', 'spend', 'tokens'];
 
     public function actual(): BelongsTo
