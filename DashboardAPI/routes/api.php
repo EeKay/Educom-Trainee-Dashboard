@@ -4,6 +4,9 @@ use App\Http\Controllers\UsageController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FaqController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+
+Route::get('/ai/fetch/period', [UsageController::class, 'FetchUsagePeriod']); 
 
 //Updates database with today's AI usage data from LiteLLM API
 //params: none
