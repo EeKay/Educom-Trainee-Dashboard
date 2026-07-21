@@ -27,7 +27,7 @@ class UsageController extends Controller
                 'end_date' => $end_date,
                 'page_size' => 10000
                 ]);
-            //dd($response = (array)$response->json());
+            $response = (array)$response->json();
 
             //If team has no usage data skip to next team
             if(empty($response['results'])) {

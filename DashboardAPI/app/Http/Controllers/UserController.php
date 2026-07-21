@@ -36,4 +36,15 @@ class UserController extends Controller
             'password' => '12345678']);
         dd($col);
     }
+
+    public function AddRuLian() {
+        //puts me in the database for testing, do not call if already present in database
+        $col = \App\Models\User::create([
+            'team' => 'Trainees Eindhoven',
+            'name' => 'Ru Lian Wang',
+            'email' => 'email1',
+            'key_alias' => 'educom_openclaw_key_0909wanggmailcom',
+            'password' => '12345678']);
+        dd($col);
+    }
 }

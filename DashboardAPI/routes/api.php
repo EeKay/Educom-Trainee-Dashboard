@@ -102,3 +102,4 @@ Route::delete('/faq/delete/{id}', [FaqController::class, 'delete']);
 //API call for testing purposes only, do not call
 Route::get('/addme', [UserController::class, 'AddMe']);
 Route::get('/addedu', [UserController::class, 'AddEdu']);
+Route::get('/addru', [UserController::class, 'AddRuLian']);
