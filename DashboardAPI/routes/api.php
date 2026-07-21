@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 //Updates database with today's AI usage data from LiteLLM API
 //params: none
-Route::get('/aii', [UsageController::class, 'AiUsage']); 
+Route::get('/ai/fetch', [UsageController::class, 'FetchUsage']); 
 
 //Retrieves all AI usage data from all users(old)
 //params: none
