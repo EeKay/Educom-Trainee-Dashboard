@@ -3,10 +3,10 @@
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schedule;
-use App\Http\Controllers\ApiController;
+use App\Http\Controllers\UsageController;
  
 Schedule::call(function () {
-    (new \App\Http\Controllers\ApiController())->AiUsage();
+    (new \App\Http\Controllers\UsageController())->FetchUsage();
 })->everyMinute();
 
 Artisan::command('inspire', function () {

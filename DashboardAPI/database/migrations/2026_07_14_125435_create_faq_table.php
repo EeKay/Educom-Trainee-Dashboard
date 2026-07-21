@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Usage', function (Blueprint $table) {
+        Schema::create('faq', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnDelete();
-            $table->date('date');
-            $table->string('model');
-            $table->float('spend');
-            $table->integer('tokens');
+            $table->string('question');
+            $table->string('answer');
+            $table->boolean('is_active');
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('AiUsage');
+        Schema::dropIfExists('faq');
     }
 };
