@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import '../../css/date-range-card.css';
 
-export default function DateRangeCard({ onRangeChange }) {
+export default function DateRangeCard({ tokens, spend, onRangeChange, maxDate }) {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
 
@@ -29,8 +29,8 @@ export default function DateRangeCard({ onRangeChange }) {
       </div>
 
       <div className="date-range-result">
-        <div className="date-range-result-value">150,000 tokens</div>
-        <div className="date-range-result-spend">Spend: $0.19</div>
+        <div className="stat-card-value">{Math.round(tokens).toLocaleString()} tokens</div>
+        <div className="stat-card-spend">Spend: ${spend.toFixed(3)}</div>
       </div>
     </div>
   );

@@ -39,7 +39,7 @@ export default function Leaderboard({ users, currentUserId }) {
               >
                 <div className="leaderboard-avatar-wrapper">
                   <img
-                    src={user.avatar}
+                    src={"https://placecats.com/200/200"}
                     alt={user.name}
                     className="leaderboard-avatar"
                   />
@@ -50,7 +50,7 @@ export default function Leaderboard({ users, currentUserId }) {
                 </div>
 
                 <div className="leaderboard-name">
-                  {user.name}
+                  {user.name.split(" ")[0]}
                 </div>
               </div>
             );
