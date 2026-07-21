@@ -8,7 +8,7 @@ use Carbon\Carbon;
 
 class UsageController extends Controller
 {
-    public function FetchUsage()
+    public function AiUsage()
     {
         //get list of teams
         $response = Http::withToken(env('API_KEY'))->get('https://ai.educom.nu/team/list');
@@ -45,9 +45,9 @@ class UsageController extends Controller
                     //create entry if not yet present, otherwise update entry
                     if ($user !== null)
                     {
-                        if (!\App\Models\Usage::where('user_id', $user->id)->where('model', $key)->where('date', $date)->exists())
+                        if (!\App\Models\AiUsage::where('user_id', $user->id)->where('model', $key)->where('date', $date)->exists())
                         {
-                            $user->Usage()->create([
+                            $user->AiUsage()->create([
                                 'date' => $date,
                                 'model' => $key,
                                 'spend' => $userData['metrics']['spend'], 
@@ -55,7 +55,7 @@ class UsageController extends Controller
                                 ]);
                         } else 
                         {
-                            \App\Models\Usage::where('user_id', $user->id)
+                            \App\Models\AiUsage::where('user_id', $user->id)
                                                 ->where('model', $key)
                                                 ->where('date', $date)
                                                 ->update([
@@ -78,7 +78,7 @@ class UsageController extends Controller
     */
     public function getUsage() 
     {
-        return \App\Models\Usage::latest()->get()->toJson();
+        return \App\Models\AiUsage::latest()->get()->toJson(JSON_PRETTY_PRINT);
     }
 
     /*
@@ -88,7 +88,7 @@ class UsageController extends Controller
     */
     public function getUserUsage(string $id) 
     {
-        return \App\Models\Usage::where('user_id', $id)->latest()->get()->toJson();
+        return \App\Models\AiUsage::where('user_id', $id)->latest()->get()->toJson(JSON_PRETTY_PRINT);
     }
 
     /*
@@ -101,7 +101,7 @@ class UsageController extends Controller
     {
         $start_date = $request->input('start_date', date('Y-m-d'));
         $end_date = $request->input('end_date', date('Y-m-d'));
-        return \App\Models\Usage::whereBetween('date', [$start_date, $end_date])->get()->toJson();
+        return \App\Models\AiUsage::whereBetween('date', [$start_date, $end_date])->get()->toJson(JSON_PRETTY_PRINT);
     }
 
     /*
@@ -115,7 +115,7 @@ class UsageController extends Controller
     {
         $start_date = $request->input('start_date', date('Y-m-d'));
         $end_date = $request->input('end_date', date('Y-m-d'));
-        return \App\Models\Usage::where('user_id', $id)->whereBetween('date', [$start_date, $end_date])->get()->toJson();
+        return \App\Models\AiUsage::where('user_id', $id)->whereBetween('date', [$start_date, $end_date])->get()->toJson(JSON_PRETTY_PRINT);
     }
 
     /*
@@ -128,8 +128,8 @@ class UsageController extends Controller
         foreach ($users as $user) {
             $id = $user->id;
             $name = $user->name;
-            $spend = $user->Usage()->sum('spend');
-            $tokens = $user->Usage()->sum('tokens');
+            $spend = $user->AiUsage()->sum('spend');
+            $tokens = $user->AiUsage()->sum('tokens');
             $result[] = ['user_id' => $id, 'name' => $name, 'spend' => $spend, 'tokens' => $tokens];
             
         }
@@ -146,8 +146,8 @@ class UsageController extends Controller
         $user = \App\Models\User::where('id', $id)->get();
         $user_id = $user[0]->id;
         $name = $user[0]->name;
-        $spend = $user[0]->Usage()->sum('spend');
-        $tokens = $user[0]->Usage()->sum('tokens');
+        $spend = $user[0]->AiUsage()->sum('spend');
+        $tokens = $user[0]->AiUsage()->sum('tokens');
 
        return json_encode(['user_id' => $user_id, 'name' => $name, 'spend' => $spend, 'tokens' => $tokens]);
     }
@@ -168,8 +168,8 @@ class UsageController extends Controller
         foreach ($users as $user) {
             $id = $user->id;
             $name = $user->name;
-            $spend = $user->Usage()->whereBetween('date', [$start_date, $end_date])->sum('spend');
-            $tokens = $user->Usage()->whereBetween('date', [$start_date, $end_date])->sum('tokens');
+            $spend = $user->AiUsage()->whereBetween('date', [$start_date, $end_date])->sum('spend');
+            $tokens = $user->AiUsage()->whereBetween('date', [$start_date, $end_date])->sum('tokens');
             $result[] = ['user_id' => $id, 'name' => $name, 'spend' => $spend, 'tokens' => $tokens];
             
         }
@@ -191,8 +191,8 @@ class UsageController extends Controller
         $user = \App\Models\User::where('id', $id)->get();
         $user_id = $user[0]->id;
         $name = $user[0]->name;
-        $spend = $user[0]->Usage()->whereBetween('date', [$start_date, $end_date])->sum('spend');
-        $tokens = $user[0]->Usage()->whereBetween('date', [$start_date, $end_date])->sum('tokens');
+        $spend = $user[0]->AiUsage()->whereBetween('date', [$start_date, $end_date])->sum('spend');
+        $tokens = $user[0]->AiUsage()->whereBetween('date', [$start_date, $end_date])->sum('tokens');
 
        return json_encode(['user_id' => $user_id, 'name' => $name, 'spend' => $spend, 'tokens' => $tokens]);
     }
@@ -210,8 +210,8 @@ class UsageController extends Controller
         foreach ($users as $user) {
             $id = $user->id;
             $name = $user->name;
-            $spend = $user->Usage()->whereBetween('date', [$start_date, $end_date])->sum('spend');
-            $tokens = $user->Usage()->whereBetween('date', [$start_date, $end_date])->sum('tokens');
+            $spend = $user->AiUsage()->whereBetween('date', [$start_date, $end_date])->sum('spend');
+            $tokens = $user->AiUsage()->whereBetween('date', [$start_date, $end_date])->sum('tokens');
             $result[] = ['user_id' => $id, 'name' => $name, 'spend' => $spend, 'tokens' => $tokens];
             
         }
@@ -231,8 +231,8 @@ class UsageController extends Controller
         $user = \App\Models\User::where('id', $id)->get();
         $user_id = $user[0]->id;
         $name = $user[0]->name;
-        $spend = $user[0]->Usage()->whereBetween('date', [$start_date, $end_date])->sum('spend');
-        $tokens = $user[0]->Usage()->whereBetween('date', [$start_date, $end_date])->sum('tokens');
+        $spend = $user[0]->AiUsage()->whereBetween('date', [$start_date, $end_date])->sum('spend');
+        $tokens = $user[0]->AiUsage()->whereBetween('date', [$start_date, $end_date])->sum('tokens');
 
        return json_encode(['user_id' => $user_id, 'name' => $name, 'spend' => $spend, 'tokens' => $tokens]);
     }
@@ -250,8 +250,8 @@ class UsageController extends Controller
         foreach ($users as $user) {
             $id = $user->id;
             $name = $user->name;
-            $spend = $user->Usage()->whereBetween('date', [$start_date, $end_date])->sum('spend');
-            $tokens = $user->Usage()->whereBetween('date', [$start_date, $end_date])->sum('tokens');
+            $spend = $user->AiUsage()->whereBetween('date', [$start_date, $end_date])->sum('spend');
+            $tokens = $user->AiUsage()->whereBetween('date', [$start_date, $end_date])->sum('tokens');
             $result[] = ['user_id' => $id, 'name' => $name, 'spend' => $spend, 'tokens' => $tokens];
             
         }
@@ -272,8 +272,8 @@ class UsageController extends Controller
         $user = \App\Models\User::where('id', $id)->get();
         $user_id = $user[0]->id;
         $name = $user[0]->name;
-        $spend = $user[0]->Usage()->whereBetween('date', [$start_date, $end_date])->sum('spend');
-        $tokens = $user[0]->Usage()->whereBetween('date', [$start_date, $end_date])->sum('tokens');
+        $spend = $user[0]->AiUsage()->whereBetween('date', [$start_date, $end_date])->sum('spend');
+        $tokens = $user[0]->AiUsage()->whereBetween('date', [$start_date, $end_date])->sum('tokens');
 
        return json_encode(['user_id' => $user_id, 'name' => $name, 'spend' => $spend, 'tokens' => $tokens]);
     }
