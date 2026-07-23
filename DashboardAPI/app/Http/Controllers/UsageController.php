@@ -8,7 +8,78 @@ use Carbon\Carbon;
 
 class UsageController extends Controller
 {
-    public function AiUsage()
+    public function fetchUsagePeriod(Request $request) 
+    {
+        $start_date = $request->input('start_date', date('Y-m-d'));
+        $end_date = $request->input('end_date', date('Y-m-d'));
+
+        //get list of teams
+        $response = Http::withToken(env('API_KEY'))->get('https://ai.educom.nu/team/list');
+        $teams = (array)$response->json();
+
+        //loop through teams to get each trainee's ai usage data
+        foreach ($teams as $team) {
+
+            //retrieve AI usage data from LiteLLM API
+            $response = Http::withToken(env('API_KEY'))->get('https://ai.educom.nu/team/daily/activity', [
+                'team_ids' => $team['team_id'], 
+                'start_date' => $start_date,
+                'end_date' => $end_date,
+                'page_size' => 10000
+                ]);
+            $response = (array)$response->json();
+
+            //If team has no usage data skip to next team
+            if(empty($response['results'])) {
+                continue;
+            }
+
+            foreach ($response['results'] as $data) {
+
+                //get date associated with usage data
+                $date = date($data['date']);
+                    
+                //get all models that were used
+                $models = (array)$data['breakdown']['models'];
+                foreach ($models as $key => $model) {
+                    foreach ($model['api_key_breakdown'] as $userData) {
+                            
+                        //retrieve user from database
+                        $user = \App\Models\User::where('key_alias', $userData['metadata']['key_alias'])->first();
+
+                        //create entry if not yet present, otherwise update entry
+                        if ($user !== null)
+                        {
+                            if (!\App\Models\Usage::where('user_id', $user->id)->where('model', $key)->where('date', $date)->exists())
+                            {
+                                $user->Usage()->create([
+                                    'date' => $date,
+                                    'model' => $key,
+                                    'spend' => $userData['metrics']['spend'], 
+                                    'tokens' => $userData['metrics']['total_tokens']
+                                    ]);
+                            } else 
+                            {
+                                \App\Models\Usage::where('user_id', $user->id)
+                                                    ->where('model', $key)
+                                                    ->where('date', $date)
+                                                    ->update([
+                                                        'spend' => $userData['metrics']['spend'], 
+                                                        'tokens' => $userData['metrics']['total_tokens']
+                                                    ]);
+                            }
+                        } else
+                        {
+                            //TODO user not found
+                        }
+                    }
+                }
+            }
+        }
+        return('succes');
+    }
+    
+    public function fetchUsage()
     {
         //get list of teams
         $response = Http::withToken(env('API_KEY'))->get('https://ai.educom.nu/team/list');
@@ -196,6 +267,39 @@ class UsageController extends Controller
 
        return json_encode(['user_id' => $user_id, 'name' => $name, 'spend' => $spend, 'tokens' => $tokens]);
     }
+
+    /*
+    * Returns total spend and tokens used of specified user over given period in daily intervals
+    * params
+    * int id
+    * string start_date : YYYY-MM-DD
+    * string end_date : YYYY-MM-DD
+    */
+    public function getUserSpendPeriodDaily(Request $request, string $id)
+    {
+        $start_date = $request->input('start_date', date('Y-m-d'));
+        $end_date = $request->input('end_date', date('Y-m-d'));
+
+
+        $period = new \Carbon\CarbonPeriod($start_date, $end_date);
+
+        $results = [];
+        
+        foreach ($period as $date)
+        {
+            $user = \App\Models\User::where('id', $id)->get();
+            $user_id = $user[0]->id;
+            $name = $user[0]->name;
+            $spend = $user[0]->Usage()->where('date', $date->format('Y-m-d'))->sum('spend');
+            $tokens = $user[0]->Usage()->where('date', $date->format('Y-m-d'))->sum('tokens');
+            $results[] = ['user_id' => $user_id, 'name' => $name, 'date' => $date->format('Y-m-d'), 'spend' => $spend, 'tokens' => $tokens];
+        }
+       
+
+
+       return json_encode($results);
+    }
+
 
     /*
     * Returns total spend and tokens used of every user over this month

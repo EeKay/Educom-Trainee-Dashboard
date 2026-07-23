@@ -3,11 +3,21 @@
 use App\Http\Controllers\UsageController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+
+
+
+Route::get('test', function () {return 'Succes';})
+    ->middleware(['auth:sanctum', 'ability:trainee']);
+
+
+Route::get('/ai/fetch/period', [UsageController::class, 'fetchUsagePeriod']); 
 
 //Updates database with today's AI usage data from LiteLLM API
 //params: none
-Route::get('/aii', [UsageController::class, 'AiUsage']); 
+Route::get('/ai/fetch', [UsageController::class, 'fetchUsage']); 
 
 //Retrieves all AI usage data from all users(old)
 //params: none
@@ -40,6 +50,10 @@ Route::get('/ai/spend/period', [UsageController::class, 'getTotalSpendPeriod']);
 //Retrieves full list of specified user's spend and tokens over a time period
 //params: {id} -> user_id, request -> {'start_date', 'end_date'}
 Route::get('/ai/spend/period/user/{id}', [UsageController::class, 'getUserSpendPeriod']);
+
+//Retrieves full list of specified user's spend and tokens over a time period
+//params: {id} -> user_id, request -> {'start_date', 'end_date'}
+Route::get('/ai/spend/period/daily/user/{id}', [UsageController::class, 'getUserSpendPeriodDaily']);
 
 //Retrieves full list of all users' spend and tokens for this month
 //params: none
@@ -94,8 +108,18 @@ Route::delete('/faq/delete/{id}', [FaqController::class, 'delete']);
 
 
 
+//login
+//params: request->{'name', 'password'} 
+Route::post('/login', [AuthController::class, 'login']);
+//logout
+//params: none
+Route::get('/logout', [AuthController::class, 'logout']);
+
+
+
 
 
 //API call for testing purposes only, do not call
 Route::get('/addme', [UserController::class, 'AddMe']);
 Route::get('/addedu', [UserController::class, 'AddEdu']);
+Route::get('/addru', [UserController::class, 'AddRuLian']);

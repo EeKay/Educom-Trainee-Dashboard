@@ -1,11 +1,15 @@
 import '../../css/profile-card.css';
-// update this with backend JSON data
-export default function ProfileCard({ user }) {
-    return(
-        <div className = "profile-card">
-            <img src={user.avatar} alt="User Avatar" className = "profile-avatar" />
-            <div className = "profile-name"> {user.name} </div>
-            <div className = "profile-tokens"> total of <b>{user.tokensUsed} tokens </b> used this month</div> 
-        </div>
-    )
+
+export default function ProfileCard({ user, monthlySpend }) {
+  const initial = user.name ? user.name.charAt(0).toUpperCase() : '?';
+
+  return (
+    <div className="profile-card">         
+        <img className = "profile-avatar" src="https://placecats.com/200/200" alt="User Avatar" />
+      <div className="profile-name">{user.name}</div>
+      <div className="profile-tokens">
+        total of <strong>€{monthlySpend.toFixed(2)}</strong> spent this month
+      </div>
+    </div>
+  );
 }

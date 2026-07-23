@@ -1,74 +1,73 @@
 .leaderboard {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  width: 85%;
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-  padding: 24px 32px;
+  width: 100%;
+  padding: 32px 40px;
   box-sizing: border-box;
-  margin-top: 50px;
+  font-family: Helvetica, Arial, sans-serif;
 }
 
 .leaderboard-title {
-  font-size: 24px;
-  margin-bottom: 24px;
+  margin: 0 0 32px;
+  font-size: 28px;
 }
 
-.leaderboard-track {
+.leaderboard-row {
   display: flex;
-  align-items: center;
-  position: relative;
-  width: 100%;
-}
-
-.leaderboard-track::before {
-  content: '';
-  position: absolute;
-  top: 30px;
-  left: 120px;
-  right: 44px;
-  height: 3px;
-  background-color: #F24452;
-  z-index: 0;
+  align-items: flex-start;
 }
 
 .leaderboard-marker {
-  position: relative;
-  width: 120px;
-  height: 60px;
-  flex-shrink: 0;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  margin-top: -57px;
+    width: 40px;
+    position: relative;
+    flex-shrink: 0;
+    height: 100px;
+    z-index: 10;
 }
 
-.leaderboard-marker-shape {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+.leaderboard-track {
+    display: flex;
+    align-items: center;     
 }
 
-.leaderboard-marker-text {
-  position: relative;
-  z-index: 1;
-  color: white;
-  font-weight: bold;
-  font-size: 13px;
-  width: 100%;
-  padding-left: 50px;
-  padding-right: 38px;
-  text-align: left;
+.leaderboard-timeline {
+    position: relative;
+    flex: 1;
+    height: 100px;
+}
+
+.leaderboard-line {
+    position: absolute;
+    left: 0;
+    right: 0px;
+    top: 29px;
+    height: 3px;
+    background: #F24452;
+}
+
+.leaderboard-start,
+.leaderboard-end {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #43B5E8;
+    top: 21px;    
+}
+
+.leaderboard-start{
+  right: -9px;
+}
+
+.leaderboard-end{
+  right: -9px;
 }
 
 .leaderboard-entry {
-  position: relative;
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 1;
 }
 
 .leaderboard-avatar-wrapper {
@@ -76,60 +75,89 @@
 }
 
 .leaderboard-avatar {
-  width: 84px;
-  height: 84px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid #F24452;
-  transition: transform 0.15s ease;
+  background: white;
   cursor: pointer;
+  transition: transform .15s;
 }
 
 .leaderboard-avatar:hover {
-  transform: scale(0.92);
+  transform: scale(.94);
 }
+
 .leaderboard-entry-you .leaderboard-avatar {
-  border-color: #3DAEDA;
+  border-color: #43B5E8;
+  width: 75px;
+  height: 75px;
+  position: relative;
+}
+
+.leaderboard-entry-you {
+  top: -5px;
+}
+
+.leaderboard-name {
+  margin-top: 10px;
+  color: #F24452;
+  font-weight: bold;
+  font-size: 18px;
 }
 
 .leaderboard-entry-you .leaderboard-name {
-  color: #3DAEDA;
+  color: #43B5E8;
 }
 
 .leaderboard-tooltip {
   position: absolute;
-  bottom: 100%;
+  bottom: calc(100% + 8px);
   left: 50%;
   transform: translateX(-50%);
-  margin-bottom: 8px;
   background: #F24452;
   color: white;
-  font-size: 12px;
-  font-weight: bold;
   padding: 6px 10px;
   border-radius: 6px;
   white-space: nowrap;
+  font-size: 12px;
   opacity: 0;
+  transition: opacity .15s;
   pointer-events: none;
-  transition: opacity 0.15s ease;
-  z-index: 10;
+}
+
+.leaderboard-entry-you .leaderboard-tooltip{
+    position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #43B5E8;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity .15s;
+  pointer-events: none;
 }
 
 .leaderboard-avatar-wrapper:hover .leaderboard-tooltip {
   opacity: 1;
 }
 
-.leaderboard-crown {
-  position: absolute;
-  top: -40px;
-  right: -12px;
-  width: 50px;
-  height: 50px;
+.stat-card,
+.profile-card,
+.leaderboard,
+.date-range-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.leaderboard-name {
-  margin-top: 14px;
-  font-size: 16px;
-  font-weight: bold;
-  color: #F24452;
+.stat-card:hover,
+.profile-card:hover,
+.leaderboard:hover,
+.date-range-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }

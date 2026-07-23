@@ -1,0 +1,61 @@
+.date-range-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  border-radius: 12px;
+  padding: 40px;
+  width: 550px;
+  height: 400px;
+  color: white;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.date-range-chart {
+  width: 100%;
+  height: 30px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  flex: 1;
+}
+
+.date-range-fields {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+  width: 100%;
+}
+
+.date-range-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: bold;
+  background-color: #3DAEDA;
+  border-radius: 6px;
+  padding: 6px 10px;
+}
+
+.date-range-text {
+  font-weight: bold;
+  white-space: nowrap;
+  color: white;
+}
+
+.date-range-input {
+  border: none;
+  font-size: 13px;
+  font-weight: bold;
+  font-family: inherit;
+  color: white;
+  background: transparent;
+  text-align: right;
+}
+
+.date-range-input::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}

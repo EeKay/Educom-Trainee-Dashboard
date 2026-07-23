@@ -1,12 +1,66 @@
+import {useState, useEffect} from 'react';
 import Navbar from '../Components/Navbar';
+import SearchBar from '../Components/SearchBar';
+import FaqItem from '../Components/FaqItem';
+import '../../css/faq.css';
+
+const API_BASE = 'http://127.0.0.1:9000/api';
 
 export default function Faq(){
+    //const [currentUser, setCurrentUser] = useState(null);
+    const currentUser = 1; //change later and change the calls to currentUser.id
+
+    const [searchPrompt, setSearchPrompt] = useState('');
+    const [faqs, setFaqs] = useState ([]);
+
+    useEffect(() => {
+    fetch(`${API_BASE}/faq`, {
+        // method: 'POST',
+        // body: JSON.stringify({question: 'hoe gaat het?', answer:'goed'})
+    })
+        .then((res) => res.json())
+        .then(allFaqs => {
+            const formatted = allFaqs.map((faq) => ({ 
+                question: faq.question,
+                answer: faq.answer,
+                id: faq.id
+            }));
+            setFaqs(formatted)
+        })
+        .catch((err) => console.error('Error fetching users:', err));
+    }, []);
+
+    const filteredFaqs = faqs.filter((faq) =>
+    faq.question.toLowerCase().includes(searchPrompt.toLowerCase())
+    );
+
     return(
         <div>
             <Navbar />
-            <div style={{ padding: '32px' }}>
-                <h1>FAQ</h1>
-                <p>Welcome to the FAQ page.</p>
+            <div className = "faq-container">  
+                <div className = "faq-heading">
+                    <div className ="faq-eyebrow"> FAQs </div>
+                    <h1 className = "faq-title"> Frequently Asked Questions</h1>
+                </div>
+
+                <SearchBar 
+                    searchPrompt = {searchPrompt} 
+                    onSearchChange = {setSearchPrompt} 
+                    faqs = {faqs}/>
+
+                <h2 className = "faq-subheading"> Top FAQ's</h2>
+  
+                
+                {filteredFaqs.length === 0 ? (
+                <div className="database-empty">No matching questions found.</div>
+                ) : (
+                <div className="database">
+                    {filteredFaqs.map((faq) => (
+                    <FaqItem question={faq.question} answer={faq.answer} />
+                    ))}
+                </div>
+                )}
+
             </div>
         </div>
     )
