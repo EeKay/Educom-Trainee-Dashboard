@@ -7,8 +7,13 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/ai/fetch/period', [UsageController::class, 'fetchUsagePeriod'])
-    ->middleware(['auth:sanctum', 'ability:admin']); 
+
+
+Route::get('test', function () {return 'Succes';})
+    ->middleware(['auth:sanctum', 'ability:trainee']);
+
+
+Route::get('/ai/fetch/period', [UsageController::class, 'fetchUsagePeriod']); 
 
 //Updates database with today's AI usage data from LiteLLM API
 //params: none
@@ -16,8 +21,7 @@ Route::get('/ai/fetch', [UsageController::class, 'fetchUsage']);
 
 //Retrieves all AI usage data from all users(old)
 //params: none
-Route::get('/ai/', [UsageController::class, 'getUsage'])
-    ->middleware(['auth:sanctum', 'ability:admin,trainee']); 
+Route::get('/ai/', [UsageController::class, 'getUsage']); 
 
 //Retrieves all AI usage data of specified user
 //params: {id} -> user_id
@@ -104,8 +108,11 @@ Route::delete('/faq/delete/{id}', [FaqController::class, 'delete']);
 
 
 
-
-Route::get('/login', [AuthController::class, 'login']);
+//login
+//params: request->{'name', 'password'} 
+Route::post('/login', [AuthController::class, 'login']);
+//logout
+//params: none
 Route::get('/logout', [AuthController::class, 'logout']);
 
 
