@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('team');
             $table->string('name');
+            $table->enum('role', [ 'admin', 'trainee'])->default('trainee');
             $table->string('email')->unique();
             $table->string('key_alias');
             $table->string('password');
