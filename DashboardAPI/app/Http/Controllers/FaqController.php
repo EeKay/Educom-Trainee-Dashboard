@@ -24,7 +24,7 @@ class FaqController extends Controller
     {
         //TODO remove default values, default values for testing purposes only
         $question = $request->input('question', 'Who am I?');
-        $answer = $request->input('question', 'Dunno');
+        $answer = $request->input('answer', 'Dunno');
         \App\Models\Faq::create([
                         'question' => $question,
                         'answer' => $answer,
@@ -43,7 +43,7 @@ class FaqController extends Controller
     {
         //TODO remove default values, default values for testing purposes only
         $question = $request->input('question', 'Who am I?');
-        $answer = $request->input('question', 'Or maybe I do');
+        $answer = $request->input('answer', 'Or maybe I do');
         \App\Models\Faq::where('id', $id)->update([
                                         'question' => $question,
                                         'answer' => $answer

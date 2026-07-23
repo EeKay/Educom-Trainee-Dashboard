@@ -8,7 +8,7 @@ use Carbon\Carbon;
 
 class UsageController extends Controller
 {
-    public function FetchUsagePeriod(Request $request) 
+    public function fetchUsagePeriod(Request $request) 
     {
         $start_date = $request->input('start_date', date('Y-m-d'));
         $end_date = $request->input('end_date', date('Y-m-d'));
@@ -79,7 +79,7 @@ class UsageController extends Controller
         return('succes');
     }
     
-    public function FetchUsage()
+    public function fetchUsage()
     {
         //get list of teams
         $response = Http::withToken(env('API_KEY'))->get('https://ai.educom.nu/team/list');
@@ -266,6 +266,34 @@ class UsageController extends Controller
         $tokens = $user[0]->Usage()->whereBetween('date', [$start_date, $end_date])->sum('tokens');
 
        return json_encode(['user_id' => $user_id, 'name' => $name, 'spend' => $spend, 'tokens' => $tokens]);
+    }
+
+    /*
+    * Returns total spend and tokens used of specified user over given period in daily intervals
+    * params
+    * int id
+    * string start_date : YYYY-MM-DD
+    * string end_date : YYYY-MM-DD
+    */
+    public function getUserSpendPeriodDaily(Request $request, string $id)
+    {
+        $start_date = $request->input('start_date', date('Y-m-d'));
+        $end_date = $request->input('end_date', date('Y-m-d'));
+
+        $period = new \Carbon\CarbonPeriod($start_date, $end_date);
+
+        foreach ($period as $date) 
+        {
+            $user = \App\Models\User::where('id', $id)->get();
+            $user_id = $user[0]->id;
+            $name = $user[0]->name;
+            $spend = $user[0]->Usage()->where('date', $date->format('Y-m-d'))->sum('spend');
+            $tokens = $user[0]->Usage()->where('date', $date->format('Y-m-d'))->sum('tokens');
+            $results[] = ['user_id' => $user_id, 'name' => $name, 'date' => $date->format('Y-m-d'), 'spend' => $spend, 'tokens' => $tokens];
+        }
+        
+
+       return json_encode($results);
     }
 
     /*
