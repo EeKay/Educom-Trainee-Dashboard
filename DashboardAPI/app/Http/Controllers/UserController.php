@@ -48,4 +48,5 @@ class UserController extends Controller
             'password' => '12345678']);
         dd($col);
     }
+
 }

@@ -51,7 +51,7 @@ Route::get('/ai/spend/period', [UsageController::class, 'getTotalSpendPeriod']);
 //params: {id} -> user_id, request -> {'start_date', 'end_date'}
 Route::get('/ai/spend/period/user/{id}', [UsageController::class, 'getUserSpendPeriod']);
 
-//Retrieves full list of specified user's spend and tokens over a time period in daily intervals
+//Retrieves full list of specified user's spend and tokens over a time period
 //params: {id} -> user_id, request -> {'start_date', 'end_date'}
 Route::get('/ai/spend/period/daily/user/{id}', [UsageController::class, 'getUserSpendPeriodDaily']);
 

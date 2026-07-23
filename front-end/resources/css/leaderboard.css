@@ -91,6 +91,13 @@
 
 .leaderboard-entry-you .leaderboard-avatar {
   border-color: #43B5E8;
+  width: 75px;
+  height: 75px;
+  position: relative;
+}
+
+.leaderboard-entry-you {
+  top: -5px;
 }
 
 .leaderboard-name {

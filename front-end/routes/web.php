@@ -17,3 +17,11 @@ Route::get('/faq', function () {
 Route::get('/login', function () {
     return Inertia::render('Login');
 });
+
+Route::get('/appChart', function(){
+    return Inertia::render('App');
+});
+
+Route::get('/passwordReset', function(){
+    return Inertia::render('PasswordReset');
+});
