@@ -8,25 +8,4 @@
 ## Get latest from https://github.com/github/gitignore/blob/main/Dotnet.gitignore
 
 .env
-
-# Others
-~$*
-*~
-CodeCoverage/
-
-# MSBuild Binary and Structured Log
-*.binlog
-
-# MSTest test Results
-[Tt]est[Rr]esult*/
-[Bb]uild[Ll]og.*
-
-# NUnit
-*.VisualState.xml
-TestResult.xml
-nunit-*.xml
-
-# Visual studio code Loek
-n8n/.vscode/*
-n8n/tests/*
 DashboardAPI/storage/logs/laravel.log
