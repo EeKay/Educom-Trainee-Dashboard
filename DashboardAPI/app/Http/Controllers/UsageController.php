@@ -8,7 +8,7 @@ use Carbon\Carbon;
 
 class UsageController extends Controller
 {
-    public function FetchUsagePeriod(Request $request) 
+    public function fetchUsagePeriod(Request $request) 
     {
         $start_date = $request->input('start_date', date('Y-m-d'));
         $end_date = $request->input('end_date', date('Y-m-d'));
@@ -27,7 +27,7 @@ class UsageController extends Controller
                 'end_date' => $end_date,
                 'page_size' => 10000
                 ]);
-            //dd($response = (array)$response->json());
+            $response = (array)$response->json();
 
             //If team has no usage data skip to next team
             if(empty($response['results'])) {
@@ -79,7 +79,7 @@ class UsageController extends Controller
         return('succes');
     }
     
-    public function FetchUsage()
+    public function fetchUsage()
     {
         //get list of teams
         $response = Http::withToken(env('API_KEY'))->get('https://ai.educom.nu/team/list');
