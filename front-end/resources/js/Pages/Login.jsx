@@ -46,7 +46,10 @@ export default function Login() {
         <button type="submit" className="login-button" disabled={processing}>
           {processing ? 'Logging in...' : 'Log in'}
         </button>
-      </form>
+        <Link href="/passwordReset" className="forgot-password-link">
+          Forgot your password?
+        </Link>
+      </form>       
     </div>
   );
 }

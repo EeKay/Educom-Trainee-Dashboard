@@ -44,6 +44,10 @@ Route::get('/ai/spend/period', [UsageController::class, 'getTotalSpendPeriod']);
 //params: {id} -> user_id, request -> {'start_date', 'end_date'}
 Route::get('/ai/spend/period/user/{id}', [UsageController::class, 'getUserSpendPeriod']);
 
+//Retrieves full list of specified user's spend and tokens over a time period
+//params: {id} -> user_id, request -> {'start_date', 'end_date'}
+Route::get('/ai/spend/period/daily/user/{id}', [UsageController::class, 'getUserSpendPeriodDaily']);
+
 //Retrieves full list of all users' spend and tokens for this month
 //params: none
 Route::get('/ai/spend/month', [UsageController::class, 'getTotalSpendMonth']);
@@ -102,3 +106,4 @@ Route::delete('/faq/delete/{id}', [FaqController::class, 'delete']);
 //API call for testing purposes only, do not call
 Route::get('/addme', [UserController::class, 'AddMe']);
 Route::get('/addedu', [UserController::class, 'AddEdu']);
+Route::get('/addru', [UserController::class, 'AddRuLian']);
