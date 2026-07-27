@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('test', function () {return 'Succes';})
-    ->middleware(['auth:sanctum', 'ability:trainee']);
+    ->middleware(['cookie.filter', 'auth:sanctum', 'ability:trainee']);
 
 
 Route::get('/ai/fetch/period', [UsageController::class, 'fetchUsagePeriod']); 
