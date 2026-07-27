@@ -4,9 +4,9 @@ use App\Http\Controllers\UsageController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\nanController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
 
 
 Route::get('test', function () {return 'Succes';})
@@ -77,6 +77,19 @@ Route::get('/ai/spend/week/user/{id}', [UsageController::class, 'getUserSpendWee
 //Retrieves full list of users
 //params: none
 Route::get('/users', [UserController::class, 'getUsers']);//Retrieves a list of all users
+
+
+
+
+//Contacts the n8n workflow
+//params: request -> {(int)'traineeId', 'question', 'sessionId', (boolean)'faqRejected'}
+Route::post('/nan', [nanController::class, 'contactWorkflow']); 
+
+//Sends email to reset password
+//params: none
+Route::post('/nan/resetPassword', [nanController::class, 'resetPassword'])
+    ->middleware(['auth:sanctum', 'ability:trainee']); 
+
 
 
 
