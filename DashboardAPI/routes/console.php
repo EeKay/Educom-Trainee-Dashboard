@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schedule;
 use App\Http\Controllers\UsageController;
  
 Schedule::call(function () {
-    (new \App\Http\Controllers\UsageController())->FetchUsage();
+    (new \App\Http\Controllers\UsageController())->AiUsage();
 })->everyMinute();
 
 Artisan::command('inspire', function () {

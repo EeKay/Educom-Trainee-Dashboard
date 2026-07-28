@@ -1,0 +1,223 @@
+#chatCon {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 320px; /* matches your chat-box width, prevents collapse */
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    z-index: 1000;
+}
+
+/* --- Floating toggle icon --- */
+.pop {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 2;
+}
+
+.pop img {
+    width: 64px;
+    height: 64px;
+    max-width: none; /* prevent the container's collapsed width from squeezing this */
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    background-color: #F24452;
+    padding: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    object-fit: cover;
+    transition: transform 0.2s ease;
+}
+
+.pop:hover {
+  transform: scale(0.98);
+}
+
+.saved-chat-dot {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 14px;
+    height: 14px;
+    background-color: #3DAEDA;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Chat box --- */
+.chat-box {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    bottom: 76px;
+    right: 0;
+    width: 320px;
+    height: 460px;
+    background-color: #3DAEDA;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    z-index: 1;
+}
+
+.chat-box.open {
+    display: flex;
+}
+
+/* --- Header --- */
+.chat-box .header {
+    background-color: #F24452;
+    color: #ffffff;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-avatar {
+    width: 28px;
+    height: 28px;
+    max-width: none;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #3DAEDA;
+}
+
+.header-name {
+    font-weight: 700;
+    font-size: 15px;
+    flex: 1;
+}
+
+.header-controls {
+    display: flex;
+    gap: 12px;
+}
+
+.header-controls button {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    line-height: 1;
+}
+
+/* --- Centered bot intro --- */
+.bot-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px 0 8px;
+}
+
+.bot-avatar {
+    width: 64px;
+    height: 64px;
+    max-width: none;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    background-color: #F24452;
+    padding: 8px;
+    object-fit: cover;
+}
+
+.bot-name {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 15px;
+    margin-top: 6px;
+}
+
+/* --- Message area --- */
+.chat-box .msg-area {
+    flex: 1;
+    padding: 8px 14px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.chat-box .msg-area p {
+    margin: 0;
+    display: flex;
+}
+
+.chat-box .msg-area .left {
+    justify-content: flex-start;
+}
+
+.chat-box .msg-area .right {
+    justify-content: flex-end;
+}
+
+.chat-box .msg-area .left span {
+    background-color: #ffffff;
+    color: #222;
+    padding: 10px 14px;
+    border-radius: 14px 14px 14px 2px;
+    max-width: 75%;
+    font-size: 14px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.chat-box .msg-area .right span {
+    background-color: #F24452;
+    color: #ffffff;
+    padding: 10px 14px;
+    border-radius: 14px 14px 2px 14px;
+    max-width: 75%;
+    font-size: 14px;
+}
+
+/* --- Footer / input --- */
+.chat-box .footer {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    background-color: #3DAEDA;
+    gap: 8px;
+}
+
+.chat-box .footer input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 10px 14px;
+    font-size: 14px;
+    font-family: inherit;
+    border-radius: 20px;
+    background-color: #ffffff;
+}
+
+.chat-box .footer input::placeholder {
+    color: #999;
+}
+
+.chat-box .footer button {
+    background-color: #ffffff;
+    border: none;
+    color: #3DAEDA;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chat-box.minimized {
+    height: 52px; 
+    transition: height 0.2s ease;
+}
+
+.chat-box.minimized .bot-intro,
+.chat-box.minimized .msg-area,
+.chat-box.minimized .footer {
+    display: none;
+}
