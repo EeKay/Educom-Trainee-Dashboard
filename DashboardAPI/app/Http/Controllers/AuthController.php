@@ -26,15 +26,42 @@ class AuthController extends Controller
         
         $token = $user->createToken('token', [$user->role])->plainTextToken;
 
-        return response()->json([
-            'token' => $token,
-            'Type' => 'Bearer'
-        ]);
+        $cookie = cookie(
+        'access_token',
+        $token,
+        60, // minutes
+        '/',
+        null,
+        false, // secure: true in production
+        true,  // HttpOnly
+        false,
+        'lax'
+        );
+
+        return response()->json(['token' => $token, 'message' => 'Logged in'])->cookie($cookie);
     }
 
     public function logout(Request $request) {
-        $token = \Laravel\Sanctum\PersonalAccessToken::findToken($request->bearerToken());
-        $user = $token->tokenable;
+        
+        $user = $this->getUser($request);
+        if ($user == null) {
+            return response()->json(['message' => 'No API key provided']);
+        }
         $user->tokens()->delete();
+
+        return response()->json(['message' => 'Logged out'])
+            ->withoutCookie('access_token', '/', null, false, true, false, 'lax');
+    }
+
+    public function getUser(Request $request) {
+        $token = \Laravel\Sanctum\PersonalAccessToken::findToken($request->bearerToken());
+        if ($token == null) 
+        {
+            $token = \Laravel\Sanctum\PersonalAccessToken::findToken($request->cookie('access_token'));
+        }
+        if ($token == null) {
+            return null;
+        }
+        return $user = $token->tokenable;
     }
 }
