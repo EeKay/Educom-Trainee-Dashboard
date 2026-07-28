@@ -48,4 +48,14 @@ class UserController extends Controller
             'password' => '12345678']);
         dd($col);
     }
+
+    public function AddLoek() {
+        $col = \App\Models\User::create([
+            'team' => 'Trainees Eindhoven',
+            'name' => 'Loek de Kleijn',
+            'email' => 'email2',
+            'key_alias' => 'educom_openclaw_key_loekdekleijn03gmailc',
+            'password' => '12345678']);
+        dd($col);
+    }
 }

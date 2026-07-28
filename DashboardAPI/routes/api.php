@@ -82,13 +82,12 @@ Route::get('/users', [UserController::class, 'getUsers']);//Retrieves a list of 
 
 
 //Contacts the n8n workflow
-//params: request -> {(int)'traineeId', 'question', 'sessionId', (boolean)'faqRejected'}
+//params: request -> {'question', (boolean)'faqRejected'}
 Route::post('/nan', [nanController::class, 'contactWorkflow']); 
 
 //Sends email to reset password
 //params: none
-Route::post('/nan/resetPassword', [nanController::class, 'resetPassword'])
-    ->middleware(['auth:sanctum', 'ability:trainee']); 
+Route::post('/nan/resetPassword', [nanController::class, 'resetPassword']); 
 
 
 
@@ -136,3 +135,4 @@ Route::get('/logout', [AuthController::class, 'logout']);
 Route::get('/addme', [UserController::class, 'AddMe']);
 Route::get('/addedu', [UserController::class, 'AddEdu']);
 Route::get('/addru', [UserController::class, 'AddRuLian']);
+Route::get('/addloek', [UserController::class, 'AddLoek']);
