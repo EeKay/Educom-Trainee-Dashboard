@@ -1,61 +1,105 @@
-// import { NavFooter } from '@/components/nav-footer';
-// import { NavMain } from '@/components/nav-main';
-// import { NavUser } from '@/components/nav-user';
-// import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
-// import { type NavItem } from '@/types';
-// import { Link } from '@inertiajs/react';
-// import { BookOpen, Folder, LayoutGrid, MessageCircleCodeIcon } from 'lucide-react';
-// import AppLogo from './app-logo';
+import '../../css/chatbot.css';
+import eddieAvatar from '../../img/eddie-avatar.svg';
+import arrowUpCircle from '../../img/Arrow up-circle.svg';
+import { useState, useEffect } from 'react';
 
-// const mainNavItems: NavItem[] = [
-//     {
-//         title: 'Dashboard',
-//         href: '/dashboard',
-//         icon: LayoutGrid,
-//     },
-//     {
-//         title: 'Chat',
-//         href: '/chat',
-//         icon: MessageCircleCodeIcon,
-//     },
-// ];
+const DEFAULT_MESSAGE = "Hoi! Ik ben Eddie de Educom hulpchat. Stel gerust je vraag!";
 
-// const footerNavItems: NavItem[] = [
-//     {
-//         title: 'Repository',
-//         href: 'https://github.com/laravel/react-starter-kit',
-//         icon: Folder,
-//     },
-//     {
-//         title: 'Documentation',
-//         href: 'https://laravel.com/docs/starter-kits',
-//         icon: BookOpen,
-//     },
-// ];
+export default function ChatBot({ message = [] }) {
 
-// export default function ChatBot() {
-//     return (
-//         <Sidebar collapsible="icon" variant="inset">
-//             <SidebarHeader>
-//                 <SidebarMenu>
-//                     <SidebarMenuItem>
-//                         <SidebarMenuButton size="lg" asChild>
-//                             <Link href="/dashboard" prefetch>
-//                                 <AppLogo />
-//                             </Link>
-//                         </SidebarMenuButton>
-//                     </SidebarMenuItem>
-//                 </SidebarMenu>
-//             </SidebarHeader>
+    const [chatopen, setChatopen] = useState(false);
+    const [minimized, setMinimized] = useState(false);
+    const [messages, setMessages] = useState([]);
+    const [isTyping, setIsTyping] = useState(false);
 
-//             <SidebarContent>
-//                 <NavMain items={mainNavItems} />
-//             </SidebarContent>
+    const handlePopClick = () => {
+        if (minimized) {
+            setMinimized(false);
+        } else {
+            setChatopen(!chatopen);
+        }
+    };
 
-//             <SidebarFooter>
-//                 <NavFooter items={footerNavItems} className="mt-auto" />
-//                 <NavUser />
-//             </SidebarFooter>
-//         </Sidebar>
-//     );
-// }
+    const minimizeChat = () => {
+        setMinimized(true);
+    };
+
+    const deleteChat = () => {
+        setMessages([]);
+        setIsTyping(false);
+        setMinimized(false);
+        setChatopen(false);
+    };
+
+    useEffect(() => {
+        if (chatopen && messages.length === 0) {
+            setIsTyping(true);
+
+            const timer = setTimeout(() => {
+                setIsTyping(false);
+                setMessages([DEFAULT_MESSAGE]);
+            }, 1200);
+
+            return () => clearTimeout(timer);
+        }
+    }, [chatopen, messages.length]);
+
+    useEffect(() => {
+        if (message.length > 0) {
+            setMessages((prev) => [prev[0], ...message]);
+        }
+    }, [message]);
+
+    const hasSavedChat = minimized && messages.length > 0;
+
+    return (
+        <div id="chatCon">
+            <div className={`chat-box ${chatopen && !minimized ? 'open' : ''}`}>
+
+                <div className="header">
+                    <img className="header-avatar" src={eddieAvatar} alt="" />
+                    <span className="header-name">Eddie</span>
+                    <div className="header-controls">
+                        <button className="minimize" onClick={minimizeChat}>&minus;</button>
+                        <button className="delete" onClick={deleteChat}>&times;</button>
+                    </div>
+                </div>
+
+                <div className="bot-intro">
+                    <img className="bot-avatar" src={eddieAvatar} alt="Eddie the chatbot" />
+                    <span className="bot-name">Eddie</span>
+                </div>
+
+                <div className="msg-area">
+                    {messages.map((msg, i) => (
+                        i % 2 ? (
+                            <p className="right" key={i}><span>{msg}</span></p>
+                        ) : (
+                            <p className="left" key={i}><span>{msg}</span></p>
+                        )
+                    ))}
+
+                    {isTyping && (
+                        <p className="left">
+                            <span className="typing-indicator">
+                                <i></i><i></i><i></i>
+                            </span>
+                        </p>
+                    )}
+                </div>
+
+                <div className="footer">
+                    <input type="text" placeholder="Message..." />
+                    <button className="send-btn">
+                        <img src={arrowUpCircle} alt="Send" />
+                    </button>
+                </div>
+            </div>
+
+            <div className="pop">
+                <img onClick={handlePopClick} src={eddieAvatar} alt="Open chat" />
+                {hasSavedChat && <span className="saved-chat-dot" />}
+            </div>
+        </div>
+    );
+}
