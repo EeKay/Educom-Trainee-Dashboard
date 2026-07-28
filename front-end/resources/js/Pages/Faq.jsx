@@ -2,6 +2,7 @@ import {useState, useEffect} from 'react';
 import Navbar from '../Components/Navbar';
 import SearchBar from '../Components/SearchBar';
 import FaqItem from '../Components/FaqItem';
+import ChatBot from '../Components/ChatBot';
 import '../../css/faq.css';
 
 const API_BASE = 'http://127.0.0.1:9000/api';
@@ -27,7 +28,7 @@ export default function Faq(){
             }));
             setFaqs(formatted)
         })
-        .catch((err) => console.error('Error fetching users:', err));
+        .catch((err) => console.error('Error fetching faqs:', err));
     }, []);
 
     const filteredFaqs = faqs.filter((faq) =>
@@ -60,7 +61,7 @@ export default function Faq(){
                     ))}
                 </div>
                 )}
-
+                <ChatBot/>
             </div>
         </div>
     )
