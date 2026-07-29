@@ -4,7 +4,7 @@ import ProfileCard from '../Components/ProfileCard';
 import Leaderboard from '../Components/Leaderboard';
 import StatCard from '../Components/StatCard';
 import DateRangeCard from '../Components/DateRangeCard';
-// import ChatBot from '../Components/ChatBot';
+import ChatBot from '../Components/ChatBot';
 import '../../css/dashboard.css';
 
 const API_BASE = 'http://127.0.0.1:9000/api';
@@ -123,6 +123,7 @@ useEffect(() => {
           </div>
         </div>
       </div>
+      <ChatBot />
     </div>
   )
 }

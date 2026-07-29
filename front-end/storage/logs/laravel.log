@@ -3201,3 +3201,7 @@ Stack trace:
 #38 [internal function]: Illuminate/Foundation/Bootstrap/HandleExceptions->{closure:Illuminate/Foundation/Bootstrap/HandleExceptions::forwardsTo():262}()
 #39 {main}
 "} 
+[2026-07-27 07:26:02] local.ERROR: Maximum execution time of 30 seconds exceeded {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Maximum execution time of 30 seconds exceeded at C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Queue/Queue.php:31)
+[stacktrace]
+#0 {main}
+"} 

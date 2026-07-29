@@ -12,9 +12,9 @@ export default function UserMenu() {
 
     
         <div className={`user-dropdown ${isOpen ? 'user-dropdown-open' : ''}`}>
-          <Link href="/change-password" className = "user-dropdown-link">Change Password</Link>
-          <Link href="/change-email" className = "user-dropdown-link">Change Email</Link>
-          <Link href="/logout" className = "user-dropdown-link">Logout</Link>
+          <Link href="/passwordReset" className = "user-dropdown-link">Change Password</Link>
+          <Link href="/emailReset" className = "user-dropdown-link">Change Email</Link>
+          <Link href="/login" className = "user-dropdown-link">Logout</Link>
         </div>
       
     </div>
