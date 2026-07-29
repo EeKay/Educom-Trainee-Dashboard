@@ -2,8 +2,9 @@ import '../../css/chatbot.css';
 import eddieAvatar from '../../img/eddie-avatar.svg';
 import arrowUpCircle from '../../img/Arrow up-circle.svg';
 import { useState, useEffect } from 'react';
+import { setLayoutProps } from '@inertiajs/react';
 
-const DEFAULT_MESSAGE = "Hoi! Ik ben Eddie de Educom hulpchat. Stel gerust je vraag!";
+const DEFAULT_MESSAGE = "Hello! I am Eddie the chatbot, do you have a question?";
 
 export default function ChatBot({ message = [] }) {
 
@@ -11,6 +12,8 @@ export default function ChatBot({ message = [] }) {
     const [minimized, setMinimized] = useState(false);
     const [messages, setMessages] = useState([]);
     const [isTyping, setIsTyping] = useState(false);
+    const [question, setQuestion] = useState('');
+    const [faqRejected, setFaqRejected] = useState (false);
 
     const handlePopClick = () => {
         if (minimized) {
@@ -30,6 +33,31 @@ export default function ChatBot({ message = [] }) {
         setMinimized(false);
         setChatopen(false);
     };
+
+    // useEffect(() =>{
+    //     fetch(`${API_BASE}/nan`, {
+    //         method: 'POST',
+    //         headers:{
+    //             "Content-Type": "application/json",
+    //             "accept" : "application/json",
+    //             "Access-Control-Allow-Origin": "*",
+    //             "Access-Control-Allow-Methods": "POST",
+    //             "Authorization": "Bearer 463|H7ztAS1gkOUb4V5CYjHhTVtSFNSIbPyWDtvRxJjm549eebc2"//hardcoded for now
+    //         },
+    //         // credentials: "include",
+    //         body: JSON.stringify({
+    //             question: "question", 
+    //             faqRejected: "false",
+    //         })
+    //     })
+        
+    //     .then(response => response.text())   
+    //     .then(data => {
+    //         console.log(data);
+    //     })
+    //     .catch(error => console.error ("error: ", error));
+
+    // }, []);
 
     useEffect(() => {
         if (chatopen && messages.length === 0) {
@@ -57,13 +85,19 @@ export default function ChatBot({ message = [] }) {
             <div className={`chat-box ${chatopen && !minimized ? 'open' : ''}`}>
 
                 <div className="header">
-                    <img className="header-avatar" src={eddieAvatar} alt="" />
+                    <img
+                        className="header-avatar"
+                        src={eddieAvatar}
+                        alt=""
+                        onClick={minimizeChat}
+                        style={{ cursor: 'pointer' }}
+                    />
                     <span className="header-name">Eddie</span>
                     <div className="header-controls">
                         <button className="minimize" onClick={minimizeChat}>&minus;</button>
                         <button className="delete" onClick={deleteChat}>&times;</button>
                     </div>
-                </div>
+                </div>   
 
                 <div className="bot-intro">
                     <img className="bot-avatar" src={eddieAvatar} alt="Eddie the chatbot" />
@@ -94,12 +128,15 @@ export default function ChatBot({ message = [] }) {
                         <img src={arrowUpCircle} alt="Send" />
                     </button>
                 </div>
+
             </div>
 
             <div className="pop">
                 <img onClick={handlePopClick} src={eddieAvatar} alt="Open chat" />
                 {hasSavedChat && <span className="saved-chat-dot" />}
             </div>
+
         </div>
     );
 }
+//antwoord krijg je ook terug

@@ -3,11 +3,12 @@ import { useForm, Link } from '@inertiajs/react';
 import logo from '../../img/logo.svg';
 import '../../css/login.css';
 import { router } from '@inertiajs/react';
+// import { useAuth } from '/Context/AuthContext'; 
 
 const API_BASE = 'http://127.0.0.1:9000/api';
 
 export default function Login() {
-
+  // const { setToken } = useAuth();
   const [loggedIn, setLoggedIn] = useState(false);
   const [login, setLogin] = useState([]);
 
@@ -26,7 +27,7 @@ export default function Login() {
     .then (data => {
       setLogin(data);
       console.log(data);
-      const token = data.token;
+      // setToken = data.token;
 
       //put the token in the authentication
       return fetch(`${API_BASE}/test`, {
@@ -52,8 +53,6 @@ export default function Login() {
     router.visit('/dashboard');
   }
 }, [loggedIn]);
-
-
 
   const { data, setData, post, processing, errors } = useForm({
     username: '',

@@ -8,7 +8,7 @@ export default function ProfileCard({ user, monthlySpend }) {
         <img className = "profile-avatar" src="https://placecats.com/200/200" alt="User Avatar" />
       <div className="profile-name">{user.name}</div>
       <div className="profile-tokens">
-        total of <strong>€{monthlySpend.toFixed(2)}</strong> spent this month
+        total of <strong>€{Number.isFinite(parseFloat(monthlySpend)) ? parseFloat(monthlySpend).toFixed(2) : '0.00'}</strong> spent this month
       </div>
     </div>
   );
