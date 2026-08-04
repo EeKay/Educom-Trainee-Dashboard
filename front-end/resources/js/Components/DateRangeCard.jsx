@@ -3,9 +3,8 @@ import '../../css/date-range-card.css';
 import React, { Component } from "react";
 import Chart from "react-apexcharts";
 
+export default function DateRangeCard({ modelStats, resultStats, onRangeChange, currentUser, maxDate }) {
 
-export default function DateRangeCard({ rangeStats, onRangeChange, currentUser, maxDate }) {
-  
   function formatDate(date) {
     return date.toISOString().split('T')[0];
   }
@@ -22,16 +21,19 @@ export default function DateRangeCard({ rangeStats, onRangeChange, currentUser, 
     formatDate(new Date())
   );
 
+  const [dataType, setDataType] = useState("tokens");
+
 
   // Send default range to API
   useEffect(() => {
+
     onRangeChange(
       formatDate(defaultStart),
       formatDate(new Date())
     );
   }, []);
 
-    function handleStartChange(e) {
+  function handleStartChange(e) {
     const newStart = e.target.value;
     setStartDate(newStart);
     onRangeChange(newStart, endDate);
@@ -43,8 +45,11 @@ export default function DateRangeCard({ rangeStats, onRangeChange, currentUser, 
     onRangeChange(startDate, newEnd);
   }
 
-  //split rangeStats between models and results
-
+  function handleTypeChange(e) {
+    //const newType = e.target.value;
+    setDataType(e.target.value);
+    console.log("Data type changed to:", e.target.value);
+  }
 
   //data for the graph
   const options = {
@@ -52,23 +57,17 @@ export default function DateRangeCard({ rangeStats, onRangeChange, currentUser, 
       id: 'charts',
       toolbar: { show: false },
     },
-    colors: ['#F24452', '#3DAEDA'],
+    colors: ['#F24452', '#3DAEDA', '#F2A541', '#BA68C8', '#FFB74D', '#4DB6AC', '#7986CB', '#E57373', '#81C784'],
     stroke: {
       curve: 'smooth',
       width: 3,
     },
     xaxis: {
-      categories: rangeStats.map((x) => x.date),
+      categories: resultStats.map((x) => x.date),
       tickAmount: 5,
     },
     yaxis: [
       {
-        labels: {
-          show: false,
-        },
-      },
-      {
-        opposite: true,
         labels: {
           show: false,
         },
@@ -79,45 +78,38 @@ export default function DateRangeCard({ rangeStats, onRangeChange, currentUser, 
     },
     tooltip: {
       y: [
-        {
-          formatter: (value) => `${Math.round(value)} tokens`,
-        },
-        {
-          formatter: (value) => `€${value.toFixed(3)}`,
-        },
+          {
+            formatter: function(value){ 
+              if(dataType == "tokens"){ 
+                return `${Math.round(value)} tokens`;
+              }
+              else if(dataType == "spend"){
+                return value;
+              }
+            } 
+          }
       ],
     },
   };
 
+  const series = [];
 
-  const series = [
-      // {
-      //   name: model
-      //   data: rangeStats.results.map(x=> x.data.model===model?x.data.model.tokens : 0)
-      // }
-      
-      //make toggle function for spend
-       
-    
-
-    // {
-    //   name: "tokens",
-    //   data: rangeStats.map(x=>x.tokens)
-    // },
-    // {
-    //   name: "spend",
-    //   data: rangeStats.map(x=>x.spend)
-    // },
-
-    //loop through the results and make a new series for each model, with the model name as the series name and the data as the number of results for that model on that date
-  ];
-
-  rangeStats.models.map((model) => {
-    series.push({
-      name: model,
-      data: rangeStats.results.map((x)=> x.data.model===model?x.data.model.tokens : 0)
+  if(dataType == "tokens") {
+    modelStats.map((model) => {
+      series.push({
+        name: model.split('/').pop(),
+        data: resultStats.map((x) => model in x.data ? x.data[model].tokens : 0)
+      })
     });
-  });
+  } else if(dataType == "spend") {
+    modelStats.map((model) => {
+      series.push({
+        name: model.split('/').pop(),
+        data: resultStats.map((x) => model in x.data ? (x.data[model].spend) : 0)
+      })
+    });
+  }
+
 
   return (
     <div className="date-range-card">
@@ -139,12 +131,31 @@ export default function DateRangeCard({ rangeStats, onRangeChange, currentUser, 
           <span className="date-range-text">
             End:
           </span>
+        <input
+          type="date"
+          value={endDate}
+          max={maxDate}
+          onChange={handleEndChange}
+          className="date-range-input"
+        />
+        </div>
+        <div className="date-type-row">
+            <span className="date-range-text">
+              Data:
+            </span>
           <input
-            type="date"
-            value={endDate}
-            max={maxDate}
-            onChange={handleEndChange}
-            className="date-range-input"
+            type="button"
+            value={dataType}
+            onClick={(e) => {
+              if (e.target.value == "spend") {
+                e.target.value = "tokens";
+                handleTypeChange(e);
+              } else {
+                e.target.value = "spend";
+                handleTypeChange(e);
+              }
+            }}
+            className="data-type-input"
           />
         </div>
       </div>
