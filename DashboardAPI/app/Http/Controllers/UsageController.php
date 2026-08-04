@@ -283,25 +283,40 @@ class UsageController extends Controller
 
         $period = new \Carbon\CarbonPeriod($start_date, $end_date);
 
-        $results = [];
-        
-        foreach ($period as $date)
+        $all_models = [];
+        foreach ($period as $date) 
         {
             $user = \App\Models\User::where('id', $id)->get();
-            $user_id = $user[0]->id;
-            $name = $user[0]->name;
-            $spend = $user[0]->Usage()->where('date', $date->format('Y-m-d'))->sum('spend');
-            $tokens = $user[0]->Usage()->where('date', $date->format('Y-m-d'))->sum('tokens');
-            $results[] = ['user_id' => $user_id, 'name' => $name, 'date' => $date->format('Y-m-d'), 'spend' => $spend, 'tokens' => $tokens];
+            $models = $user[0]->Usage()->where('date', $date->format('Y-m-d'))->get('model');
+            //return json_encode($models);
+            $data = [];
+            foreach ($models as $model)
+            {   
+                $model = $model['model'];
+                $spend = $user[0]->Usage()->where('date', $date->format('Y-m-d'))->where('model', $model)->sum('spend');
+                $tokens = $user[0]->Usage()->where('date', $date->format('Y-m-d'))->where('model', $model)->sum('tokens');
+                $data[$model] = ['spend' => $spend, 'tokens' => $tokens];
+                if (!in_array($model, $all_models))
+                {
+                    $all_models[] = $model;
+                }
+            }
+            $results[] = ['date' => $date->format('Y-m-d'), 'data' => $data];
         }
-       
+        $output['models'] = $all_models;
+        $output['results'] = $results;
 
-
-       return json_encode($results);
+       return json_encode($output);
     }
 
-    public function getUserSpendPeriodDailyV2(Request $request, string $id)
+    public function getCurrentUserSpendPeriodDaily(Request $request)
     {
+        $user = app(AuthController::class)->getUser($request);
+        if ($user == null) {
+            return response()->json(['message' => 'No API key provided']);
+        }
+        $id = $user->id;
+
         $start_date = $request->input('start_date', date('Y-m-d'));
         $end_date = $request->input('end_date', date('Y-m-d'));
 
