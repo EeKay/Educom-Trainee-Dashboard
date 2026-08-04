@@ -1,27 +1,19 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\ViewController;
 
-// Route::get('/appChart', function(){
-//     return Inertia::render('App');
-// });
 
-Route :: get('/', function(){
-    return Inertia::render('Dashboard');
-});
+Route::get('/dashboard', [ViewController::class, "Dashboard"]);
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->name('dashboard');
+Route::get('/api/range-usage', [ViewController::class, 'RangeUsage']);
 
-Route::get('/faq', function () {
-    return Inertia::render('Faq');
-})->name('faq');
+Route::get('/faq', [ViewController::class, 'Faq'])->name('faq');
 
-Route::get('/login', function () {
-    return Inertia::render('Login');
-});
+Route::get('/passwordReset', [ViewController::class, 'passwordReset'])->name('passwordReset');
 
-Route::get('/passwordReset', function(){
-    return Inertia::render('PasswordReset');
-});
+Route::post('/nan', [ViewController::class, 'Chatbot']);
+
+Route::post('/login', [ViewController::class, 'Login'])->name('loginPost');
+Route::get('/login', [ViewController::class, 'Login'])->name('loginGet');
+

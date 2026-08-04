@@ -27,7 +27,7 @@ class nanController extends Controller
         if ($user == null) {
             return response()->json(['message' => 'No valid API key provided']);
         } 
-
+        //dd($fields);
         $response = Http::withHeaders(['n8n-secret' => env('NAN_KEY')])->post('https://ai.educom.nu/t/23090/webhook-test/helpdesk-chat', [
             'traineeId' => $user->id,
             'question' => $fields['question'],

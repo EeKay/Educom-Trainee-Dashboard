@@ -5,31 +5,13 @@ import FaqItem from '../Components/FaqItem';
 import ChatBot from '../Components/ChatBot';
 import '../../css/faq.css';
 
-const API_BASE = 'http://127.0.0.1:9000/api';
-
-export default function Faq(){
-    //const [currentUser, setCurrentUser] = useState(null);
-    const currentUser = 1; //change later and change the calls to currentUser.id
+export default function Faq(props){
+    // const [faqs, setFaqs] = useState ([]);
+    const currentUser = 2; //hardcoded for now, but will be changed to token from the session 
 
     const [searchPrompt, setSearchPrompt] = useState('');
-    const [faqs, setFaqs] = useState ([]);
+    const faqs = props.faqs;
 
-    useEffect(() => {
-    fetch(`${API_BASE}/faq`, {
-        // method: 'POST',
-        // body: JSON.stringify({question: 'hoe gaat het?', answer:'goed'})
-    })
-        .then((res) => res.json())
-        .then(allFaqs => {
-            const formatted = allFaqs.map((faq) => ({ 
-                question: faq.question,
-                answer: faq.answer,
-                id: faq.id
-            }));
-            setFaqs(formatted)
-        })
-        .catch((err) => console.error('Error fetching faqs:', err));
-    }, []);
 
     const filteredFaqs = faqs.filter((faq) =>
     faq.question.toLowerCase().includes(searchPrompt.toLowerCase())
@@ -66,3 +48,20 @@ export default function Faq(){
         </div>
     )
 }
+
+    // useEffect(() => {
+    // fetch(`${API_BASE}/faq`, {
+    //     // method: 'POST',
+    //     // body: JSON.stringify({question: 'hoe gaat het?', answer:'goed'})
+    // })
+    //     .then((res) => res.json())
+    //     .then(allFaqs => {
+    //         const formatted = allFaqs.map((faq) => ({ 
+    //             question: faq.question,
+    //             answer: faq.answer,
+    //             id: faq.id
+    //         }));
+    //         setFaqs(formatted)
+    //     })
+    //     .catch((err) => console.error('Error fetching faqs:', err));
+    // }, []);

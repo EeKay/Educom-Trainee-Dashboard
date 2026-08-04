@@ -6,92 +6,47 @@ import StatCard from '../Components/StatCard';
 import DateRangeCard from '../Components/DateRangeCard';
 import ChatBot from '../Components/ChatBot';
 import '../../css/dashboard.css';
-
-const API_BASE = 'http://127.0.0.1:9000/api';
-const CURRENT_USER_ID = 1; // TODO: replace with real logged-in user id once auth exists
-
+import { setLayoutProps } from '@inertiajs/react';
 
 function formatDate(date) {
   return date.toISOString().split('T')[0];
 }
 
-export default function Dashboard() {
+export default function Dashboard(props) {
+  const users = props.users;
+  const currentUser = 2; //hardcoded for now, but will be changed to token from the session 
 
-  const [users, setUsers] = useState([]);
-  //const [currentUser, setCurrentUser] = useState(null);
-  const currentUser = 1; //change later and change the calls to currentUser.id
-  const [monthlyStats, setMonthlyStats] = useState({tokens: 0, spend: 0});
-  const [dailyStats, setDailyStats] = useState({ tokens: 0, spend: 0 });
-  const [weeklyStats, setWeeklyStats] = useState({ tokens: 0, spend: 0 });
+  const monthlyStats = props.user_monthly_usage;
+  const dailyStats = props.user_daily_usage;
+  const weeklyStats = props.user_weekly_usage;
+  const leaderboardUsers = (props.users_leaderboard ?? []).map((entry) => ({
+    id: entry.user_id,
+    name: entry.name,
+    tokensUsed: entry.tokens,
+  }));
+
   const [rangeStats, setRangeStats] = useState([]);
-  const [leaderboardUsers, setLeaderboardUsers] = useState([]);
 
-  //get all users
-  useEffect(() => {
-    fetch(`${API_BASE}/users`)
-      .then((res) => res.json())
-      .then((allUsers) => {
-        setUsers(allUsers);
-      })
-      .catch((err) => console.error('Error fetching users:', err));
-  }, []);
-
-  //fetching daily, weekly and monthly usage
-  useEffect(() => {
-    if (!currentUser) return;
-    const today = formatDate(new Date());
-
-    fetch(`${API_BASE}/ai/spend/period/user/${currentUser}?start_date=${today}&end_date=${today}`)
-      .then((res) => res.json())
-      .then(setDailyStats)
-      .catch((err) => console.error('Error fetching daily usage:', err));
-
-    fetch(`${API_BASE}/ai/spend/week/user/${currentUser}`)
-      .then((res) => res.json())
-      .then(setWeeklyStats)
-      .catch((err) => console.error('Error fetching weekly usage:', err));
-
-    fetch(`${API_BASE}/ai/spend/month/user/${currentUser}`)
-      .then((res) => res.json())
-      .then(setMonthlyStats)
-    .catch((err) => console.error('Error fetching monthly usage:', err));
-  }, [currentUser]);
-  
-
-//every user's monthly total for the leaderboard
-useEffect(() => {
-  fetch(`${API_BASE}/ai/spend/month`)
-    .then((res) => res.json())
-    .then((allMonthly) => {
-      const leaderboardData = allMonthly.map((entry) => ({
-        id: entry.user_id,
-        name: entry.name,
-        tokensUsed: entry.tokens,
-      }));
-      setLeaderboardUsers(leaderboardData);
-    })
-    .catch((err) => console.error('Error building leaderboard:', err));
-}, []);
-
-  // Validated: end date can't be before start date, and neither can be after today
   function handleRangeChange(startDate, endDate) {
     if (!currentUser || !startDate || !endDate) return;
 
     const today = formatDate(new Date());
+
     if (startDate > today || endDate > today) {
       console.warn('Date range cannot extend beyond today.');
-      <div> 'Date range cannot extend beyond today. </div>
       return;
     }
     if (endDate < startDate) {
       console.warn('End date cannot be before start date.');
-      <div> End date cannot be before start date </div>
       return;
     }
 
-    fetch(`${API_BASE}/ai/spend/period/daily/user/${currentUser}?start_date=${startDate}&end_date=${endDate}`)
+    fetch(`/api/range-usage?start_date=${startDate}&end_date=${endDate}`)
       .then((res) => res.json())
-      .then(setRangeStats)
+      .then((data) => {
+        console.log('Fetched range usage:', data);
+        setRangeStats(data);
+      })
       .catch((err) => console.error('Error fetching range usage:', err));
   }
 

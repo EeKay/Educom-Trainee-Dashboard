@@ -221,3 +221,33 @@
 .chat-box.minimized .footer {
     display: none;
 }
+
+.feedback-choices {
+    display: inline-flex;
+    gap: 16px;
+    margin-top: 8px;
+}
+
+.feedback-choices button {
+    padding: 6px 16px;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font: inherit;
+    cursor: pointer;
+    transition: box-shadow 0.15s ease, transform 0.15s ease, opacity 0.15s ease;
+}
+
+.feedback-choices button:first-child {
+    background: #3DAEDA;
+}
+
+.feedback-choices button:last-child {
+    background: #F24452;
+}
+
+.feedback-choices button:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
+    opacity: 0.9;
+}

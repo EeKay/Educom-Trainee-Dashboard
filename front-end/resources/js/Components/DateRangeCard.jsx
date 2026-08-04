@@ -43,6 +43,9 @@ export default function DateRangeCard({ rangeStats, onRangeChange, currentUser, 
     onRangeChange(startDate, newEnd);
   }
 
+  //split rangeStats between models and results
+
+
   //data for the graph
   const options = {
     chart: {
@@ -85,17 +88,36 @@ export default function DateRangeCard({ rangeStats, onRangeChange, currentUser, 
       ],
     },
   };
+
+
   const series = [
-    {
-      name: "tokens",
-      data: rangeStats.map(x=>x.tokens)
-    },
-    {
-      name: "spend",
-      data: rangeStats.map(x=>x.spend)
-    },
+      // {
+      //   name: model
+      //   data: rangeStats.results.map(x=> x.data.model===model?x.data.model.tokens : 0)
+      // }
+      
+      //make toggle function for spend
+       
+    
+
+    // {
+    //   name: "tokens",
+    //   data: rangeStats.map(x=>x.tokens)
+    // },
+    // {
+    //   name: "spend",
+    //   data: rangeStats.map(x=>x.spend)
+    // },
+
+    //loop through the results and make a new series for each model, with the model name as the series name and the data as the number of results for that model on that date
   ];
 
+  rangeStats.models.map((model) => {
+    series.push({
+      name: model,
+      data: rangeStats.results.map((x)=> x.data.model===model?x.data.model.tokens : 0)
+    });
+  });
 
   return (
     <div className="date-range-card">

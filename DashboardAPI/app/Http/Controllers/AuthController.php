@@ -38,7 +38,7 @@ class AuthController extends Controller
         'lax'
         );
 
-        return response()->json(['token' => $token, 'message' => 'Logged in'])->cookie($cookie);
+        return response()->json(['token' => $token, 'role' => $user->role, 'message' => 'Logged in'])->cookie($cookie);
     }
 
     public function logout(Request $request) {

@@ -10,7 +10,7 @@ export default function UserMenu() {
             <img src="https://placecats.com/200/200" alt="User Avatar" />
         </button>
 
-    
+    {/* //work in progress */}
         <div className={`user-dropdown ${isOpen ? 'user-dropdown-open' : ''}`}>
           <Link href="/passwordReset" className = "user-dropdown-link">Change Password</Link>
           <Link href="/emailReset" className = "user-dropdown-link">Change Email</Link>
