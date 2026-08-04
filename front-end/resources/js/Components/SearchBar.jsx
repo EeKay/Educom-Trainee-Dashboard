@@ -1,14 +1,14 @@
 import '../../css/search-bar.css';
 import Autocomplete from './Autocomplete';
 
-export default function SearchBar ({searchPrompt, onSearchChange, entries}){
+export default function SearchBar ({searchPrompt, onSearchChange, faqs}){
     const suggestions = 
         searchPrompt.length > 0
-        ? entries.filter((entry) =>
-        entry.question.toLowerCase().includes(searchPrompt.toLowerCase())
+        ? faqs.filter((faq) =>
+        faq.question.toLowerCase().includes(searchPrompt.toLowerCase())
         ) : [];
 
-    const showSuggestions = !entries.some((entry) => entry.question === searchPrompt);
+    const showSuggestions = !faqs.some((faq) => faq.question === searchPrompt);
 
     return(
         <div className="autocomplete-container">

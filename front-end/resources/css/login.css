@@ -97,3 +97,28 @@
   font-size: 20px;
   color: #1a1a1a;
 }
+
+.forgot-password-link {
+    margin-top: 16px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 14px;
+    border: 1px solid #3DAEDA;
+    border-radius: 6px;
+    color: #3DAEDA;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all .2s ease;
+}
+
+.forgot-password-link:hover {
+    background: #3DAEDA;
+    color: white;
+    transform: translateY(-1px);
+}
+
+.forgot-password-link:active {
+    transform: translateY(0);
+}

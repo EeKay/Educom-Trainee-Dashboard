@@ -3150,3 +3150,58 @@ Stack trace:
 [stacktrace]
 #0 {main}
 "} 
+[2026-07-22 07:12:06] local.ERROR: Maximum execution time of 30 seconds exceeded {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Maximum execution time of 30 seconds exceeded at C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/composer/ClassLoader.php:429)
+[stacktrace]
+#0 {main}
+"} 
+[2026-07-23 07:34:26] local.ERROR: Maximum execution time of 30 seconds exceeded {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Maximum execution time of 30 seconds exceeded at C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Support/Manager.php:11)
+[stacktrace]
+#0 {main}
+"} 
+[2026-07-23 07:34:59] local.ERROR: Class "Illuminate\Support\Manager" not found {"exception":"[object] (Error(code: 0): Class \"Illuminate\\Support\\Manager\" not found at C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Session/SessionManager.php:12)
+[stacktrace]
+#0 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/composer/ClassLoader.php(576): include()
+#1 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/composer/ClassLoader.php(427): {closure:Composer/Autoload/ClassLoader::initializeIncludeClosure():575}('C://Users//0909W//...')
+#2 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Session/SessionServiceProvider.php(37): Composer/Autoload/ClassLoader->loadClass('Illuminate//Sess...')
+#3 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Container/Container.php(1118): Illuminate/Session/SessionServiceProvider->{closure:Illuminate/Session/SessionServiceProvider::registerSessionManager():36}(Object(Illuminate/Foundation/Application), Array)
+#4 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Container/Container.php(936): Illuminate/Container/Container->build(Object(Closure))
+#5 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1078): Illuminate/Container/Container->resolve('session', Array, true)
+#6 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Container/Container.php(864): Illuminate/Foundation/Application->resolve('session', Array)
+#7 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1058): Illuminate/Container/Container->make('session', Array)
+#8 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Session/SessionServiceProvider.php(52): Illuminate/Foundation/Application->make('session')
+#9 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Container/Container.php(1118): Illuminate/Session/SessionServiceProvider->{closure:Illuminate/Session/SessionServiceProvider::registerSessionDriver():48}(Object(Illuminate/Foundation/Application), Array)
+#10 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Container/Container.php(936): Illuminate/Container/Container->build(Object(Closure))
+#11 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1078): Illuminate/Container/Container->resolve('session.store', Array, true)
+#12 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Container/Container.php(864): Illuminate/Foundation/Application->resolve('session.store', Array)
+#13 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1058): Illuminate/Container/Container->make('session.store', Array)
+#14 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Container/Container.php(1810): Illuminate/Foundation/Application->make('session.store')
+#15 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Routing/RoutingServiceProvider.php(121): Illuminate/Container/Container->offsetGet('session.store')
+#16 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Container/Container.php(1118): Illuminate/Routing/RoutingServiceProvider->{closure:Illuminate/Routing/RoutingServiceProvider::registerRedirector():114}(Object(Illuminate/Foundation/Application), Array)
+#17 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Container/Container.php(936): Illuminate/Container/Container->build(Object(Closure))
+#18 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1078): Illuminate/Container/Container->resolve('redirect', Array, true)
+#19 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Container/Container.php(864): Illuminate/Foundation/Application->resolve('redirect', Array)
+#20 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1058): Illuminate/Container/Container->make('redirect', Array)
+#21 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Container/Container.php(1810): Illuminate/Foundation/Application->make('redirect')
+#22 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Routing/RoutingServiceProvider.php(181): Illuminate/Container/Container->offsetGet('redirect')
+#23 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Container/Container.php(1118): Illuminate/Routing/RoutingServiceProvider->{closure:Illuminate/Routing/RoutingServiceProvider::registerResponseFactory():180}(Object(Illuminate/Foundation/Application), Array)
+#24 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Container/Container.php(936): Illuminate/Container/Container->build(Object(Closure))
+#25 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1078): Illuminate/Container/Container->resolve('Illuminate//Cont...', Array, true)
+#26 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Container/Container.php(864): Illuminate/Foundation/Application->resolve('Illuminate//Cont...', Array)
+#27 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1058): Illuminate/Container/Container->make('Illuminate//Cont...', Array)
+#28 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(138): Illuminate/Foundation/Application->make('Illuminate//Cont...', Array)
+#29 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(850): app('Illuminate//Cont...')
+#30 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(1098): response('<!DOCTYPE html>...', 500, Array)
+#31 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(948): Illuminate/Foundation/Exceptions/Handler->toIlluminateResponse(Object(Symfony/Component/HttpFoundation/Response), Object(Symfony/Component/ErrorHandler/Error/FatalError))
+#32 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(839): Illuminate/Foundation/Exceptions/Handler->prepareResponse(Object(Illuminate/Http/Request), Object(Symfony/Component/ErrorHandler/Error/FatalError))
+#33 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(726): Illuminate/Foundation/Exceptions/Handler->renderExceptionResponse(Object(Illuminate/Http/Request), Object(Symfony/Component/ErrorHandler/Error/FatalError))
+#34 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(226): Illuminate/Foundation/Exceptions/Handler->render(Object(Illuminate/Http/Request), Object(Symfony/Component/ErrorHandler/Error/FatalError))
+#35 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(203): Illuminate/Foundation/Bootstrap/HandleExceptions->renderHttpResponse(Object(Symfony/Component/ErrorHandler/Error/FatalError))
+#36 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(239): Illuminate/Foundation/Bootstrap/HandleExceptions->handleException(Object(Symfony/Component/ErrorHandler/Error/FatalError))
+#37 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(263): Illuminate/Foundation/Bootstrap/HandleExceptions->handleShutdown()
+#38 [internal function]: Illuminate/Foundation/Bootstrap/HandleExceptions->{closure:Illuminate/Foundation/Bootstrap/HandleExceptions::forwardsTo():262}()
+#39 {main}
+"} 
+[2026-07-27 07:26:02] local.ERROR: Maximum execution time of 30 seconds exceeded {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Maximum execution time of 30 seconds exceeded at C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Queue/Queue.php:31)
+[stacktrace]
+#0 {main}
+"} 

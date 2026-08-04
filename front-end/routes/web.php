@@ -2,6 +2,10 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+// Route::get('/appChart', function(){
+//     return Inertia::render('App');
+// });
+
 Route :: get('/', function(){
     return Inertia::render('Dashboard');
 });
@@ -16,4 +20,8 @@ Route::get('/faq', function () {
 
 Route::get('/login', function () {
     return Inertia::render('Login');
+});
+
+Route::get('/passwordReset', function(){
+    return Inertia::render('PasswordReset');
 });

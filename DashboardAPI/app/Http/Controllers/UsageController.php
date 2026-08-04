@@ -280,6 +280,7 @@ class UsageController extends Controller
         $start_date = $request->input('start_date', date('Y-m-d'));
         $end_date = $request->input('end_date', date('Y-m-d'));
 
+
         $period = new \Carbon\CarbonPeriod($start_date, $end_date);
 
         $all_models = [];
