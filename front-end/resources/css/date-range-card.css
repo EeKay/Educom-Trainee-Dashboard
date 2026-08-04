@@ -59,3 +59,26 @@
 .date-range-input::-webkit-calendar-picker-indicator {
   filter: invert(1);
 }
+
+.date-type-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: bold;
+  background-color: #F24452;
+  border-radius: 6px;
+  padding: 6px 10px;
+}
+
+.data-type-input{
+  border: none;
+  font-size: 13px;
+  font-weight: bold;
+  font-family: inherit;
+  color: white;
+  background: transparent;
+  text-align: right;
+
+}

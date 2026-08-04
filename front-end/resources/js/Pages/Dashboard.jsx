@@ -25,7 +25,8 @@ export default function Dashboard(props) {
     tokensUsed: entry.tokens,
   }));
 
-  const [rangeStats, setRangeStats] = useState([]);
+  const [modelStats, setModelStats] = useState([]);
+  const [resultStats, setResultStats] = useState([]);
 
   function handleRangeChange(startDate, endDate) {
     if (!currentUser || !startDate || !endDate) return;
@@ -45,7 +46,8 @@ export default function Dashboard(props) {
       .then((res) => res.json())
       .then((data) => {
         console.log('Fetched range usage:', data);
-        setRangeStats(data);
+        setModelStats(data.models);
+        setResultStats(data.results);
       })
       .catch((err) => console.error('Error fetching range usage:', err));
   }
@@ -70,7 +72,8 @@ export default function Dashboard(props) {
           </div>
             <div style={{ flex: 1 }}>
               <DateRangeCard
-                rangeStats={rangeStats}
+                modelStats={modelStats}
+                resultStats={resultStats}
                 onRangeChange={handleRangeChange}
                 currentUser={currentUser}
                 maxDate={formatDate(new Date())}

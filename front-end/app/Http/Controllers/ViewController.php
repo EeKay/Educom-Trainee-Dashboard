@@ -51,7 +51,7 @@ class ViewController extends Controller
     $rangeUsage = Http::get('http://127.0.0.1:9000/api/ai/spend/period/daily/user/'.$currentUser
         . '?start_date=' . $startDate . '&end_date=' . $endDate);
 
-    return response()->json((array) $rangeUsage->json());
+    return json_encode((array) $rangeUsage->json());
     }
 
     public function Faq(Request $request){
