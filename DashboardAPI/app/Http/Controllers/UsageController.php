@@ -280,9 +280,12 @@ class UsageController extends Controller
         $start_date = $request->input('start_date', date('Y-m-d'));
         $end_date = $request->input('end_date', date('Y-m-d'));
 
+
         $period = new \Carbon\CarbonPeriod($start_date, $end_date);
 
-        foreach ($period as $date) 
+        $results = [];
+        
+        foreach ($period as $date)
         {
             $user = \App\Models\User::where('id', $id)->get();
             $user_id = $user[0]->id;
@@ -291,7 +294,8 @@ class UsageController extends Controller
             $tokens = $user[0]->Usage()->where('date', $date->format('Y-m-d'))->sum('tokens');
             $results[] = ['user_id' => $user_id, 'name' => $name, 'date' => $date->format('Y-m-d'), 'spend' => $spend, 'tokens' => $tokens];
         }
-        
+       
+
 
        return json_encode($results);
     }
