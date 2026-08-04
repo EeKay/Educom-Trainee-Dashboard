@@ -9,8 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('test', function () {return 'Succes';})
-    ->middleware(['cookie.filter', 'auth:sanctum', 'ability:trainee']);
+Route::get('test/{id}', [UsageController::class, 'getUserSpendPeriodDailyV2']);
 
 
 Route::get('/ai/fetch/period', [UsageController::class, 'fetchUsagePeriod']); 
@@ -37,31 +36,36 @@ Route::get('/ai/period/user/{id}', [UsageController::class, 'getUserUsagePeriod'
 
 //Retrieves full list of all users' spend and tokens
 //params: none
-Route::get('/ai/spend', [UsageController::class, 'getTotalSpend']);
+Route::get('/ai/spend', [UsageController::class, 'getTotalSpend']);//admin
 
 //Retrieves full list of specified user's spend and tokens
 //params: {id} -> user_id
-Route::get('/ai/spend/user/{id}', [UsageController::class, 'getUserSpend']);
+Route::get('/ai/spend/user/{id}', [UsageController::class, 'getUserSpend']);//admin make trainee version
 
 //Retrieves full list of all users' spend and tokens over a time period
 //params: request -> {'start_date', 'end_date'}
-Route::get('/ai/spend/period', [UsageController::class, 'getTotalSpendPeriod']); 
+Route::get('/ai/spend/period', [UsageController::class, 'getTotalSpendPeriod']);//admin
 
 //Retrieves full list of specified user's spend and tokens over a time period
 //params: {id} -> user_id, request -> {'start_date', 'end_date'}
-Route::get('/ai/spend/period/user/{id}', [UsageController::class, 'getUserSpendPeriod']);
+Route::get('/ai/spend/period/user/{id}', [UsageController::class, 'getUserSpendPeriod']);//admin make trainee version
+
+//TODO remove old one
+//Retrieves full list of specified user's spend and tokens over a time period in daily intervals
+//params: {id} -> user_id, request -> {'start_date', 'end_date'}
+Route::get('/ai/spend/period/daily/user/deprecated/{id}', [UsageController::class, 'getUserSpendPeriodDaily']);//admin make trainee version
 
 //Retrieves full list of specified user's spend and tokens over a time period
 //params: {id} -> user_id, request -> {'start_date', 'end_date'}
-Route::get('/ai/spend/period/daily/user/{id}', [UsageController::class, 'getUserSpendPeriodDaily']);
+Route::get('/ai/spend/period/daily/user/{id}', [UsageController::class, 'getUserSpendPeriodDailyV2']);
 
 //Retrieves full list of all users' spend and tokens for this month
 //params: none
-Route::get('/ai/spend/month', [UsageController::class, 'getTotalSpendMonth']);
+Route::get('/ai/spend/month', [UsageController::class, 'getTotalSpendMonth']);//trainee
 
 //Retrieves full list of specified user's spend and tokens for this month
 //params: {id} -> user_id
-Route::get('/ai/spend/month/user/{id}', [UsageController::class, 'getUserSpendMonth']);
+Route::get('/ai/spend/month/user/{id}', [UsageController::class, 'getUserSpendMonth']);//admin make trainee version
 
 //Retrieves full list of all users' spend and tokens for this week
 //params: none
@@ -76,7 +80,17 @@ Route::get('/ai/spend/week/user/{id}', [UsageController::class, 'getUserSpendWee
 
 //Retrieves full list of users
 //params: none
-Route::get('/users', [UserController::class, 'getUsers']);//Retrieves a list of all users
+Route::get('/users', [UserController::class, 'getUsers']);
+
+Route::post('/user/create', [UserController::class, 'create']);
+
+//update specified user
+//params: {id} -> user_id, request -> {'team', 'name', 'role'(optional), 'email', 'key_alias', 'password'}
+Route::post('/user/update/{id}', [UserController::class, 'update']);
+
+//delete specified user
+//params: {id} -> user_id
+Route::delete('/user/delete/{id}', [UserController::class, 'delete']);
 
 
 
