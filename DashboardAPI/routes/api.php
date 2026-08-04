@@ -50,13 +50,12 @@ Route::get('/ai/spend/period', [UsageController::class, 'getTotalSpendPeriod']);
 //params: {id} -> user_id, request -> {'start_date', 'end_date'}
 Route::get('/ai/spend/period/user/{id}', [UsageController::class, 'getUserSpendPeriod']);//admin make trainee version
 
-//TODO remove old one
-//Retrieves full list of specified user's spend and tokens over a time period in daily intervals
+//Retrieves full list of specified user's spend and tokens per model over a time period in daily intervals
 //params: {id} -> user_id, request -> {'start_date', 'end_date'}
 Route::get('/ai/spend/period/daily/user/{id}', [UsageController::class, 'getUserSpendPeriodDaily']);//admin make trainee version
 
-//Retrieves full list of specified user's spend and tokens over a time period
-//params: {id} -> user_id, request -> {'start_date', 'end_date'}
+//Retrieves full list of current user's spend and tokens per model over a time period
+//params: request -> {'start_date', 'end_date'}
 Route::get('/ai/spend/period/daily/user/', [UsageController::class, 'getCurrentUserSpendPeriodDaily']);
 
 //Retrieves full list of all users' spend and tokens for this month
