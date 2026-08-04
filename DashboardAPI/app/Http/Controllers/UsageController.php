@@ -296,6 +296,39 @@ class UsageController extends Controller
        return json_encode($results);
     }
 
+    public function getUserSpendPeriodDailyV2(Request $request, string $id)
+    {
+        $start_date = $request->input('start_date', date('Y-m-d'));
+        $end_date = $request->input('end_date', date('Y-m-d'));
+
+        $period = new \Carbon\CarbonPeriod($start_date, $end_date);
+
+        $all_models = [];
+        foreach ($period as $date) 
+        {
+            $user = \App\Models\User::where('id', $id)->get();
+            $models = $user[0]->Usage()->where('date', $date->format('Y-m-d'))->get('model');
+            //return json_encode($models);
+            $data = [];
+            foreach ($models as $model)
+            {   
+                $model = $model['model'];
+                $spend = $user[0]->Usage()->where('date', $date->format('Y-m-d'))->where('model', $model)->sum('spend');
+                $tokens = $user[0]->Usage()->where('date', $date->format('Y-m-d'))->where('model', $model)->sum('tokens');
+                $data[$model] = ['spend' => $spend, 'tokens' => $tokens];
+                if (!in_array($model, $all_models))
+                {
+                    $all_models[] = $model;
+                }
+            }
+            $results[] = ['date' => $date->format('Y-m-d'), 'data' => $data];
+        }
+        $output['models'] = $all_models;
+        $output['results'] = $results;
+
+       return json_encode($output);
+    }
+
     /*
     * Returns total spend and tokens used of every user over this month
     */
