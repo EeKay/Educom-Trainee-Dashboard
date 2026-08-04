@@ -55,7 +55,7 @@ class UsageController extends Controller
                                 $user->Usage()->create([
                                     'date' => $date,
                                     'model' => $key,
-                                    'spend' => $userData['metrics']['spend'], 
+                                    'spend' => round($userData['metrics']['spend'], 5, PHP_ROUND_HALF_UP), 
                                     'tokens' => $userData['metrics']['total_tokens']
                                     ]);
                             } else 
@@ -64,7 +64,7 @@ class UsageController extends Controller
                                                     ->where('model', $key)
                                                     ->where('date', $date)
                                                     ->update([
-                                                        'spend' => $userData['metrics']['spend'], 
+                                                        'spend' => round($userData['metrics']['spend'], 5, PHP_ROUND_HALF_UP), 
                                                         'tokens' => $userData['metrics']['total_tokens']
                                                     ]);
                             }
@@ -121,7 +121,7 @@ class UsageController extends Controller
                             $user->Usage()->create([
                                 'date' => $date,
                                 'model' => $key,
-                                'spend' => $userData['metrics']['spend'], 
+                                'spend' => round($userData['metrics']['spend'], 5, PHP_ROUND_HALF_UP), 
                                 'tokens' => $userData['metrics']['total_tokens']
                                 ]);
                         } else 
@@ -130,7 +130,7 @@ class UsageController extends Controller
                                                 ->where('model', $key)
                                                 ->where('date', $date)
                                                 ->update([
-                                                    'spend' => $userData['metrics']['spend'], 
+                                                    'spend' => round($userData['metrics']['spend'], 5, PHP_ROUND_HALF_UP), 
                                                     'tokens' => $userData['metrics']['total_tokens']
                                                 ]);
                         }
@@ -269,7 +269,7 @@ class UsageController extends Controller
     }
 
     /*
-    * Returns total spend and tokens used of specified user over given period in daily intervals
+    * Returns total spend and tokens per model used of specified user over given period in daily intervals
     * params
     * int id
     * string start_date : YYYY-MM-DD
@@ -288,7 +288,6 @@ class UsageController extends Controller
         {
             $user = \App\Models\User::where('id', $id)->get();
             $models = $user[0]->Usage()->where('date', $date->format('Y-m-d'))->get('model');
-            //return json_encode($models);
             $data = [];
             foreach ($models as $model)
             {   
@@ -309,6 +308,12 @@ class UsageController extends Controller
        return json_encode($output);
     }
 
+    /*
+    * Returns total spend and tokens per model used of current user over given period in daily intervals
+    * params
+    * string start_date : YYYY-MM-DD
+    * string end_date : YYYY-MM-DD
+    */
     public function getCurrentUserSpendPeriodDaily(Request $request)
     {
         $user = app(AuthController::class)->getUser($request);
@@ -327,7 +332,6 @@ class UsageController extends Controller
         {
             $user = \App\Models\User::where('id', $id)->get();
             $models = $user[0]->Usage()->where('date', $date->format('Y-m-d'))->get('model');
-            //return json_encode($models);
             $data = [];
             foreach ($models as $model)
             {   
