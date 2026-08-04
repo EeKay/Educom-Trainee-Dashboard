@@ -7411,3 +7411,74 @@ CONTEXT:  unnamed portal parameter $1 = '...' at C:/Users/0909W/OneDrive/Documen
 #46 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(23): require_once('C://Users//0909W//...')
 #47 {main}
 "} 
+[2026-07-29 13:57:04] local.ERROR: Maximum execution time of 30 seconds exceeded {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Maximum execution time of 30 seconds exceeded at C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/composer/ClassLoader.php:429)
+[stacktrace]
+#0 {main}
+"} 
+[2026-07-29 13:57:05] local.ERROR: Target class [view] does not exist. {"exception":"[object] (Illuminate\\Contracts\\Container\\BindingResolutionException(code: 0): Target class [view] does not exist. at C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Container/Container.php:1127)
+[stacktrace]
+#0 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Container/Container.php(936): Illuminate/Container/Container->build('view')
+#1 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1078): Illuminate/Container/Container->resolve('view', Array, true)
+#2 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Container/Container.php(864): Illuminate/Foundation/Application->resolve('view', Array)
+#3 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1058): Illuminate/Container/Container->make('view', Array)
+#4 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Container/Container.php(1810): Illuminate/Foundation/Application->make('view')
+#5 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Routing/RoutingServiceProvider.php(181): Illuminate/Container/Container->offsetGet('Illuminate//Cont...')
+#6 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Container/Container.php(1118): Illuminate/Routing/RoutingServiceProvider->{closure:Illuminate/Routing/RoutingServiceProvider::registerResponseFactory():180}(Object(Illuminate/Foundation/Application), Array)
+#7 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Container/Container.php(936): Illuminate/Container/Container->build(Object(Closure))
+#8 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1078): Illuminate/Container/Container->resolve('Illuminate//Cont...', Array, true)
+#9 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Container/Container.php(864): Illuminate/Foundation/Application->resolve('Illuminate//Cont...', Array)
+#10 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1058): Illuminate/Container/Container->make('Illuminate//Cont...', Array)
+#11 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(138): Illuminate/Foundation/Application->make('Illuminate//Cont...', Array)
+#12 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(850): app('Illuminate//Cont...')
+#13 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(1115): response()
+#14 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(838): Illuminate/Foundation/Exceptions/Handler->prepareJsonResponse(Object(Illuminate/Http/Request), Object(Symfony/Component/ErrorHandler/Error/FatalError))
+#15 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(726): Illuminate/Foundation/Exceptions/Handler->renderExceptionResponse(Object(Illuminate/Http/Request), Object(Symfony/Component/ErrorHandler/Error/FatalError))
+#16 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(226): Illuminate/Foundation/Exceptions/Handler->render(Object(Illuminate/Http/Request), Object(Symfony/Component/ErrorHandler/Error/FatalError))
+#17 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(203): Illuminate/Foundation/Bootstrap/HandleExceptions->renderHttpResponse(Object(Symfony/Component/ErrorHandler/Error/FatalError))
+#18 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(239): Illuminate/Foundation/Bootstrap/HandleExceptions->handleException(Object(Symfony/Component/ErrorHandler/Error/FatalError))
+#19 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(263): Illuminate/Foundation/Bootstrap/HandleExceptions->handleShutdown()
+#20 [internal function]: Illuminate/Foundation/Bootstrap/HandleExceptions->{closure:Illuminate/Foundation/Bootstrap/HandleExceptions::forwardsTo():262}()
+#21 {main}
+
+[previous exception] [object] (ReflectionException(code: -1): Class \"view\" does not exist at C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Container/Container.php:1125)
+[stacktrace]
+#0 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Container/Container.php(1125): ReflectionClass->__construct('view')
+#1 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Container/Container.php(936): Illuminate/Container/Container->build('view')
+#2 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1078): Illuminate/Container/Container->resolve('view', Array, true)
+#3 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Container/Container.php(864): Illuminate/Foundation/Application->resolve('view', Array)
+#4 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1058): Illuminate/Container/Container->make('view', Array)
+#5 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Container/Container.php(1810): Illuminate/Foundation/Application->make('view')
+#6 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Routing/RoutingServiceProvider.php(181): Illuminate/Container/Container->offsetGet('Illuminate//Cont...')
+#7 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Container/Container.php(1118): Illuminate/Routing/RoutingServiceProvider->{closure:Illuminate/Routing/RoutingServiceProvider::registerResponseFactory():180}(Object(Illuminate/Foundation/Application), Array)
+#8 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Container/Container.php(936): Illuminate/Container/Container->build(Object(Closure))
+#9 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1078): Illuminate/Container/Container->resolve('Illuminate//Cont...', Array, true)
+#10 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Container/Container.php(864): Illuminate/Foundation/Application->resolve('Illuminate//Cont...', Array)
+#11 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1058): Illuminate/Container/Container->make('Illuminate//Cont...', Array)
+#12 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(138): Illuminate/Foundation/Application->make('Illuminate//Cont...', Array)
+#13 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(850): app('Illuminate//Cont...')
+#14 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(1115): response()
+#15 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(838): Illuminate/Foundation/Exceptions/Handler->prepareJsonResponse(Object(Illuminate/Http/Request), Object(Symfony/Component/ErrorHandler/Error/FatalError))
+#16 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(726): Illuminate/Foundation/Exceptions/Handler->renderExceptionResponse(Object(Illuminate/Http/Request), Object(Symfony/Component/ErrorHandler/Error/FatalError))
+#17 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(226): Illuminate/Foundation/Exceptions/Handler->render(Object(Illuminate/Http/Request), Object(Symfony/Component/ErrorHandler/Error/FatalError))
+#18 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(203): Illuminate/Foundation/Bootstrap/HandleExceptions->renderHttpResponse(Object(Symfony/Component/ErrorHandler/Error/FatalError))
+#19 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(239): Illuminate/Foundation/Bootstrap/HandleExceptions->handleException(Object(Symfony/Component/ErrorHandler/Error/FatalError))
+#20 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(263): Illuminate/Foundation/Bootstrap/HandleExceptions->handleShutdown()
+#21 [internal function]: Illuminate/Foundation/Bootstrap/HandleExceptions->{closure:Illuminate/Foundation/Bootstrap/HandleExceptions::forwardsTo():262}()
+#22 {main}
+"} 
+[2026-08-03 11:39:36] local.ERROR: Maximum execution time of 30 seconds exceeded {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Maximum execution time of 30 seconds exceeded at C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/symfony/http-foundation/Response.php:15)
+[stacktrace]
+#0 {main}
+"} 
+[2026-08-03 11:39:38] local.ERROR: Class "Illuminate\Http\JsonResponse" not found {"exception":"[object] (Error(code: 0): Class \"Illuminate\\Http\\JsonResponse\" not found at C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Routing/ResponseFactory.php:105)
+[stacktrace]
+#0 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(1115): Illuminate/Routing/ResponseFactory->json(Array, 500, Array, 192)
+#1 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(838): Illuminate/Foundation/Exceptions/Handler->prepareJsonResponse(Object(Illuminate/Http/Request), Object(Symfony/Component/ErrorHandler/Error/FatalError))
+#2 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(726): Illuminate/Foundation/Exceptions/Handler->renderExceptionResponse(Object(Illuminate/Http/Request), Object(Symfony/Component/ErrorHandler/Error/FatalError))
+#3 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(226): Illuminate/Foundation/Exceptions/Handler->render(Object(Illuminate/Http/Request), Object(Symfony/Component/ErrorHandler/Error/FatalError))
+#4 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(203): Illuminate/Foundation/Bootstrap/HandleExceptions->renderHttpResponse(Object(Symfony/Component/ErrorHandler/Error/FatalError))
+#5 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(239): Illuminate/Foundation/Bootstrap/HandleExceptions->handleException(Object(Symfony/Component/ErrorHandler/Error/FatalError))
+#6 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/DashboardAPI/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(263): Illuminate/Foundation/Bootstrap/HandleExceptions->handleShutdown()
+#7 [internal function]: Illuminate/Foundation/Bootstrap/HandleExceptions->{closure:Illuminate/Foundation/Bootstrap/HandleExceptions::forwardsTo():262}()
+#8 {main}
+"} 

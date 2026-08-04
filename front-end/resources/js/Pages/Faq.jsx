@@ -7,7 +7,7 @@ import '../../css/faq.css';
 
 export default function Faq(props){
     // const [faqs, setFaqs] = useState ([]);
-    const currentUser = 1; //change later and change the calls to currentUser.id
+    const currentUser = 2; //hardcoded for now, but will be changed to token from the session 
 
     const [searchPrompt, setSearchPrompt] = useState('');
     const faqs = props.faqs;

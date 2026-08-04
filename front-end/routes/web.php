@@ -4,14 +4,16 @@ use Inertia\Inertia;
 use App\Http\Controllers\ViewController;
 
 
-Route :: get('/dashboard', [ViewController::class, "Dashboard"]);
+Route::get('/dashboard', [ViewController::class, "Dashboard"]);
 
-Route :: get('/api/range-usage', [ViewController::class, 'RangeUsage']);
+Route::get('/api/range-usage', [ViewController::class, 'RangeUsage']);
 
-Route :: get('/faq', [ViewController::class, 'Faq'])->name('faq');
+Route::get('/faq', [ViewController::class, 'Faq'])->name('faq');
 
-Route :: get('/login', function() {
-    return Inertia::render('Login');
-});
+Route::get('/passwordReset', [ViewController::class, 'passwordReset'])->name('passwordReset');
 
-Route :: get('/passwordReset', [ViewController::class, 'passwordReset'])->name('passwordReset');
+Route::post('/nan', [ViewController::class, 'Chatbot']);
+
+Route::post('/login', [ViewController::class, 'Login'])->name('loginPost');
+Route::get('/login', [ViewController::class, 'Login'])->name('loginGet');
+

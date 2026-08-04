@@ -2,6 +2,8 @@ import { useForm, Link } from '@inertiajs/react';
 import logo from '../../img/logo.svg';
 import '../../css/password-reset.css';
 
+//api needs to be connected still
+
 export default function PasswordReset() {
     const { data, setData, post, processing, errors } = useForm({
         email: '',

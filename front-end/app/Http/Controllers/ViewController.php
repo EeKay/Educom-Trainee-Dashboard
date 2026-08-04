@@ -5,21 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use inertia\inertia;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redirect;
 
 class ViewController extends Controller
 {
-
-//   const [users, setUsers] = useState([]);
-//   //const [currentUser, setCurrentUser] = useState(null);
-//   const currentUser = 1; //change later and change the calls to currentUser.id
-//   const [monthlyStats, setMonthlyStats] = useState({tokens: 0, spend: 0});
-//   const [dailyStats, setDailyStats] = useState({ tokens: 0, spend: 0 });
-//   const [weeklyStats, setWeeklyStats] = useState({ tokens: 0, spend: 0 });
-//   const [rangeStats, setRangeStats] = useState([]);
-//   const [leaderboardUsers, setLeaderboardUsers] = useState([]);
-
     public function Dashboard(Request $request ){
-        $currentUser = 1;
+        $currentUser = 2;
         $today = date('Y-m-d');
 
 
@@ -48,7 +40,7 @@ class ViewController extends Controller
     }
 
     public function RangeUsage(Request $request){
-        $currentUser = 1; //hardcoded for now
+        $currentUser = 2; //hardcoded for now
         $startDate = $request->query('start_date');
         $endDate = $request->query('end_date');
 
@@ -71,34 +63,59 @@ class ViewController extends Controller
         ]);
     }
 
-    public function ChatBot(Request $request){
-        $chatbot = Http::get('http://127.0.0.1:9000/api/nan');
+    public function Login(Request $request){
+        if($request -> isMethod('post')){
+            $validated = $request->validate([
+                'name'    => 'required|string',
+                'password' => 'required|string',
+            ]);
+
+            $login = Http::post('http://127.0.0.1:9000/api/login', [
+                'name' => $validated['name'],
+                'password' => $validated['password']
+            ]);
+
+            $login = (array) $login->json();
+            session(['token' => $login['token'] ?? null]);
+
+            Log::info('Session Token: ' . session('token'));
+
+            if (!session('token')) {
+                return Inertia::render('Login', [
+                    'token' => null,
+                    'errorMessage' => 'Failed to retrieve token from API.'
+                ]);
+            }
+
+            return redirect('/dashboard');
+        }
+
+        return Inertia::render('Login', [
+            'token' => null,
+            'errorMessage' => null
+        ]);
+    }
+
+
+    public function ChatBot(Request $request)
+    {
+        $validated = $request->validate([
+            'question'    => 'required|string',
+            'faqRejected' => 'sometimes|boolean',
+        ]);
+
+        $chatbot = Http::withToken(session('token')) 
+            ->post('http://127.0.0.1:9000/api/nan', [
+                'question'    => $validated['question'],
+                'faqRejected' => $validated['faqRejected'] ?? false,
+            ]);
+
+        Log::info('Nan workflow status: ' . $chatbot->status());
+        Log::info('Nan workflow body: ' . $chatbot->body());
         $chatbot = (array) $chatbot->json();
+
+        return response()->json($chatbot);
     }
 }
 
 
-    // useEffect(() =>{
-    //     fetch(`${API_BASE}/nan`, {
-    //         method: 'POST',
-    //         headers:{
-    //             "Content-Type": "application/json",
-    //             "accept" : "application/json",
-    //             "Access-Control-Allow-Origin": "*",
-    //             "Access-Control-Allow-Methods": "POST",
-    //             "Authorization": "Bearer 463|H7ztAS1gkOUb4V5CYjHhTVtSFNSIbPyWDtvRxJjm549eebc2"//hardcoded for now
-    //         },
-    //         // credentials: "include",
-    //         body: JSON.stringify({
-    //             question: "question", 
-    //             faqRejected: "false",
-    //         })
-    //     })
-        
-    //     .then(response => response.text())   
-    //     .then(data => {
-    //         console.log(data);
-    //     })
-    //     .catch(error => console.error ("error: ", error));
-
-    // }, []);
