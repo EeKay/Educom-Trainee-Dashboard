@@ -300,7 +300,6 @@ class UsageController extends Controller
                     $all_models[] = $model;
                 }
             }
-            sort($data);
             $results[] = ['date' => $date->format('Y-m-d'), 'data' => $data];
         }
         $output['models'] = $all_models;

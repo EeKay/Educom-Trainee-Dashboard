@@ -3,7 +3,7 @@ import '../../css/date-range-card.css';
 import React, { Component } from "react";
 import Chart from "react-apexcharts";
 
-export default function DateRangeCard({ modelStats, resultStats, onRangeChange, currentUser, maxDate }) {
+export default function DateRangeCard({ modelStats = [], resultStats = [], onRangeChange, maxDate, currentUser }) {
 
   function formatDate(date) {
     return date.toISOString().split('T')[0];
@@ -23,15 +23,15 @@ export default function DateRangeCard({ modelStats, resultStats, onRangeChange, 
 
   const [dataType, setDataType] = useState("tokens");
 
-
-  // Send default range to API
+  //Change information when the user changes and set default
   useEffect(() => {
+    if (!currentUser) return;
 
     onRangeChange(
       formatDate(defaultStart),
       formatDate(new Date())
     );
-  }, []);
+  }, [currentUser]);
 
   function handleStartChange(e) {
     const newStart = e.target.value;
@@ -57,7 +57,7 @@ export default function DateRangeCard({ modelStats, resultStats, onRangeChange, 
       id: 'charts',
       toolbar: { show: false },
     },
-    colors: ['#F24452', '#3DAEDA', '#F2A541', '#BA68C8', '#FFB74D', '#4DB6AC', '#7986CB', '#E57373', '#81C784'],
+    colors: ['#F24452', '#3DAEDA', '#F2A541', '#BA68C8','#81C784', '#4DB6AC', '#7986CB', '#E57373', ],
     stroke: {
       curve: 'smooth',
       width: 3,
@@ -77,22 +77,21 @@ export default function DateRangeCard({ modelStats, resultStats, onRangeChange, 
       borderColor: '#eee',
     },
     tooltip: {
-      y: [
-          {
-            formatter: function(value){ 
-              if(dataType == "tokens"){ 
-                return `${Math.round(value)} tokens`;
-              }
-              else if(dataType == "spend"){
-                return value;
-              }
-            } 
-          }
-      ],
+      y:{
+          formatter: function(value){ 
+            if(dataType == "tokens"){ 
+              return `${Math.round(value)} tokens`;
+            }
+            else if(dataType == "spend"){
+              return (value) + " euros";
+            }
+          } 
+        },
     },
   };
 
   const series = [];
+
 
   if(dataType == "tokens") {
     modelStats.map((model) => {
@@ -109,7 +108,6 @@ export default function DateRangeCard({ modelStats, resultStats, onRangeChange, 
       })
     });
   }
-
 
   return (
     <div className="date-range-card">
@@ -155,6 +153,7 @@ export default function DateRangeCard({ modelStats, resultStats, onRangeChange, 
                 handleTypeChange(e);
               }
             }}
+            style={{cursor:'pointer'}}
             className="data-type-input"
           />
         </div>
