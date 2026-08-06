@@ -16,21 +16,6 @@ Route::get('/ai/fetch/period', [UsageController::class, 'fetchUsagePeriod']);//f
 //params: none
 Route::get('/ai/fetch', [UsageController::class, 'fetchUsage']);//for internal use
 
-//Retrieves all AI usage data from all users(old)
-//params: none
-Route::get('/ai/', [UsageController::class, 'getUsage']);//deprecated
-
-//Retrieves all AI usage data of specified user
-//params: {id} -> user_id
-Route::get('/ai/user/{id}', [UsageController::class, 'getUserUsage']);//deprectated
-
-//Retrieves all AI usage data for the specified period
-//params: request -> {'start_date', 'end_date'}
-Route::get('/ai/period', [UsageController::class, 'getUsagePeriod']);//deprecated
-
-//Retrieves all AI usage data of specified user for specified period
-//params: {id} -> user_id, request -> {'start_date', 'end_date'}
-Route::get('/ai/period/user/{id}', [UsageController::class, 'getUserUsagePeriod']);//deprecated
 
 
 //Trainee usage data fetches
