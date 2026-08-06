@@ -199,7 +199,7 @@ class UsageController extends Controller
         foreach ($users as $user) {
             $id = $user->id;
             $name = $user->name;
-            $spend = $user->Usage()->sum('spend');
+            $spend = round($user->Usage()->sum('spend'), 5, PHP_ROUND_HALF_UP);
             $tokens = $user->Usage()->sum('tokens');
             $result[] = ['user_id' => $id, 'name' => $name, 'spend' => $spend, 'tokens' => $tokens];
             
@@ -215,12 +215,68 @@ class UsageController extends Controller
     public function getUserSpend(string $id)
     {
         $user = \App\Models\User::where('id', $id)->get();
+
         $user_id = $user[0]->id;
         $name = $user[0]->name;
-        $spend = $user[0]->Usage()->sum('spend');
+        $spend = round($user[0]->Usage()->sum('spend'), 5, PHP_ROUND_HALF_UP);
         $tokens = $user[0]->Usage()->sum('tokens');
 
-       return json_encode(['user_id' => $user_id, 'name' => $name, 'spend' => $spend, 'tokens' => $tokens]);
+        $models = $user[0]->Usage()->get('model');
+        $modelData = [];
+        $all_models = [];
+        foreach ($models as $model)
+        {
+            $model = $model['model'];
+            $modelSpend = round($user[0]->Usage()->where('model', $model)->sum('spend'), 5, PHP_ROUND_HALF_UP);
+            $modelTokens = $user[0]->Usage()->where('model', $model)->sum('tokens');
+            $modelData[$model] = ['spend' => $modelSpend, 'tokens' => $modelTokens];
+
+            if (!in_array($model, $all_models))
+            {
+                $all_models[] = $model;
+            }
+        }
+        
+
+       return json_encode(['user_id' => $user_id, 'name' => $name, 'spend' => $spend, 'tokens' => $tokens, 'models' => $all_models, 'data' => $modelData]);
+    }
+
+    /*
+    * Returns total spend and tokens used of specified user
+    */
+    public function getCurrentUserSpend(Request $request)
+    {
+        $user = app(AuthController::class)->getUser($request);
+        if ($user == null) {
+            return response()->json(['message' => 'No API key provided']);
+        }
+        $id = $user->id;
+
+        $user = \App\Models\User::where('id', $id)->get();
+
+        $user_id = $user[0]->id;
+        $name = $user[0]->name;
+        $spend = round($user[0]->Usage()->sum('spend'), 5, PHP_ROUND_HALF_UP);
+        $tokens = $user[0]->Usage()->sum('tokens');
+
+        $models = $user[0]->Usage()->get('model');
+        $modelData = [];
+        $all_models = [];
+        foreach ($models as $model)
+        {
+            $model = $model['model'];
+            $modelSpend = round($user[0]->Usage()->where('model', $model)->sum('spend'), 5, PHP_ROUND_HALF_UP);
+            $modelTokens = $user[0]->Usage()->where('model', $model)->sum('tokens');
+            $modelData[$model] = ['spend' => $modelSpend, 'tokens' => $modelTokens];
+
+            if (!in_array($model, $all_models))
+            {
+                $all_models[] = $model;
+            }
+        }
+        
+
+       return json_encode(['user_id' => $user_id, 'name' => $name, 'spend' => $spend, 'tokens' => $tokens, 'models' => $all_models, 'data' => $modelData]);
     }
 
     /*
@@ -239,7 +295,7 @@ class UsageController extends Controller
         foreach ($users as $user) {
             $id = $user->id;
             $name = $user->name;
-            $spend = $user->Usage()->whereBetween('date', [$start_date, $end_date])->sum('spend');
+            $spend = round($user->Usage()->whereBetween('date', [$start_date, $end_date])->sum('spend'), 5, PHP_ROUND_HALF_UP);
             $tokens = $user->Usage()->whereBetween('date', [$start_date, $end_date])->sum('tokens');
             $result[] = ['user_id' => $id, 'name' => $name, 'spend' => $spend, 'tokens' => $tokens];
             
@@ -262,10 +318,68 @@ class UsageController extends Controller
         $user = \App\Models\User::where('id', $id)->get();
         $user_id = $user[0]->id;
         $name = $user[0]->name;
-        $spend = $user[0]->Usage()->whereBetween('date', [$start_date, $end_date])->sum('spend');
+        $spend = round($user[0]->Usage()->whereBetween('date', [$start_date, $end_date])->sum('spend'), 5, PHP_ROUND_HALF_UP);
         $tokens = $user[0]->Usage()->whereBetween('date', [$start_date, $end_date])->sum('tokens');
 
-       return json_encode(['user_id' => $user_id, 'name' => $name, 'spend' => $spend, 'tokens' => $tokens]);
+        $models = $user[0]->Usage()->get('model');
+        $modelData = [];
+        $all_models = [];
+        foreach ($models as $model)
+        {
+            $model = $model['model'];
+            $modelSpend = round($user[0]->Usage()->where('model', $model)->sum('spend'), 5, PHP_ROUND_HALF_UP);
+            $modelTokens = $user[0]->Usage()->where('model', $model)->sum('tokens');
+            $modelData[$model] = ['spend' => $modelSpend, 'tokens' => $modelTokens];
+
+            if (!in_array($model, $all_models))
+            {
+                $all_models[] = $model;
+            }
+        }
+
+       return json_encode(['user_id' => $user_id, 'name' => $name, 'spend' => $spend, 'tokens' => $tokens, 'models' => $all_models, 'data' => $modelData]);
+    }
+
+    /*
+    * Returns total spend and tokens used of specified user over given period
+    * params
+    * string start_date : YYYY-MM-DD
+    * string end_date : YYYY-MM-DD
+    */
+    public function getCurrentUserSpendPeriod(Request $request)
+    {
+        $user = app(AuthController::class)->getUser($request);
+        if ($user == null) {
+            return response()->json(['message' => 'No API key provided']);
+        }
+        $id = $user->id;
+
+        $start_date = $request->input('start_date', date('Y-m-d'));
+        $end_date = $request->input('end_date', date('Y-m-d'));
+
+        $user = \App\Models\User::where('id', $id)->get();
+        $user_id = $user[0]->id;
+        $name = $user[0]->name;
+        $spend = round($user[0]->Usage()->whereBetween('date', [$start_date, $end_date])->sum('spend'), 5, PHP_ROUND_HALF_UP);
+        $tokens = $user[0]->Usage()->whereBetween('date', [$start_date, $end_date])->sum('tokens');
+
+        $models = $user[0]->Usage()->get('model');
+        $modelData = [];
+        $all_models = [];
+        foreach ($models as $model)
+        {
+            $model = $model['model'];
+            $modelSpend = round($user[0]->Usage()->where('model', $model)->sum('spend'), 5, PHP_ROUND_HALF_UP);
+            $modelTokens = $user[0]->Usage()->where('model', $model)->sum('tokens');
+            $modelData[$model] = ['spend' => $modelSpend, 'tokens' => $modelTokens];
+
+            if (!in_array($model, $all_models))
+            {
+                $all_models[] = $model;
+            }
+        }
+
+       return json_encode(['user_id' => $user_id, 'name' => $name, 'spend' => $spend, 'tokens' => $tokens, 'models' => $all_models, 'data' => $modelData]);
     }
 
     /*
@@ -292,7 +406,7 @@ class UsageController extends Controller
             foreach ($models as $model)
             {   
                 $model = $model['model'];
-                $spend = $user[0]->Usage()->where('date', $date->format('Y-m-d'))->where('model', $model)->sum('spend');
+                $spend = round($user[0]->Usage()->where('date', $date->format('Y-m-d'))->where('model', $model)->sum('spend'), 5, PHP_ROUND_HALF_UP);
                 $tokens = $user[0]->Usage()->where('date', $date->format('Y-m-d'))->where('model', $model)->sum('tokens');
                 $data[$model] = ['spend' => $spend, 'tokens' => $tokens];
                 if (!in_array($model, $all_models))
@@ -300,7 +414,6 @@ class UsageController extends Controller
                     $all_models[] = $model;
                 }
             }
-            sort($data);
             $results[] = ['date' => $date->format('Y-m-d'), 'data' => $data];
         }
         $output['models'] = $all_models;
@@ -337,7 +450,7 @@ class UsageController extends Controller
             foreach ($models as $model)
             {   
                 $model = $model['model'];
-                $spend = $user[0]->Usage()->where('date', $date->format('Y-m-d'))->where('model', $model)->sum('spend');
+                $spend = round($user[0]->Usage()->where('date', $date->format('Y-m-d'))->where('model', $model)->sum('spend'), 5, PHP_ROUND_HALF_UP);
                 $tokens = $user[0]->Usage()->where('date', $date->format('Y-m-d'))->where('model', $model)->sum('tokens');
                 $data[$model] = ['spend' => $spend, 'tokens' => $tokens];
                 if (!in_array($model, $all_models))
@@ -366,7 +479,7 @@ class UsageController extends Controller
         foreach ($users as $user) {
             $id = $user->id;
             $name = $user->name;
-            $spend = $user->Usage()->whereBetween('date', [$start_date, $end_date])->sum('spend');
+            $spend = round($user->Usage()->whereBetween('date', [$start_date, $end_date])->sum('spend'), 5, PHP_ROUND_HALF_UP);
             $tokens = $user->Usage()->whereBetween('date', [$start_date, $end_date])->sum('tokens');
             $result[] = ['user_id' => $id, 'name' => $name, 'spend' => $spend, 'tokens' => $tokens];
             
@@ -387,10 +500,65 @@ class UsageController extends Controller
         $user = \App\Models\User::where('id', $id)->get();
         $user_id = $user[0]->id;
         $name = $user[0]->name;
-        $spend = $user[0]->Usage()->whereBetween('date', [$start_date, $end_date])->sum('spend');
+        $spend = round($user[0]->Usage()->whereBetween('date', [$start_date, $end_date])->sum('spend'), 5, PHP_ROUND_HALF_UP);
         $tokens = $user[0]->Usage()->whereBetween('date', [$start_date, $end_date])->sum('tokens');
 
-       return json_encode(['user_id' => $user_id, 'name' => $name, 'spend' => $spend, 'tokens' => $tokens]);
+        $models = $user[0]->Usage()->whereBetween('date', [$start_date, $end_date])->get('model');
+        $modelData = [];
+        $all_models = [];
+        foreach ($models as $model)
+        {
+            $model = $model['model'];
+            $modelSpend = round($user[0]->Usage()->whereBetween('date', [$start_date, $end_date])->where('model', $model)->sum('spend'), 5, PHP_ROUND_HALF_UP);
+            $modelTokens = $user[0]->Usage()->whereBetween('date', [$start_date, $end_date])->where('model', $model)->sum('tokens');
+            $modelData[$model] = ['spend' => $modelSpend, 'tokens' => $modelTokens];
+
+            if (!in_array($model, $all_models))
+            {
+                $all_models[] = $model;
+            }
+        }
+
+       return json_encode(['user_id' => $user_id, 'name' => $name, 'spend' => $spend, 'tokens' => $tokens, 'models' => $all_models, 'data' => $modelData]);
+    }
+
+    /*
+    * Returns total spend and tokens used of specfied user over this month
+    */
+    public function getCurrentUserSpendMonth(Request $request)
+    {
+        $user = app(AuthController::class)->getUser($request);
+        if ($user == null) {
+            return response()->json(['message' => 'No API key provided']);
+        }
+        $id = $user->id;
+
+        $start_date = Carbon::now()->startOfMonth()->format('Y-m-d');
+        $end_date = date('Y-m-d');
+
+        $user = \App\Models\User::where('id', $id)->get();
+        $user_id = $user[0]->id;
+        $name = $user[0]->name;
+        $spend = round($user[0]->Usage()->whereBetween('date', [$start_date, $end_date])->sum('spend'), 5, PHP_ROUND_HALF_UP);
+        $tokens = $user[0]->Usage()->whereBetween('date', [$start_date, $end_date])->sum('tokens');
+
+        $models = $user[0]->Usage()->whereBetween('date', [$start_date, $end_date])->get('model');
+        $modelData = [];
+        $all_models = [];
+        foreach ($models as $model)
+        {
+            $model = $model['model'];
+            $modelSpend = round($user[0]->Usage()->whereBetween('date', [$start_date, $end_date])->where('model', $model)->sum('spend'), 5, PHP_ROUND_HALF_UP);
+            $modelTokens = $user[0]->Usage()->whereBetween('date', [$start_date, $end_date])->where('model', $model)->sum('tokens');
+            $modelData[$model] = ['spend' => $modelSpend, 'tokens' => $modelTokens];
+
+            if (!in_array($model, $all_models))
+            {
+                $all_models[] = $model;
+            }
+        }
+
+       return json_encode(['user_id' => $user_id, 'name' => $name, 'spend' => $spend, 'tokens' => $tokens, 'models' => $all_models, 'data' => $modelData]);
     }
 
     /*
@@ -406,7 +574,7 @@ class UsageController extends Controller
         foreach ($users as $user) {
             $id = $user->id;
             $name = $user->name;
-            $spend = $user->Usage()->whereBetween('date', [$start_date, $end_date])->sum('spend');
+            $spend = round($user->Usage()->whereBetween('date', [$start_date, $end_date])->sum('spend'), 5, PHP_ROUND_HALF_UP);
             $tokens = $user->Usage()->whereBetween('date', [$start_date, $end_date])->sum('tokens');
             $result[] = ['user_id' => $id, 'name' => $name, 'spend' => $spend, 'tokens' => $tokens];
             
@@ -428,10 +596,65 @@ class UsageController extends Controller
         $user = \App\Models\User::where('id', $id)->get();
         $user_id = $user[0]->id;
         $name = $user[0]->name;
-        $spend = $user[0]->Usage()->whereBetween('date', [$start_date, $end_date])->sum('spend');
+        $spend = round($user[0]->Usage()->whereBetween('date', [$start_date, $end_date])->sum('spend'), 5, PHP_ROUND_HALF_UP);
         $tokens = $user[0]->Usage()->whereBetween('date', [$start_date, $end_date])->sum('tokens');
 
-       return json_encode(['user_id' => $user_id, 'name' => $name, 'spend' => $spend, 'tokens' => $tokens]);
+        $models = $user[0]->Usage()->whereBetween('date', [$start_date, $end_date])->get('model');
+        $modelData = [];
+        $all_models = [];
+        foreach ($models as $model)
+        {
+            $model = $model['model'];
+            $modelSpend = round($user[0]->Usage()->whereBetween('date', [$start_date, $end_date])->where('model', $model)->sum('spend'), 5, PHP_ROUND_HALF_UP);
+            $modelTokens = $user[0]->Usage()->whereBetween('date', [$start_date, $end_date])->where('model', $model)->sum('tokens');
+            $modelData[$model] = ['spend' => $modelSpend, 'tokens' => $modelTokens];
+
+            if (!in_array($model, $all_models))
+            {
+                $all_models[] = $model;
+            }
+        }
+
+       return json_encode(['user_id' => $user_id, 'name' => $name, 'spend' => $spend, 'tokens' => $tokens, 'models' => $all_models, 'data' => $modelData]);
+    }
+
+    /*
+    * Returns total spend and tokens used of specfied user over this week
+    */
+    public function getCurrentUserSpendWeek(Request $request)
+    {
+        $user = app(AuthController::class)->getUser($request);
+        if ($user == null) {
+            return response()->json(['message' => 'No API key provided']);
+        }
+        $id = $user->id;
+
+        $start_date = Carbon::now()->startOfWeek()->format('Y-m-d');
+        $end_date = date('Y-m-d');
+
+        $user = \App\Models\User::where('id', $id)->get();
+        $user_id = $user[0]->id;
+        $name = $user[0]->name;
+        $spend = round($user[0]->Usage()->whereBetween('date', [$start_date, $end_date])->sum('spend'), 5, PHP_ROUND_HALF_UP);
+        $tokens = $user[0]->Usage()->whereBetween('date', [$start_date, $end_date])->sum('tokens');
+
+        $models = $user[0]->Usage()->whereBetween('date', [$start_date, $end_date])->get('model');
+        $modelData = [];
+        $all_models = [];
+        foreach ($models as $model)
+        {
+            $model = $model['model'];
+            $modelSpend = round($user[0]->Usage()->whereBetween('date', [$start_date, $end_date])->where('model', $model)->sum('spend'), 5, PHP_ROUND_HALF_UP);
+            $modelTokens = $user[0]->Usage()->whereBetween('date', [$start_date, $end_date])->where('model', $model)->sum('tokens');
+            $modelData[$model] = ['spend' => $modelSpend, 'tokens' => $modelTokens];
+
+            if (!in_array($model, $all_models))
+            {
+                $all_models[] = $model;
+            }
+        }
+
+       return json_encode(['user_id' => $user_id, 'name' => $name, 'spend' => $spend, 'tokens' => $tokens, 'models' => $all_models, 'data' => $modelData]);
     }
 
 
