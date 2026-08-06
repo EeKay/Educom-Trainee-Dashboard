@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 
 class ViewController extends Controller
 {
-    public function Dashboard(Request $request ){
+    public function Dashboard(Request $request){
         $currentUser = 2;
         $today = date('Y-m-d');
 
@@ -38,9 +38,38 @@ class ViewController extends Controller
             'users_leaderboard' => $users_leaderboard
         ]);
     }
+    public function DashboardAdmin(Request $request, $currentUser = 2){
+        
+        $today = date('Y-m-d');
+
+
+        $users = Http::get('http://127.0.0.1:9000/api/users');
+        $users = (array) $users->json();
+
+        $user_daily_usage = Http::get('http://127.0.0.1:9000/api/ai/spend/period/user/'.$currentUser.'?start_date='.$today.'&end_date='.$today);
+        $user_daily_usage = (array) $user_daily_usage->json();
+
+        $user_weekly_usage = Http::get('http://127.0.0.1:9000/api/ai/spend/week/user/'.$currentUser);
+        $user_weekly_usage = (array) $user_weekly_usage->json();
+
+        $user_monthly_usage = Http::get('http://127.0.0.1:9000/api/ai/spend/month/user/'.$currentUser);
+        $user_monthly_usage = (array) $user_monthly_usage->json();
+
+        $users_leaderboard = Http::get('http://127.0.0.1:9000/api/ai/spend/month');
+        $users_leaderboard = (array) $users_leaderboard->json();
+                
+        return Inertia::render('DashboardAdmin', [
+            'users' => $users, 
+            'user_daily_usage' => $user_daily_usage, 
+            'user_weekly_usage' => $user_weekly_usage,
+            'user_monthly_usage' => $user_monthly_usage,
+            'users_leaderboard' => $users_leaderboard,
+            'currentUser' => (int) $currentUser,
+        ]);
+    }
 
     public function RangeUsage(Request $request){
-        $currentUser = 2; //hardcoded for now
+        $currentUser = $request->query('current_user', 2);
         $startDate = $request->query('start_date');
         $endDate = $request->query('end_date');
 
@@ -51,7 +80,7 @@ class ViewController extends Controller
     $rangeUsage = Http::get('http://127.0.0.1:9000/api/ai/spend/period/daily/user/'.$currentUser
         . '?start_date=' . $startDate . '&end_date=' . $endDate);
 
-    return json_encode((array) $rangeUsage->json());
+    return response() -> json((array) $rangeUsage->json());
     }
 
     public function Faq(Request $request){
