@@ -34,7 +34,7 @@ Route::get('/ai/period/user/{id}', [UsageController::class, 'getUserUsagePeriod'
 
 
 //Trainee usage data fetches
-Route::group(['middleware' => ['cookie.filter', 'auth:sanctum','ability:trainee,admin']], function() {
+Route::group(['middleware' => ['cookie.filter', 'auth:sanctum','ability:admin,trainee']], function() {
 
     //Retrieves full list of all users' spend and tokens
     //params: none
@@ -139,7 +139,7 @@ Route::group(['middleware' => ['cookie.filter', 'auth:sanctum','ability:admin,tr
 
 
 //Trainee faq get
-Route::group(['middleware' => ['cookie.filter', 'auth:sanctum','ability:admin']], function() {
+Route::group(['middleware' => ['cookie.filter', 'auth:sanctum','ability:admin,trainee']], function() {
 
     //Retrieves full list of Faq entries
     //params: none
