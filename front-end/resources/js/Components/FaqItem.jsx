@@ -4,6 +4,7 @@ import '../../css/faq-item.css';
 export default function FaqItem({question, answer}){
     const [isOpen, setIsOpen] = useState(false);
 
+
     return(
         <div className = "faq-item">
             <button className = "faq-item-header" onClick = {() => setIsOpen(!isOpen)}>
