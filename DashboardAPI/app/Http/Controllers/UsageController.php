@@ -149,15 +149,14 @@ class UsageController extends Controller
     */
     public function getTotalSpend()
     {
-        $users = \App\Models\User::get();
+        $users = \App\Models\User::where('role', 'trainee')->get();
         $result = array();
         foreach ($users as $user) {
-            $id = $user->id;
-            $name = $user->name;
-            $spend = round($user->Usage()->sum('spend'), 5, PHP_ROUND_HALF_UP);
-            $tokens = $user->Usage()->sum('tokens');
-            $result[] = ['user_id' => $id, 'name' => $name, 'spend' => $spend, 'tokens' => $tokens];
-            
+                $id = $user->id;
+                $name = $user->name;
+                $spend = round($user->Usage()->sum('spend'), 5, PHP_ROUND_HALF_UP);
+                $tokens = $user->Usage()->sum('tokens');
+                $result[] = ['user_id' => $id, 'name' => $name, 'spend' => $spend, 'tokens' => $tokens];
         }
         return json_encode($result);
     }
@@ -217,7 +216,7 @@ class UsageController extends Controller
         $start_date = $request->input('start_date', Carbon::now()->format('Y-m-d'));
         $end_date = $request->input('end_date', Carbon::now()->format('Y-m-d'));
 
-        $users = \App\Models\User::get();
+        $users = \App\Models\User::where('role', 'trainee')->get();
         $result = array();
         foreach ($users as $user) {
             $id = $user->id;
