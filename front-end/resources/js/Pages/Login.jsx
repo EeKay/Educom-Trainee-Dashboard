@@ -11,12 +11,9 @@ export default function Login(props) {
     password: '',
   });
 
-
   function handleSubmit(e) {
     e.preventDefault();
     post(`/login`);
-        // name: "Educom LLM",       // hardcoded for testing
-        // password: "12345678"      // hardcoded for testing
   }
     
   const token = props.token;

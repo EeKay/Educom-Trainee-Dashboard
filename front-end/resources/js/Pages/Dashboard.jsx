@@ -25,6 +25,10 @@ export default function Dashboard(props) {
     tokensUsed: entry.tokens,
   }));
 
+console.log('dailyStats:', dailyStats);
+console.log('weeklyStats:', weeklyStats);
+console.log('monthlyStats:', monthlyStats);
+
   const [modelStats, setModelStats] = useState([]);
   const [resultStats, setResultStats] = useState([]);
 
@@ -62,7 +66,7 @@ export default function Dashboard(props) {
             <Leaderboard users={leaderboardUsers} currentUserId={currentUser} />
           </div>
         </div>
-
+      
         <div style={{ display: 'flex', gap: '48px', width: '100%' }}>
           <div style={{ flex: '0 0 220px' }}>
             <StatCard label="total today" tokens={dailyStats.tokens} spend={dailyStats.spend} color="red" />
@@ -70,14 +74,14 @@ export default function Dashboard(props) {
           <div style={{ flex: '0 0 220px' }}>
             <StatCard label="total this week" tokens={weeklyStats.tokens} spend={weeklyStats.spend} color="blue" />
           </div>
-            <div style={{ flex: 1 }}>
-              <DateRangeCard
-                modelStats={modelStats}
-                resultStats={resultStats}
-                onRangeChange={handleRangeChange}
-                currentUser={currentUser}
-                maxDate={formatDate(new Date())}
-              />
+          <div style={{ flex: 1 }}>
+            <DateRangeCard
+              modelStats={modelStats}
+              resultStats={resultStats}
+              onRangeChange={handleRangeChange}
+              currentUser={currentUser}
+              maxDate={formatDate(new Date())}
+            />
           </div>
         </div>
       </div>
