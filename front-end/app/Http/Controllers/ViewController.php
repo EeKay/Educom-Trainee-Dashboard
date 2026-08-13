@@ -128,13 +128,8 @@ class ViewController extends Controller
         // $faqUpdate = Http::withToken(session('token'))->put('http://127.0.0.1:9000/api/faq/update/'.$id);
         // $faqUpdate = $faqUpdate->json();
 
-        // $faqDelete = Http::withToken(session('token'))->delete('http://127.0.0.1:9000/api/faq/delete/'.$id);
-        // $faqDelete = $faqDelete->json();
-
         return Inertia::render('FaqAdmin', [
             'faqs' => $faqs,
-            // 'faqUpdate' => $faqUpdate,
-            // 'faqDelete' => $faqDelete
         ]);
     }
 
@@ -144,7 +139,7 @@ class ViewController extends Controller
         }
 
         $response = Http::withToken(session('token'))
-            ->put("http://127.0.0.1:9000/api/faq/delete/{$id}");
+            ->delete("http://127.0.0.1:9000/api/faq/delete/{$id}");
 
         return response()->json((array) $response->json(), $response->status());
     }

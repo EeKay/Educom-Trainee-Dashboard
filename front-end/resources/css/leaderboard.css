@@ -128,7 +128,7 @@
 }
 
 .leaderboard-entry-you .leaderboard-tooltip{
-    position: absolute;
+  position: absolute;
   bottom: calc(100% + 8px);
   left: 50%;
   transform: translateX(-50%);

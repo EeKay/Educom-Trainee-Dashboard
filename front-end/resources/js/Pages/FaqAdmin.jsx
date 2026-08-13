@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import Navbar from '../Components/NavbarAdmin';
 import SearchBar from '../Components/SearchBar';
-import FaqItem from '../Components/FaqItem';
+import FaqItemAdmin from '../Components/FaqItemAdmin';
 import ChatBot from '../Components/ChatBot';
 import '../../css/faq.css';
 
@@ -45,7 +45,7 @@ export default function FaqAdmin(props){
                 ) : (
                     <div className="database">
                         {filteredFaqs.map((faq) => (
-                            <FaqItem
+                            <FaqItemAdmin
                                 key={faq.id}
                                 id={faq.id}
                                 question={faq.question}

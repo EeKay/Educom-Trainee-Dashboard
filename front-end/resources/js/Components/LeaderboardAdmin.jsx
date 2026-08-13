@@ -1,4 +1,5 @@
 import "../../css/leaderboard.css";
+import userIcon from '../../img/icon.png';
 
 export default function LeaderboardAdmin({ users, onSelectUser, currentUser }) {
   if (!users?.length) return null;
@@ -60,7 +61,7 @@ export default function LeaderboardAdmin({ users, onSelectUser, currentUser }) {
                 <div className="leaderboard-avatar-wrapper">
 
                     <img
-                      src={"https://placecats.com/200/200"}
+                      src={userIcon}
                       alt={user.name}
                       className="leaderboard-avatar"
                       onClick = {() => onSelectUser(user.id)}

@@ -9813,3 +9813,296 @@ Stack trace:
 [2026-08-12 14:58:22] local.INFO: Session Token: 42|CiggqmTzW46xDUuSJD9p7snQoppmnesQHfri7bwQ9246e0a2  
 [2026-08-12 14:58:22] local.INFO: Session Role: admin  
 [2026-08-12 14:58:22] local.INFO: Data: {"user_id":2,"name":"Educom LLM","spend":0,"tokens":0,"models":[],"data":[]}  
+[2026-08-13 07:45:37] local.INFO: Session Token:   
+[2026-08-13 07:45:37] local.INFO: Session Role:   
+[2026-08-13 07:45:37] local.INFO: Data: {"message":"Unauthenticated."}  
+[2026-08-13 07:45:41] local.ERROR: Maximum execution time of 30 seconds exceeded {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Maximum execution time of 30 seconds exceeded at C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/composer/ClassLoader.php:429)
+[stacktrace]
+#0 {main}
+"} 
+[2026-08-13 07:45:48] local.INFO: Session Token:   
+[2026-08-13 07:45:48] local.INFO: Session Role:   
+[2026-08-13 07:45:48] local.INFO: Data: {"message":"Unauthenticated."}  
+[2026-08-13 07:58:08] local.INFO: Session Token: 43|TjPJarIyO3Dbg4dbKydeyntnNMhJENyJp2Fj3LCWa3ea91bc  
+[2026-08-13 07:58:08] local.INFO: Session Role: admin  
+[2026-08-13 07:58:11] local.INFO: Session Token: 43|TjPJarIyO3Dbg4dbKydeyntnNMhJENyJp2Fj3LCWa3ea91bc  
+[2026-08-13 07:58:11] local.INFO: Session Role: admin  
+[2026-08-13 07:58:11] local.INFO: Data: {"user_id":2,"name":"Educom LLM","spend":0,"tokens":0,"models":[],"data":[]}  
+[2026-08-13 08:16:23] local.ERROR: Maximum execution time of 30 seconds exceeded {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Maximum execution time of 30 seconds exceeded at C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/guzzlehttp/guzzle/src/Handler/StreamHandler.php:421)
+[stacktrace]
+#0 {main}
+"} 
+[2026-08-13 08:23:25] local.INFO: Session Token: 44|IluLfRKKze7suo3JnIv5pOtzaesP9pzlK19hydju1fb45024  
+[2026-08-13 08:23:25] local.INFO: Session Role: admin  
+[2026-08-13 08:23:27] local.INFO: Session Token: 44|IluLfRKKze7suo3JnIv5pOtzaesP9pzlK19hydju1fb45024  
+[2026-08-13 08:23:27] local.INFO: Session Role: admin  
+[2026-08-13 08:23:27] local.INFO: Data: {"user_id":2,"name":"Educom LLM","spend":0,"tokens":0,"models":[],"data":[]}  
+[2026-08-13 08:23:35] local.INFO: Session Token: 44|IluLfRKKze7suo3JnIv5pOtzaesP9pzlK19hydju1fb45024  
+[2026-08-13 08:23:35] local.INFO: Session Role: admin  
+[2026-08-13 08:23:35] local.INFO: Data: {"user_id":2,"name":"Educom LLM","spend":0,"tokens":0,"models":[],"data":[]}  
+[2026-08-13 08:26:08] local.INFO: Session Token: 45|tvz9m8yMb2mwRPdpUDbulkFnxYbk8JlFQx90gceGbf1f098f  
+[2026-08-13 08:26:08] local.INFO: Session Role: admin  
+[2026-08-13 08:26:10] local.INFO: Session Token: 45|tvz9m8yMb2mwRPdpUDbulkFnxYbk8JlFQx90gceGbf1f098f  
+[2026-08-13 08:26:10] local.INFO: Session Role: admin  
+[2026-08-13 08:26:10] local.INFO: Data: {"user_id":2,"name":"Educom LLM","spend":0,"tokens":0,"models":[],"data":[]}  
+[2026-08-13 08:30:49] local.INFO: Session Token: 46|VR6C7PCAyWmIQPKCeU33IIVPESiSFSPhO5vUf0Nh021ef6d7  
+[2026-08-13 08:30:49] local.INFO: Session Role: admin  
+[2026-08-13 08:30:52] local.INFO: Session Token: 46|VR6C7PCAyWmIQPKCeU33IIVPESiSFSPhO5vUf0Nh021ef6d7  
+[2026-08-13 08:30:52] local.INFO: Session Role: admin  
+[2026-08-13 08:30:52] local.INFO: Data: {"user_id":2,"name":"Educom LLM","spend":0,"tokens":0,"models":[],"data":[]}  
+[2026-08-13 08:38:30] local.INFO: Session Token: 47|DkHUXqGX49gU7mVPzhZxwfDQT32TwiMwoSM6Sbp70d41a7f7  
+[2026-08-13 08:38:30] local.INFO: Session Role: admin  
+[2026-08-13 08:38:33] local.INFO: Session Token: 47|DkHUXqGX49gU7mVPzhZxwfDQT32TwiMwoSM6Sbp70d41a7f7  
+[2026-08-13 08:38:33] local.INFO: Session Role: admin  
+[2026-08-13 08:38:33] local.INFO: Data: {"user_id":2,"name":"Educom LLM","spend":0,"tokens":0,"models":[],"data":[]}  
+[2026-08-13 08:48:27] local.INFO: Session Token: 48|ms3bxflt0Zgo9JX5gMp3jJB6YgA9zENzn6buode6323bcc71  
+[2026-08-13 08:48:27] local.INFO: Session Role: admin  
+[2026-08-13 08:48:31] local.INFO: Session Token: 48|ms3bxflt0Zgo9JX5gMp3jJB6YgA9zENzn6buode6323bcc71  
+[2026-08-13 08:48:31] local.INFO: Session Role: admin  
+[2026-08-13 08:48:31] local.INFO: Data: {"user_id":2,"name":"Educom LLM","spend":0,"tokens":0,"models":[],"data":[]}  
+[2026-08-13 09:16:17] local.ERROR: The C:\Users\0909W\OneDrive\Documenten\GitHub\Educom-Trainee-Dashboard\front-end\bootstrap\cache directory must be present and writable. {"exception":"[object] (Exception(code: 0): The C:\\Users\\0909W\\OneDrive\\Documenten\\GitHub\\Educom-Trainee-Dashboard\\front-end\\bootstrap\\cache directory must be present and writable. at C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php:179)
+[stacktrace]
+#0 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(132): Illuminate/Foundation/PackageManifest->write(Array)
+#1 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(108): Illuminate/Foundation/PackageManifest->build()
+#2 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(90): Illuminate/Foundation/PackageManifest->getManifest()
+#3 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(79): Illuminate/Foundation/PackageManifest->config('aliases')
+#4 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterFacades.php(26): Illuminate/Foundation/PackageManifest->aliases()
+#5 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(342): Illuminate/Foundation/Bootstrap/RegisterFacades->bootstrap(Object(Illuminate/Foundation/Application))
+#6 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(494): Illuminate/Foundation/Application->bootstrapWith(Array)
+#7 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(196): Illuminate/Foundation/Console/Kernel->bootstrap()
+#8 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1235): Illuminate/Foundation/Console/Kernel->handle(Object(Symfony/Component/Console/Input/ArgvInput), Object(Symfony/Component/Console/Output/ConsoleOutput))
+#9 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/artisan(16): Illuminate/Foundation/Application->handleCommand(Object(Symfony/Component/Console/Input/ArgvInput))
+#10 {main}
+"} 
+[2026-08-13 09:16:28] local.ERROR: The C:\Users\0909W\OneDrive\Documenten\GitHub\Educom-Trainee-Dashboard\front-end\bootstrap\cache directory must be present and writable. {"exception":"[object] (Exception(code: 0): The C:\\Users\\0909W\\OneDrive\\Documenten\\GitHub\\Educom-Trainee-Dashboard\\front-end\\bootstrap\\cache directory must be present and writable. at C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php:179)
+[stacktrace]
+#0 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(132): Illuminate/Foundation/PackageManifest->write(Array)
+#1 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(108): Illuminate/Foundation/PackageManifest->build()
+#2 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(90): Illuminate/Foundation/PackageManifest->getManifest()
+#3 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(79): Illuminate/Foundation/PackageManifest->config('aliases')
+#4 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterFacades.php(26): Illuminate/Foundation/PackageManifest->aliases()
+#5 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(342): Illuminate/Foundation/Bootstrap/RegisterFacades->bootstrap(Object(Illuminate/Foundation/Application))
+#6 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(494): Illuminate/Foundation/Application->bootstrapWith(Array)
+#7 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(196): Illuminate/Foundation/Console/Kernel->bootstrap()
+#8 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1235): Illuminate/Foundation/Console/Kernel->handle(Object(Symfony/Component/Console/Input/ArgvInput), Object(Symfony/Component/Console/Output/ConsoleOutput))
+#9 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/artisan(16): Illuminate/Foundation/Application->handleCommand(Object(Symfony/Component/Console/Input/ArgvInput))
+#10 {main}
+"} 
+[2026-08-13 09:19:33] local.ERROR: The C:\Users\0909W\OneDrive\Documenten\GitHub\Educom-Trainee-Dashboard\front-end\bootstrap\cache directory must be present and writable. {"exception":"[object] (Exception(code: 0): The C:\\Users\\0909W\\OneDrive\\Documenten\\GitHub\\Educom-Trainee-Dashboard\\front-end\\bootstrap\\cache directory must be present and writable. at C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php:179)
+[stacktrace]
+#0 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(132): Illuminate/Foundation/PackageManifest->write(Array)
+#1 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(108): Illuminate/Foundation/PackageManifest->build()
+#2 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(90): Illuminate/Foundation/PackageManifest->getManifest()
+#3 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(79): Illuminate/Foundation/PackageManifest->config('aliases')
+#4 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterFacades.php(26): Illuminate/Foundation/PackageManifest->aliases()
+#5 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(342): Illuminate/Foundation/Bootstrap/RegisterFacades->bootstrap(Object(Illuminate/Foundation/Application))
+#6 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(494): Illuminate/Foundation/Application->bootstrapWith(Array)
+#7 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(196): Illuminate/Foundation/Console/Kernel->bootstrap()
+#8 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1235): Illuminate/Foundation/Console/Kernel->handle(Object(Symfony/Component/Console/Input/ArgvInput), Object(Symfony/Component/Console/Output/ConsoleOutput))
+#9 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/artisan(16): Illuminate/Foundation/Application->handleCommand(Object(Symfony/Component/Console/Input/ArgvInput))
+#10 {main}
+"} 
+[2026-08-13 09:19:33] local.ERROR: The C:\Users\0909W\OneDrive\Documenten\GitHub\Educom-Trainee-Dashboard\front-end\bootstrap\cache directory must be present and writable. {"exception":"[object] (Exception(code: 0): The C:\\Users\\0909W\\OneDrive\\Documenten\\GitHub\\Educom-Trainee-Dashboard\\front-end\\bootstrap\\cache directory must be present and writable. at C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php:179)
+[stacktrace]
+#0 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(132): Illuminate/Foundation/PackageManifest->write(Array)
+#1 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(108): Illuminate/Foundation/PackageManifest->build()
+#2 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(90): Illuminate/Foundation/PackageManifest->getManifest()
+#3 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(79): Illuminate/Foundation/PackageManifest->config('aliases')
+#4 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterFacades.php(26): Illuminate/Foundation/PackageManifest->aliases()
+#5 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(342): Illuminate/Foundation/Bootstrap/RegisterFacades->bootstrap(Object(Illuminate/Foundation/Application))
+#6 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(494): Illuminate/Foundation/Application->bootstrapWith(Array)
+#7 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(196): Illuminate/Foundation/Console/Kernel->bootstrap()
+#8 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1235): Illuminate/Foundation/Console/Kernel->handle(Object(Symfony/Component/Console/Input/ArgvInput), Object(Symfony/Component/Console/Output/ConsoleOutput))
+#9 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/artisan(16): Illuminate/Foundation/Application->handleCommand(Object(Symfony/Component/Console/Input/ArgvInput))
+#10 {main}
+"} 
+[2026-08-13 09:22:09] local.ERROR: The C:\Users\0909W\OneDrive\Documenten\GitHub\Educom-Trainee-Dashboard\front-end\bootstrap\cache directory must be present and writable. {"exception":"[object] (Exception(code: 0): The C:\\Users\\0909W\\OneDrive\\Documenten\\GitHub\\Educom-Trainee-Dashboard\\front-end\\bootstrap\\cache directory must be present and writable. at C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php:179)
+[stacktrace]
+#0 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(132): Illuminate/Foundation/PackageManifest->write(Array)
+#1 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(108): Illuminate/Foundation/PackageManifest->build()
+#2 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(90): Illuminate/Foundation/PackageManifest->getManifest()
+#3 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(79): Illuminate/Foundation/PackageManifest->config('aliases')
+#4 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterFacades.php(26): Illuminate/Foundation/PackageManifest->aliases()
+#5 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(342): Illuminate/Foundation/Bootstrap/RegisterFacades->bootstrap(Object(Illuminate/Foundation/Application))
+#6 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(494): Illuminate/Foundation/Application->bootstrapWith(Array)
+#7 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(196): Illuminate/Foundation/Console/Kernel->bootstrap()
+#8 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1235): Illuminate/Foundation/Console/Kernel->handle(Object(Symfony/Component/Console/Input/ArgvInput), Object(Symfony/Component/Console/Output/ConsoleOutput))
+#9 C:/Users/0909W/OneDrive/Documenten/GitHub/Educom-Trainee-Dashboard/front-end/artisan(16): Illuminate/Foundation/Application->handleCommand(Object(Symfony/Component/Console/Input/ArgvInput))
+#10 {main}
+"} 
+[2026-08-13 09:38:08] local.ERROR: The C:\dev\Educom-Trainee-Dashboard\front-end\bootstrap\cache directory must be present and writable. {"exception":"[object] (Exception(code: 0): The C:\\dev\\Educom-Trainee-Dashboard\\front-end\\bootstrap\\cache directory must be present and writable. at C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php:179)
+[stacktrace]
+#0 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(132): Illuminate/Foundation/PackageManifest->write(Array)
+#1 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(108): Illuminate/Foundation/PackageManifest->build()
+#2 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(90): Illuminate/Foundation/PackageManifest->getManifest()
+#3 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(79): Illuminate/Foundation/PackageManifest->config('aliases')
+#4 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterFacades.php(26): Illuminate/Foundation/PackageManifest->aliases()
+#5 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(342): Illuminate/Foundation/Bootstrap/RegisterFacades->bootstrap(Object(Illuminate/Foundation/Application))
+#6 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(494): Illuminate/Foundation/Application->bootstrapWith(Array)
+#7 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(196): Illuminate/Foundation/Console/Kernel->bootstrap()
+#8 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1235): Illuminate/Foundation/Console/Kernel->handle(Object(Symfony/Component/Console/Input/ArgvInput), Object(Symfony/Component/Console/Output/ConsoleOutput))
+#9 C:/dev/Educom-Trainee-Dashboard/front-end/artisan(16): Illuminate/Foundation/Application->handleCommand(Object(Symfony/Component/Console/Input/ArgvInput))
+#10 {main}
+"} 
+[2026-08-13 09:38:38] local.ERROR: The C:\dev\Educom-Trainee-Dashboard\front-end\bootstrap\cache directory must be present and writable. {"exception":"[object] (Exception(code: 0): The C:\\dev\\Educom-Trainee-Dashboard\\front-end\\bootstrap\\cache directory must be present and writable. at C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php:179)
+[stacktrace]
+#0 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(132): Illuminate/Foundation/PackageManifest->write(Array)
+#1 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(108): Illuminate/Foundation/PackageManifest->build()
+#2 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(90): Illuminate/Foundation/PackageManifest->getManifest()
+#3 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(79): Illuminate/Foundation/PackageManifest->config('aliases')
+#4 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterFacades.php(26): Illuminate/Foundation/PackageManifest->aliases()
+#5 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(342): Illuminate/Foundation/Bootstrap/RegisterFacades->bootstrap(Object(Illuminate/Foundation/Application))
+#6 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(494): Illuminate/Foundation/Application->bootstrapWith(Array)
+#7 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(196): Illuminate/Foundation/Console/Kernel->bootstrap()
+#8 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1235): Illuminate/Foundation/Console/Kernel->handle(Object(Symfony/Component/Console/Input/ArgvInput), Object(Symfony/Component/Console/Output/ConsoleOutput))
+#9 C:/dev/Educom-Trainee-Dashboard/front-end/artisan(16): Illuminate/Foundation/Application->handleCommand(Object(Symfony/Component/Console/Input/ArgvInput))
+#10 {main}
+"} 
+[2026-08-13 09:38:42] local.ERROR: The C:\dev\Educom-Trainee-Dashboard\front-end\bootstrap\cache directory must be present and writable. {"exception":"[object] (Exception(code: 0): The C:\\dev\\Educom-Trainee-Dashboard\\front-end\\bootstrap\\cache directory must be present and writable. at C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php:179)
+[stacktrace]
+#0 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(132): Illuminate/Foundation/PackageManifest->write(Array)
+#1 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(108): Illuminate/Foundation/PackageManifest->build()
+#2 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(90): Illuminate/Foundation/PackageManifest->getManifest()
+#3 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(79): Illuminate/Foundation/PackageManifest->config('aliases')
+#4 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterFacades.php(26): Illuminate/Foundation/PackageManifest->aliases()
+#5 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(342): Illuminate/Foundation/Bootstrap/RegisterFacades->bootstrap(Object(Illuminate/Foundation/Application))
+#6 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(494): Illuminate/Foundation/Application->bootstrapWith(Array)
+#7 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(196): Illuminate/Foundation/Console/Kernel->bootstrap()
+#8 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1235): Illuminate/Foundation/Console/Kernel->handle(Object(Symfony/Component/Console/Input/ArgvInput), Object(Symfony/Component/Console/Output/ConsoleOutput))
+#9 C:/dev/Educom-Trainee-Dashboard/front-end/artisan(16): Illuminate/Foundation/Application->handleCommand(Object(Symfony/Component/Console/Input/ArgvInput))
+#10 {main}
+"} 
+[2026-08-13 09:39:28] local.ERROR: The C:\dev\Educom-Trainee-Dashboard\front-end\bootstrap\cache directory must be present and writable. {"exception":"[object] (Exception(code: 0): The C:\\dev\\Educom-Trainee-Dashboard\\front-end\\bootstrap\\cache directory must be present and writable. at C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php:179)
+[stacktrace]
+#0 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(132): Illuminate/Foundation/PackageManifest->write(Array)
+#1 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(108): Illuminate/Foundation/PackageManifest->build()
+#2 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(90): Illuminate/Foundation/PackageManifest->getManifest()
+#3 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(79): Illuminate/Foundation/PackageManifest->config('aliases')
+#4 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterFacades.php(26): Illuminate/Foundation/PackageManifest->aliases()
+#5 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(342): Illuminate/Foundation/Bootstrap/RegisterFacades->bootstrap(Object(Illuminate/Foundation/Application))
+#6 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(494): Illuminate/Foundation/Application->bootstrapWith(Array)
+#7 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(196): Illuminate/Foundation/Console/Kernel->bootstrap()
+#8 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1235): Illuminate/Foundation/Console/Kernel->handle(Object(Symfony/Component/Console/Input/ArgvInput), Object(Symfony/Component/Console/Output/ConsoleOutput))
+#9 C:/dev/Educom-Trainee-Dashboard/front-end/artisan(16): Illuminate/Foundation/Application->handleCommand(Object(Symfony/Component/Console/Input/ArgvInput))
+#10 {main}
+"} 
+[2026-08-13 09:39:28] local.ERROR: The C:\dev\Educom-Trainee-Dashboard\front-end\bootstrap\cache directory must be present and writable. {"exception":"[object] (Exception(code: 0): The C:\\dev\\Educom-Trainee-Dashboard\\front-end\\bootstrap\\cache directory must be present and writable. at C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php:179)
+[stacktrace]
+#0 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(132): Illuminate/Foundation/PackageManifest->write(Array)
+#1 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(108): Illuminate/Foundation/PackageManifest->build()
+#2 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(90): Illuminate/Foundation/PackageManifest->getManifest()
+#3 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(79): Illuminate/Foundation/PackageManifest->config('aliases')
+#4 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterFacades.php(26): Illuminate/Foundation/PackageManifest->aliases()
+#5 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(342): Illuminate/Foundation/Bootstrap/RegisterFacades->bootstrap(Object(Illuminate/Foundation/Application))
+#6 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(494): Illuminate/Foundation/Application->bootstrapWith(Array)
+#7 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(196): Illuminate/Foundation/Console/Kernel->bootstrap()
+#8 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1235): Illuminate/Foundation/Console/Kernel->handle(Object(Symfony/Component/Console/Input/ArgvInput), Object(Symfony/Component/Console/Output/ConsoleOutput))
+#9 C:/dev/Educom-Trainee-Dashboard/front-end/artisan(16): Illuminate/Foundation/Application->handleCommand(Object(Symfony/Component/Console/Input/ArgvInput))
+#10 {main}
+"} 
+[2026-08-13 09:42:35] local.ERROR: The C:\dev\Educom-Trainee-Dashboard\front-end\bootstrap\cache directory must be present and writable. {"exception":"[object] (Exception(code: 0): The C:\\dev\\Educom-Trainee-Dashboard\\front-end\\bootstrap\\cache directory must be present and writable. at C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php:179)
+[stacktrace]
+#0 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(132): Illuminate/Foundation/PackageManifest->write(Array)
+#1 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(108): Illuminate/Foundation/PackageManifest->build()
+#2 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(90): Illuminate/Foundation/PackageManifest->getManifest()
+#3 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(79): Illuminate/Foundation/PackageManifest->config('aliases')
+#4 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterFacades.php(26): Illuminate/Foundation/PackageManifest->aliases()
+#5 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(342): Illuminate/Foundation/Bootstrap/RegisterFacades->bootstrap(Object(Illuminate/Foundation/Application))
+#6 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(494): Illuminate/Foundation/Application->bootstrapWith(Array)
+#7 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(196): Illuminate/Foundation/Console/Kernel->bootstrap()
+#8 C:/dev/Educom-Trainee-Dashboard/front-end/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1235): Illuminate/Foundation/Console/Kernel->handle(Object(Symfony/Component/Console/Input/ArgvInput), Object(Symfony/Component/Console/Output/ConsoleOutput))
+#9 C:/dev/Educom-Trainee-Dashboard/front-end/artisan(16): Illuminate/Foundation/Application->handleCommand(Object(Symfony/Component/Console/Input/ArgvInput))
+#10 {main}
+"} 
+[2026-08-13 09:43:56] local.INFO: Session Token: 49|QfirER0zkDJdvznSMzJXyQbqXwjO7aubQYAd9rdMdb69d313  
+[2026-08-13 09:43:56] local.INFO: Session Role: admin  
+[2026-08-13 09:44:01] local.INFO: Session Token: 49|QfirER0zkDJdvznSMzJXyQbqXwjO7aubQYAd9rdMdb69d313  
+[2026-08-13 09:44:01] local.INFO: Session Role: admin  
+[2026-08-13 09:44:01] local.INFO: Data: {"user_id":2,"name":"Educom LLM","spend":0,"tokens":0,"models":[],"data":[]}  
+[2026-08-13 09:44:14] local.INFO: Session Token: 49|QfirER0zkDJdvznSMzJXyQbqXwjO7aubQYAd9rdMdb69d313  
+[2026-08-13 09:44:14] local.INFO: Session Role: admin  
+[2026-08-13 09:44:14] local.INFO: Data: {"user_id":4,"name":"Loek de Kleijn","spend":0,"tokens":0,"models":[],"data":[]}  
+[2026-08-13 09:50:25] local.INFO: Session Token: 49|QfirER0zkDJdvznSMzJXyQbqXwjO7aubQYAd9rdMdb69d313  
+[2026-08-13 09:50:25] local.INFO: Session Role: admin  
+[2026-08-13 09:50:25] local.INFO: Data: {"user_id":2,"name":"Educom LLM","spend":0,"tokens":0,"models":[],"data":[]}  
+[2026-08-13 09:51:36] local.INFO: Session Token: 49|QfirER0zkDJdvznSMzJXyQbqXwjO7aubQYAd9rdMdb69d313  
+[2026-08-13 09:51:36] local.INFO: Session Role: admin  
+[2026-08-13 09:51:36] local.INFO: Data: {"user_id":4,"name":"Loek de Kleijn","spend":0,"tokens":0,"models":[],"data":[]}  
+[2026-08-13 09:51:51] local.INFO: Session Token: 49|QfirER0zkDJdvznSMzJXyQbqXwjO7aubQYAd9rdMdb69d313  
+[2026-08-13 09:51:51] local.INFO: Session Role: admin  
+[2026-08-13 09:51:51] local.INFO: Data: {"user_id":2,"name":"Educom LLM","spend":0,"tokens":0,"models":[],"data":[]}  
+[2026-08-13 10:17:56] local.INFO: Session Token: 49|QfirER0zkDJdvznSMzJXyQbqXwjO7aubQYAd9rdMdb69d313  
+[2026-08-13 10:17:56] local.INFO: Session Role: admin  
+[2026-08-13 10:17:56] local.INFO: Data: {"user_id":2,"name":"Educom LLM","spend":0,"tokens":0,"models":[],"data":[]}  
+[2026-08-13 10:18:21] local.INFO: Session Token: 49|QfirER0zkDJdvznSMzJXyQbqXwjO7aubQYAd9rdMdb69d313  
+[2026-08-13 10:18:21] local.INFO: Session Role: admin  
+[2026-08-13 10:18:21] local.INFO: Data: {"user_id":2,"name":"Educom LLM","spend":0,"tokens":0,"models":[],"data":[]}  
+[2026-08-13 10:18:35] local.INFO: Session Token: 49|QfirER0zkDJdvznSMzJXyQbqXwjO7aubQYAd9rdMdb69d313  
+[2026-08-13 10:18:35] local.INFO: Session Role: admin  
+[2026-08-13 10:18:35] local.INFO: Data: {"user_id":2,"name":"Educom LLM","spend":0,"tokens":0,"models":[],"data":[]}  
+[2026-08-13 10:18:43] local.INFO: Session Token: 49|QfirER0zkDJdvznSMzJXyQbqXwjO7aubQYAd9rdMdb69d313  
+[2026-08-13 10:18:43] local.INFO: Session Role: admin  
+[2026-08-13 10:18:43] local.INFO: Data: {"user_id":4,"name":"Loek de Kleijn","spend":0,"tokens":0,"models":[],"data":[]}  
+[2026-08-13 10:19:13] local.INFO: Session Token: 49|QfirER0zkDJdvznSMzJXyQbqXwjO7aubQYAd9rdMdb69d313  
+[2026-08-13 10:19:13] local.INFO: Session Role: admin  
+[2026-08-13 10:19:13] local.INFO: Data: {"user_id":3,"name":"Ru Lian Wang","spend":0,"tokens":0,"models":[],"data":[]}  
+[2026-08-13 10:19:19] local.INFO: Session Token: 49|QfirER0zkDJdvznSMzJXyQbqXwjO7aubQYAd9rdMdb69d313  
+[2026-08-13 10:19:19] local.INFO: Session Role: admin  
+[2026-08-13 10:19:19] local.INFO: Data: {"user_id":1,"name":"Paul Broeckx","spend":0,"tokens":0,"models":[],"data":[]}  
+[2026-08-13 10:20:22] local.INFO: Session Token: 49|QfirER0zkDJdvznSMzJXyQbqXwjO7aubQYAd9rdMdb69d313  
+[2026-08-13 10:20:22] local.INFO: Session Role: admin  
+[2026-08-13 10:20:22] local.INFO: Data: {"user_id":3,"name":"Ru Lian Wang","spend":0,"tokens":0,"models":[],"data":[]}  
+[2026-08-13 10:20:29] local.INFO: Session Token: 49|QfirER0zkDJdvznSMzJXyQbqXwjO7aubQYAd9rdMdb69d313  
+[2026-08-13 10:20:29] local.INFO: Session Role: admin  
+[2026-08-13 10:20:29] local.INFO: Data: {"user_id":4,"name":"Loek de Kleijn","spend":0,"tokens":0,"models":[],"data":[]}  
+[2026-08-13 10:20:36] local.INFO: Session Token: 49|QfirER0zkDJdvznSMzJXyQbqXwjO7aubQYAd9rdMdb69d313  
+[2026-08-13 10:20:36] local.INFO: Session Role: admin  
+[2026-08-13 10:20:36] local.INFO: Data: {"user_id":1,"name":"Paul Broeckx","spend":0,"tokens":0,"models":[],"data":[]}  
+[2026-08-13 10:20:44] local.INFO: Session Token: 49|QfirER0zkDJdvznSMzJXyQbqXwjO7aubQYAd9rdMdb69d313  
+[2026-08-13 10:20:44] local.INFO: Session Role: admin  
+[2026-08-13 10:20:44] local.INFO: Data: {"user_id":3,"name":"Ru Lian Wang","spend":0,"tokens":0,"models":[],"data":[]}  
+[2026-08-13 10:20:54] local.INFO: Session Token: 49|QfirER0zkDJdvznSMzJXyQbqXwjO7aubQYAd9rdMdb69d313  
+[2026-08-13 10:20:54] local.INFO: Session Role: admin  
+[2026-08-13 10:20:54] local.INFO: Data: {"user_id":1,"name":"Paul Broeckx","spend":0,"tokens":0,"models":[],"data":[]}  
+[2026-08-13 10:21:05] local.INFO: Session Token: 49|QfirER0zkDJdvznSMzJXyQbqXwjO7aubQYAd9rdMdb69d313  
+[2026-08-13 10:21:05] local.INFO: Session Role: admin  
+[2026-08-13 10:21:05] local.INFO: Data: {"user_id":2,"name":"Educom LLM","spend":0,"tokens":0,"models":[],"data":[]}  
+[2026-08-13 10:23:30] local.INFO: Session Token: 49|QfirER0zkDJdvznSMzJXyQbqXwjO7aubQYAd9rdMdb69d313  
+[2026-08-13 10:23:30] local.INFO: Session Role: admin  
+[2026-08-13 10:23:30] local.INFO: Data: {"user_id":1,"name":"Paul Broeckx","spend":0,"tokens":0,"models":[],"data":[]}  
+[2026-08-13 10:23:41] local.INFO: Session Token: 49|QfirER0zkDJdvznSMzJXyQbqXwjO7aubQYAd9rdMdb69d313  
+[2026-08-13 10:23:41] local.INFO: Session Role: admin  
+[2026-08-13 10:23:41] local.INFO: Data: {"user_id":4,"name":"Loek de Kleijn","spend":0,"tokens":0,"models":[],"data":[]}  
+[2026-08-13 10:23:51] local.INFO: Session Token: 49|QfirER0zkDJdvznSMzJXyQbqXwjO7aubQYAd9rdMdb69d313  
+[2026-08-13 10:23:51] local.INFO: Session Role: admin  
+[2026-08-13 10:23:51] local.INFO: Data: {"user_id":2,"name":"Educom LLM","spend":0,"tokens":0,"models":[],"data":[]}  
+[2026-08-13 10:24:06] local.INFO: Session Token: 49|QfirER0zkDJdvznSMzJXyQbqXwjO7aubQYAd9rdMdb69d313  
+[2026-08-13 10:24:06] local.INFO: Session Role: admin  
+[2026-08-13 10:24:06] local.INFO: Data: {"user_id":2,"name":"Educom LLM","spend":0,"tokens":0,"models":[],"data":[]}  
+[2026-08-13 10:24:41] local.INFO: Session Token: 49|QfirER0zkDJdvznSMzJXyQbqXwjO7aubQYAd9rdMdb69d313  
+[2026-08-13 10:24:41] local.INFO: Session Role: admin  
+[2026-08-13 10:24:41] local.INFO: Data: {"user_id":2,"name":"Educom LLM","spend":0,"tokens":0,"models":[],"data":[]}  
+[2026-08-13 10:24:50] local.INFO: Session Token: 49|QfirER0zkDJdvznSMzJXyQbqXwjO7aubQYAd9rdMdb69d313  
+[2026-08-13 10:24:50] local.INFO: Session Role: admin  
+[2026-08-13 10:24:50] local.INFO: Data: {"user_id":4,"name":"Loek de Kleijn","spend":0,"tokens":0,"models":[],"data":[]}  
+[2026-08-13 10:26:03] local.INFO: Session Token: 49|QfirER0zkDJdvznSMzJXyQbqXwjO7aubQYAd9rdMdb69d313  
+[2026-08-13 10:26:03] local.INFO: Session Role: admin  
+[2026-08-13 10:26:03] local.INFO: Data: {"user_id":3,"name":"Ru Lian Wang","spend":0,"tokens":0,"models":[],"data":[]}  
+[2026-08-13 10:26:12] local.INFO: Session Token: 49|QfirER0zkDJdvznSMzJXyQbqXwjO7aubQYAd9rdMdb69d313  
+[2026-08-13 10:26:12] local.INFO: Session Role: admin  
+[2026-08-13 10:26:12] local.INFO: Data: {"message":"SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for type bigint: \"installHook.js.map\"\nCONTEXT:  unnamed portal parameter $1 = '...' (Connection: pgsql, Host: 127.0.0.1, Port: 5432, Database: dashboardapi, SQL: select * from \"users\" where \"id\" = installHook.js.map)","exception":"Illuminate\\Database\\QueryException","file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php","line":857,"trace":[{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php","line":813,"function":"runQueryCallback","class":"Illuminate\\Database\\Connection","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php","line":426,"function":"run","class":"Illuminate\\Database\\Connection","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php","line":3573,"function":"select","class":"Illuminate\\Database\\Connection","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php","line":3557,"function":"runSelect","class":"Illuminate\\Database\\Query\\Builder","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php","line":908,"function":"get","class":"Illuminate\\Database\\Query\\Builder","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php","line":890,"function":"getModels","class":"Illuminate\\Database\\Eloquent\\Builder","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\app\\Http\\Controllers\\UsageController.php","line":245,"function":"get","class":"Illuminate\\Database\\Eloquent\\Builder","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ControllerDispatcher.php","line":46,"function":"getUserSpendPeriod","class":"App\\Http\\Controllers\\UsageController","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php","line":275,"function":"dispatch","class":"Illuminate\\Routing\\ControllerDispatcher","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php","line":215,"function":"runController","class":"Illuminate\\Routing\\Route","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php","line":822,"function":"run","class":"Illuminate\\Routing\\Route","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php","line":180,"function":"{closure:Illuminate\\Routing\\Router::runRouteWithinStack():821}","class":"Illuminate\\Routing\\Router","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\sanctum\\src\\Http\\Middleware\\CheckForAnyAbility.php","line":28,"function":"{closure:Illuminate\\Pipeline\\Pipeline::prepareDestination():178}","class":"Illuminate\\Pipeline\\Pipeline","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php","line":219,"function":"handle","class":"Laravel\\Sanctum\\Http\\Middleware\\CheckForAnyAbility","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Auth\\Middleware\\Authenticate.php","line":63,"function":"{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}","class":"Illuminate\\Pipeline\\Pipeline","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php","line":219,"function":"handle","class":"Illuminate\\Auth\\Middleware\\Authenticate","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\app\\Http\\Middleware\\CookieFilter.php","line":25,"function":"{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}","class":"Illuminate\\Pipeline\\Pipeline","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php","line":219,"function":"handle","class":"App\\Http\\Middleware\\CookieFilter","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\SubstituteBindings.php","line":52,"function":"{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}","class":"Illuminate\\Pipeline\\Pipeline","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php","line":219,"function":"handle","class":"Illuminate\\Routing\\Middleware\\SubstituteBindings","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php","line":137,"function":"{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}","class":"Illuminate\\Pipeline\\Pipeline","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php","line":821,"function":"then","class":"Illuminate\\Pipeline\\Pipeline","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php","line":800,"function":"runRouteWithinStack","class":"Illuminate\\Routing\\Router","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php","line":764,"function":"runRoute","class":"Illuminate\\Routing\\Router","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php","line":753,"function":"dispatchToRoute","class":"Illuminate\\Routing\\Router","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php","line":200,"function":"dispatch","class":"Illuminate\\Routing\\Router","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php","line":180,"function":"{closure:Illuminate\\Foundation\\Http\\Kernel::dispatchToRouter():197}","class":"Illuminate\\Foundation\\Http\\Kernel","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php","line":21,"function":"{closure:Illuminate\\Pipeline\\Pipeline::prepareDestination():178}","class":"Illuminate\\Pipeline\\Pipeline","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php","line":31,"function":"handle","class":"Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php","line":219,"function":"handle","class":"Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php","line":21,"function":"{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}","class":"Illuminate\\Pipeline\\Pipeline","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php","line":51,"function":"handle","class":"Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php","line":219,"function":"handle","class":"Illuminate\\Foundation\\Http\\Middleware\\TrimStrings","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\ValidatePostSize.php","line":27,"function":"{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}","class":"Illuminate\\Pipeline\\Pipeline","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php","line":219,"function":"handle","class":"Illuminate\\Http\\Middleware\\ValidatePostSize","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php","line":109,"function":"{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}","class":"Illuminate\\Pipeline\\Pipeline","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php","line":219,"function":"handle","class":"Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\HandleCors.php","line":74,"function":"{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}","class":"Illuminate\\Pipeline\\Pipeline","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php","line":219,"function":"handle","class":"Illuminate\\Http\\Middleware\\HandleCors","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php","line":58,"function":"{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}","class":"Illuminate\\Pipeline\\Pipeline","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php","line":219,"function":"handle","class":"Illuminate\\Http\\Middleware\\TrustProxies","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\InvokeDeferredCallbacks.php","line":22,"function":"{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}","class":"Illuminate\\Pipeline\\Pipeline","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php","line":219,"function":"handle","class":"Illuminate\\Foundation\\Http\\Middleware\\InvokeDeferredCallbacks","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\ValidatePathEncoding.php","line":28,"function":"{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}","class":"Illuminate\\Pipeline\\Pipeline","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php","line":219,"function":"handle","class":"Illuminate\\Http\\Middleware\\ValidatePathEncoding","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php","line":137,"function":"{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}","class":"Illuminate\\Pipeline\\Pipeline","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php","line":175,"function":"then","class":"Illuminate\\Pipeline\\Pipeline","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php","line":144,"function":"sendRequestThroughRouter","class":"Illuminate\\Foundation\\Http\\Kernel","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php","line":1220,"function":"handle","class":"Illuminate\\Foundation\\Http\\Kernel","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\public\\index.php","line":20,"function":"handleRequest","class":"Illuminate\\Foundation\\Application","type":"->"},{"file":"C:\\dev\\Educom-Trainee-Dashboard\\DashboardAPI\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php","line":23,"function":"require_once"}]}  
+[2026-08-13 10:28:12] local.INFO: Session Token: 49|QfirER0zkDJdvznSMzJXyQbqXwjO7aubQYAd9rdMdb69d313  
+[2026-08-13 10:28:12] local.INFO: Session Role: admin  
+[2026-08-13 10:28:12] local.INFO: Data: {"user_id":1,"name":"Paul Broeckx","spend":0,"tokens":0,"models":[],"data":[]}  
+[2026-08-13 10:28:23] local.INFO: Session Token: 49|QfirER0zkDJdvznSMzJXyQbqXwjO7aubQYAd9rdMdb69d313  
+[2026-08-13 10:28:23] local.INFO: Session Role: admin  
+[2026-08-13 10:28:23] local.INFO: Data: {"user_id":2,"name":"Educom LLM","spend":0,"tokens":0,"models":[],"data":[]}  
+[2026-08-13 10:30:26] local.INFO: Session Token: 49|QfirER0zkDJdvznSMzJXyQbqXwjO7aubQYAd9rdMdb69d313  
+[2026-08-13 10:30:26] local.INFO: Session Role: admin  
+[2026-08-13 10:30:26] local.INFO: Data: {"user_id":4,"name":"Loek de Kleijn","spend":0,"tokens":0,"models":[],"data":[]}  
+[2026-08-13 10:30:36] local.INFO: Session Token: 49|QfirER0zkDJdvznSMzJXyQbqXwjO7aubQYAd9rdMdb69d313  
+[2026-08-13 10:30:36] local.INFO: Session Role: admin  
+[2026-08-13 10:30:36] local.INFO: Data: {"user_id":2,"name":"Educom LLM","spend":0,"tokens":0,"models":[],"data":[]}  
+[2026-08-13 11:22:08] local.INFO: Session Token: 49|QfirER0zkDJdvznSMzJXyQbqXwjO7aubQYAd9rdMdb69d313  
+[2026-08-13 11:22:08] local.INFO: Session Role: admin  
+[2026-08-13 11:22:08] local.INFO: Data: {"user_id":2,"name":"Educom LLM","spend":0,"tokens":0,"models":[],"data":[]}  

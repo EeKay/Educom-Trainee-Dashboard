@@ -95,7 +95,7 @@ export default function FaqItemAdmin({id, question, answer, isActive, onToggled,
                     aria-label="Delete this question"
                     title="Delete"
                 >
-                    {deleting ? '…' : '✕'}
+                    {deleting ? '' : '✕'}
                 </button>
             </div>
 

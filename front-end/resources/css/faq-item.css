@@ -8,11 +8,13 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  width: 100%;
 }
 
 .faq-item-header {
-  flex: 1;
+  flex: 1 1 auto;
   min-width: 0;
+  width: auto;          
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -64,8 +66,14 @@
 }
 
 /* --- Slider toggle (activate/deactivate) --- */
+.faq-item-toggle,
+.faq-item-delete {
+  flex: 0 0 auto;
+  width: auto;               
+  box-sizing: border-box;
+}
+
 .faq-item-toggle {
-  flex-shrink: 0;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -74,7 +82,9 @@
   padding: 4px 4px 4px 0;
   cursor: pointer;
   font-family: var(--font-sans);
+  white-space: nowrap;
 }
+
 
 .faq-item-toggle-label {
   font-size: 12px;
@@ -151,7 +161,6 @@
 }
 
 .faq-item-delete {
-  flex-shrink: 0;
   width: 28px;
   height: 28px;
   display: flex;
@@ -161,6 +170,7 @@
   border-radius: 50%;
   background: none;
   color: var(--color-brand-gray);
+  font-family: var(--font-sans);
   font-size: 14px;
   cursor: pointer;
   transition: background-color 0.15s ease, color 0.15s ease;
