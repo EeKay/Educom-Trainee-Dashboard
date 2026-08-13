@@ -133,6 +133,10 @@ class ViewController extends Controller
         ]);
     }
 
+    public function FaqCreate(Request $request, $id = null){
+        //create function
+    }
+
     public function FaqDelete(Request $request, $id = null){
         if (!$id) {
             return response()->json(['error' => 'id is required'], 400);
