@@ -34,6 +34,7 @@ class nanController extends Controller
             'timestamp' => Carbon::now(),
             'faqRejected'  => $fields['faqRejected']
         ]);
+
         return $response->json();
     }
 

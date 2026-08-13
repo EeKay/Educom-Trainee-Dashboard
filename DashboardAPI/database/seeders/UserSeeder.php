@@ -17,9 +17,10 @@ class UserSeeder extends Seeder
     {
         User::factory()->create([
             'team' => 'Trainees Eindhoven',
-            'name' => 'Paul Broeckx',
-            'email' => 'paulhoi541@gmail.com',
-            'key_alias' => 'educom_openclaw_key_paulhoi541gmailcom',
+            'name' => 'Educom LLM',
+            'role' => 'trainee',
+            'email' => 'email',
+            'key_alias' => 'Educom Dashboard LLM Key',
             'password' => '12345678'
         ]);
     }
