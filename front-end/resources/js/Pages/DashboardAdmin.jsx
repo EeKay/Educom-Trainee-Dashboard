@@ -35,7 +35,6 @@ export default function DashboardAdmin(props) {
 
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-  
 
   function selectUser(userId) {
     setSelectedUserId(userId); 
@@ -102,7 +101,7 @@ export default function DashboardAdmin(props) {
               resultStats={resultStats}
               onRangeChange={handleRangeChange}
               maxDate={formatDate(new Date())}
-              currentUser={selectedUserId} // <-- was `currentUser` (server prop) before — this was the bug.
+              currentUser={selectedUserId}
               loading={loading}
             />
           </div>

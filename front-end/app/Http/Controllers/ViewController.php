@@ -133,8 +133,28 @@ class ViewController extends Controller
         ]);
     }
 
-    public function FaqCreate(Request $request, $id = null){
-        //create function
+    public function FaqCreate(Request $request){
+        $question = $request->query('question');
+        $answer = $request->query('answer');
+
+        if (!$question) {
+            return response()->json(['error' => 'question required'], 400);
+        }
+
+        if (!$answer) {
+            return response()->json(['error' => 'answer required'], 400);
+        }
+
+        $response = Http::withToken(session('token'))
+            ->post('http://127.0.0.1:9000/api/faq/create', [
+                'question' => $question,
+                'answer' => $answer,
+            ]);
+
+        return response()->json(
+            $response->json(),
+            $response->status()
+        );
     }
 
     public function FaqDelete(Request $request, $id = null){

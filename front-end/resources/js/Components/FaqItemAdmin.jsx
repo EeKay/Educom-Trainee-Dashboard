@@ -46,7 +46,7 @@ export default function FaqItemAdmin({id, question, answer, isActive, onToggled,
 
     const handleDelete = async () => {
         if (!id) return console.error('FaqItem: missing id');
-        if (!window.confirm('Delete this FAQ permanently?')) return;
+        if (!window.confirm('Delete this item permanently?')) return;
 
         setDeleting(true);
         try {

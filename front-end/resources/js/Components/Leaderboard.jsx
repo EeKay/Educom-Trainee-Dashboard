@@ -69,7 +69,7 @@ export default function Leaderboard({ users, currentUserId }) {
                   </div>
                 </div>
                 <div className="leaderboard-name">
-                  {user.name.split(" ")[0]}
+                  {(user.name || 'Unknown').split(" ")[0]}
                 </div>
               </div>
             );

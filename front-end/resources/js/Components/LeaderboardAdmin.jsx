@@ -73,7 +73,7 @@ export default function LeaderboardAdmin({ users, onSelectUser, currentUser }) {
                   </div>
                 </div>
                 <div className="leaderboard-name">
-                  {user.name.split(" ")[0]}
+                  {(user.name || 'Unknown').split(" ")[0]}
                 </div>
               </div>
             );

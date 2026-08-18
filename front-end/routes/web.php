@@ -16,6 +16,7 @@ Route::get('/faq-admin', [ViewController::class, 'FaqAdmin'])->name('faqAdmin');
 Route::put('/faq/activate/{id?}', [ViewController::class, 'FaqActivate'])->name('faqActivate');
 Route::put('/faq/deactivate/{id?}', [ViewController::class, 'FaqDeactivate'])->name('faqDeactivate');
 Route::delete('/faq/delete/{id?}', [ViewController::class, 'FaqDelete'])->name('faqDelete');
+Route::post('/faq/create/{id?}', [ViewController::class, 'FaqCreate'])->name('faqCreate');
 
 Route::get('/passwordReset', [ViewController::class, 'passwordReset'])->name('passwordReset');
 
