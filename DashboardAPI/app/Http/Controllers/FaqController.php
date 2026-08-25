@@ -25,11 +25,12 @@ class FaqController extends Controller
         //TODO remove default values, default values for testing purposes only
         $question = $request->input('question', 'Who am I?');
         $answer = $request->input('answer', 'Dunno');
-        \App\Models\Faq::create([
+        $faq = \App\Models\Faq::create([
                         'question' => $question,
                         'answer' => $answer,
                         'is_active' => true 
                     ]);
+        return json_encode($faq);
     }
 
     /*
@@ -44,10 +45,11 @@ class FaqController extends Controller
         //TODO remove default values, default values for testing purposes only
         $question = $request->input('question', 'Who am I?');
         $answer = $request->input('answer', 'Or maybe I do');
-        \App\Models\Faq::where('id', $id)->update([
+        $faq = \App\Models\Faq::where('id', $id)->update([
                                         'question' => $question,
                                         'answer' => $answer
                                     ]);
+        return json_encode($faq);
     }
 
     /*
