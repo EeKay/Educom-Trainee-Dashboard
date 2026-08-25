@@ -9,18 +9,18 @@ use inertia\inertia;
 class FaqController extends Controller
 {
         public function Faq(Request $request){
-        $faqs = Http::withToken(session('token'))->get(env('API_URL').'/faq');
-        $faqs = (array) $faqs->json();
+        $faqs = Http::withToken(session('token'))->get(config('app.API_URL').'/faq');
+        $faqs = $faqs->json() ?? [];
 
         return Inertia::render('Faq', [
-            'faqs' => $faqs
+            'faqs' => $faqs,
         ]);
     }
 
         public function FaqAdmin(Request $request){
 
-        $faqs = Http::withToken(session('token'))->get(env('API_URL').'/faq');
-        $faqs = (array) $faqs->json();
+        $faqs = Http::withToken(session('token'))->get(config('app.API_URL').'/faq');
+        $faqs = $faqs->json() ?? [];
 
         return Inertia::render('FaqAdmin', [
             'faqs' => $faqs,
@@ -40,7 +40,7 @@ class FaqController extends Controller
         }
 
         $response = Http::withToken(session('token'))
-            ->post(env('API_URL').'/faq/create', [
+            ->post(config('app.API_URL').'/faq/create', [
                 'question' => $question,
                 'answer' => $answer,
             ]);
@@ -57,7 +57,7 @@ class FaqController extends Controller
         }
 
         $response = Http::withToken(session('token'))
-            ->delete(env('API_URL').'/faq/delete/'.$id);
+            ->delete(config('app.API_URL').'/faq/delete/'.$id);
 
         return response()->json((array) $response->json(), $response->status());
     }
@@ -69,7 +69,7 @@ class FaqController extends Controller
         }
 
         $response = Http::withToken(session('token'))
-            ->put(env('API_URL').'/faq/activate/'.$id);
+            ->put(config('app.API_URL').'/faq/activate/'.$id);
 
         return response()->json((array) $response->json(), $response->status());
     }
@@ -81,7 +81,7 @@ class FaqController extends Controller
         }
 
         $response = Http::withToken(session('token'))
-            ->put(env('API_URL').'/faq/deactivate/'.$id);
+            ->put(config('app.API_URL').'/faq/deactivate/'.$id);
 
         $body = $response->json() ?? [];
 

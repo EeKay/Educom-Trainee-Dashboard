@@ -16,9 +16,10 @@ Max questions shown per page
 
 export default function FaqAdmin(props){
     const [searchPrompt, setSearchPrompt] = useState('');
-    const [faqs, setFaqs] = useState(props.faqs);
+    const [faqs, setFaqs] = useState(Array.isArray(props.faqs) ? props.faqs : []);
 
-    const filteredFaqs = faqs.filter((faq) =>
+    const list = Array.isArray(faqs) ? faqs : [];
+    const filteredFaqs = list.filter((faq) =>
         (faq.question ?? '')
             .toLowerCase()
             .includes(searchPrompt.toLowerCase())
@@ -42,7 +43,7 @@ export default function FaqAdmin(props){
             return;
         }
 
-        setFaqs((prev) => [faq, ...prev]);
+        setFaqs((prev) => [...prev, faq]);
         
     };
 
