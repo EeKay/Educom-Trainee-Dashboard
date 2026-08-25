@@ -32,3 +32,8 @@ n8n/tests/*
 DashboardAPI/storage/logs/laravel.log
 /DashboardAPI/storage/logs
 DashboardAPI/vendor/pestphp/pest/.temp/test-results
+status.txt
+DashboardAPI/node_modules
+front-end/node_modules
+DashboardAPI/vendor
+front-end/vendor
