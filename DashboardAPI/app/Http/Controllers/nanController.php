@@ -23,12 +23,10 @@ class nanController extends Controller
             'faqRejected' => 'required'
         ]);
 
-        $user = app(AuthController::class)->getUser($request);
-        if ($user == null) {
-            return response()->json(['message' => 'No valid API key provided']);
-        } 
+        $user = $request->user();
+
         //dd($fields);
-        $response = Http::withHeaders(['n8n-secret' => env('NAN_KEY')])->post('https://ai.educom.nu/t/23090/webhook-test/helpdesk-chat', [
+        $response = Http::withHeaders(['n8n-secret' => config('app.NAN_KEY')])->post('https://ai.educom.nu/t/23090/webhook-test/helpdesk-chat', [
             'traineeId' => $user->id,
             'question' => $fields['question'],
             'timestamp' => Carbon::now(),
@@ -43,12 +41,9 @@ class nanController extends Controller
     */
     public function resetPassword(Request $request) 
     {
-        $user = app(AuthController::class)->getUser($request);
-        if ($user == null) {
-            return response()->json(['message' => 'User not found']);
-        } 
+        $user = $request->user();
 
-        $response = Http::withHeaders(['n8n-secret' => env('NAN_KEY')])->post('https://ai.educom.nu/t/23090/webhook-test/n8n-reset-request', [
+        $response = Http::withHeaders(['n8n-secret' => config('app.NAN_KEY')])->post('https://ai.educom.nu/t/23090/webhook-test/n8n-reset-request', [
             'email' => $user->email
         ]);
         return $response->json();

@@ -14,14 +14,14 @@ class UsageController extends Controller
         $end_date = $request->input('end_date', Carbon::now()->format('Y-m-d'));
 
         //get list of teams
-        $response = Http::withToken(env('API_KEY'))->get('https://ai.educom.nu/team/list');
+        $response = Http::withToken(config('app.API_KEY'))->get('https://ai.educom.nu/team/list');
         $teams = (array)$response->json();
 
         //loop through teams to get each trainee's ai usage data
         foreach ($teams as $team) {
 
             //retrieve AI usage data from LiteLLM API
-            $response = Http::withToken(env('API_KEY'))->get('https://ai.educom.nu/team/daily/activity', [
+            $response = Http::withToken(config('app.API_KEY'))->get('https://ai.educom.nu/team/daily/activity', [
                 'team_ids' => $team['team_id'], 
                 'start_date' => $start_date,
                 'end_date' => $end_date,
@@ -82,14 +82,14 @@ class UsageController extends Controller
     public function fetchUsage()
     {
         //get list of teams
-        $response = Http::withToken(env('API_KEY'))->get('https://ai.educom.nu/team/list');
+        $response = Http::withToken(config('app.API_KEY'))->get('https://ai.educom.nu/team/list');
         $teams = (array)$response->json();
 
         //loop through teams to get each trainee's ai usage data
         foreach ($teams as $team) {
 
             //retrieve AI usage data from LiteLLM API
-            $response = Http::withToken(env('API_KEY'))->get('https://ai.educom.nu/team/daily/activity', [
+            $response = Http::withToken(config('app.API_KEY'))->get('https://ai.educom.nu/team/daily/activity', [
                 'team_ids' => $team['team_id'], 
                 'start_date' => Carbon::now()->format('Y-m-d'),
                 'end_date' => Carbon::now()->format('Y-m-d')
