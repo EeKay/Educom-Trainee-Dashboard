@@ -23,26 +23,26 @@ export default function DateRangeCard({ modelStats = [], resultStats = [], onRan
 
   const [dataType, setDataType] = useState("tokens");
 
-  //Change information when the user changes and set default
   useEffect(() => {
     if (!currentUser) return;
 
     onRangeChange(
       formatDate(defaultStart),
-      formatDate(new Date())
+      formatDate(new Date()),
+      currentUser // <-- was missing
     );
   }, [currentUser]);
 
   function handleStartChange(e) {
     const newStart = e.target.value;
     setStartDate(newStart);
-    onRangeChange(newStart, endDate);
+    onRangeChange(newStart, endDate, currentUser); // <-- was missing
   }
 
   function handleEndChange(e) {
     const newEnd = e.target.value;
     setEndDate(newEnd);
-    onRangeChange(startDate, newEnd);
+    onRangeChange(startDate, newEnd, currentUser); // <-- was missing
   }
 
   function handleTypeChange(e) {

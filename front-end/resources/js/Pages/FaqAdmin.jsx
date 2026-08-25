@@ -2,15 +2,26 @@ import {useState} from 'react';
 import Navbar from '../Components/NavbarAdmin';
 import SearchBar from '../Components/SearchBar';
 import FaqItemAdmin from '../Components/FaqItemAdmin';
+import AddQuestion from '../Components/AddQuestion';
 import ChatBot from '../Components/ChatBot';
 import '../../css/faq.css';
+
+/* TO ADD
+
+Add update question function
+
+Max questions shown per page
+
+*/
 
 export default function FaqAdmin(props){
     const [searchPrompt, setSearchPrompt] = useState('');
     const [faqs, setFaqs] = useState(props.faqs);
 
     const filteredFaqs = faqs.filter((faq) =>
-        faq.question.toLowerCase().includes(searchPrompt.toLowerCase())
+        (faq.question ?? '')
+            .toLowerCase()
+            .includes(searchPrompt.toLowerCase())
     );
 
     const handleToggled = (id, nowActive) => {
@@ -21,6 +32,18 @@ export default function FaqAdmin(props){
 
     const handleDeleted = (id) => {
         setFaqs((prev) => prev.filter((faq) => faq.id !== id));
+    };
+
+    const handleAdded = (newFaq) => {
+        const faq = newFaq?.data ?? newFaq;
+
+        if (!faq?.question) {
+            console.error('Invalid FAQ returned from API:', faq);
+            return;
+        }
+
+        setFaqs((prev) => [faq, ...prev]);
+        
     };
 
     return(
@@ -36,6 +59,10 @@ export default function FaqAdmin(props){
                     searchPrompt={searchPrompt}
                     onSearchChange={setSearchPrompt}
                     faqs={faqs}
+                />
+
+                <AddQuestion
+                    onSubmitted = {handleAdded}
                 />
 
                 <h2 className="faq-subheading">Top FAQ's</h2>

@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use inertia\inertia;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Redirect;
 
 class ViewController extends Controller
 {
@@ -15,24 +14,20 @@ class ViewController extends Controller
         $today = date('Y-m-d');
         $token = session('token');
 
-        $users = Http::withToken($token)->get('http://127.0.0.1:9000/api/users');
+        $users = Http::withToken($token)->get(env('API_URL').'/users');
         $users = (array) $users->json();
 
-        $user_daily_usage = Http::withToken($token)->get('http://127.0.0.1:9000/api/ai/spend/period/user/?start_date='.$today.'&end_date='.$today);
+        $user_daily_usage = Http::withToken($token)->get(env('API_URL').'/ai/spend/period/user/?start_date='.$today.'&end_date='.$today);
         $user_daily_usage = (array) $user_daily_usage->json();
 
-        $user_weekly_usage = Http::withToken($token)->get('http://127.0.0.1:9000/api/ai/spend/week/user/');
+        $user_weekly_usage = Http::withToken($token)->get(env('API_URL').'/ai/spend/week/user/');
         $user_weekly_usage = (array) $user_weekly_usage->json();
 
-        $user_monthly_usage = Http::withToken($token)->get('http://127.0.0.1:9000/api/ai/spend/month/user/');
+        $user_monthly_usage = Http::withToken($token)->get(env('API_URL').'/ai/spend/month/user/');
         $user_monthly_usage = (array) $user_monthly_usage->json();
 
-        $users_leaderboard = Http::withToken($token)->get('http://127.0.0.1:9000/api/ai/spend/month');
+        $users_leaderboard = Http::withToken($token)->get(env('API_URL').'/ai/spend/month');
         $users_leaderboard = (array) $users_leaderboard->json();
-
-        Log::info('Session Token: ' . session('token'));
-        Log::info('Session Role: ' . session('role')); 
-        Log::info('Data: ' . json_encode($user_daily_usage));
                 
                 
         return Inertia::render('Dashboard', [
@@ -49,19 +44,19 @@ class ViewController extends Controller
         $token = session('token');
 
 
-        $users = Http::withToken($token)->get('http://127.0.0.1:9000/api/users');
+        $users = Http::withToken($token)->get(env('API_URL').'/users');
         $users = (array) $users->json();
 
-        $user_daily_usage = Http::withToken($token)->get('http://127.0.0.1:9000/api/ai/spend/period/user/'.$currentUser.'?start_date='.$today.'&end_date='.$today);
+        $user_daily_usage = Http::withToken($token)->get(env('API_URL').'/ai/spend/period/user/'.$currentUser.'?start_date='.$today.'&end_date='.$today);
         $user_daily_usage = (array) $user_daily_usage->json();
 
-        $user_weekly_usage = Http::withToken($token)->get('http://127.0.0.1:9000/api/ai/spend/week/user/'.$currentUser);
+        $user_weekly_usage = Http::withToken($token)->get(env('API_URL').'/ai/spend/week/user/'.$currentUser);
         $user_weekly_usage = (array) $user_weekly_usage->json();
 
-        $user_monthly_usage = Http::withToken($token)->get('http://127.0.0.1:9000/api/ai/spend/month/user/'.$currentUser);
+        $user_monthly_usage = Http::withToken($token)->get(env('API_URL').'/ai/spend/month/user/'.$currentUser);
         $user_monthly_usage = (array) $user_monthly_usage->json();
 
-        $users_leaderboard = Http::withToken($token)->get('http://127.0.0.1:9000/api/ai/spend/month');
+        $users_leaderboard = Http::withToken($token)->get(env('API_URL').'/ai/spend/month');
         $users_leaderboard = (array) $users_leaderboard->json();
 
         
@@ -87,7 +82,7 @@ class ViewController extends Controller
         return response()->json(['error' => 'start_date and end_date are required'], 400);
         }
 
-    $rangeUsage = Http::withToken(session('token'))->get('http://127.0.0.1:9000/api/ai/spend/period/daily/user/'
+    $rangeUsage = Http::withToken(session('token'))->get(env('API_URL').'/ai/spend/period/daily/user/'
         . '?start_date=' . $startDate . '&end_date=' . $endDate);
 
     return response() -> json((array) $rangeUsage->json());
@@ -102,14 +97,14 @@ class ViewController extends Controller
             return response()->json(['error' => 'start_date and end_date are required'], 400);
             }
 
-        $rangeUsage = Http::withToken(session('token'))->get('http://127.0.0.1:9000/api/ai/spend/period/daily/user/'.$currentUser
+        $rangeUsage = Http::withToken(session('token'))->get(env('API_URL').'/ai/spend/period/daily/user/'.$currentUser
             . '?start_date=' . $startDate . '&end_date=' . $endDate);
         return response() -> json((array) $rangeUsage->json());
     }
 
 
     public function Faq(Request $request){
-        $faqs = Http::withToken(session('token'))->get('http://127.0.0.1:9000/api/faq');
+        $faqs = Http::withToken(session('token'))->get(env('API_URL').'/faq');
         $faqs = (array) $faqs->json();
 
         return Inertia::render('Faq', [
@@ -119,13 +114,13 @@ class ViewController extends Controller
 
         public function FaqAdmin(Request $request){
 
-        $faqs = Http::withToken(session('token'))->get('http://127.0.0.1:9000/api/faq');
+        $faqs = Http::withToken(session('token'))->get(env('API_URL').'/faq');
         $faqs = (array) $faqs->json();
 
-        // $faqCreate =  Http::withToken(session('token'))->post('http://127.0.0.1:9000/api/faq/create');
+        // $faqCreate =  Http::withToken(session('token'))->post(env('API_URL').'/faq/create');
         // $faqCreate = $faqCreate->json();
 
-        // $faqUpdate = Http::withToken(session('token'))->put('http://127.0.0.1:9000/api/faq/update/'.$id);
+        // $faqUpdate = Http::withToken(session('token'))->put(env('API_URL').'/faq/update/'.$id);
         // $faqUpdate = $faqUpdate->json();
 
         return Inertia::render('FaqAdmin', [
@@ -133,8 +128,28 @@ class ViewController extends Controller
         ]);
     }
 
-    public function FaqCreate(Request $request, $id = null){
-        //create function
+    public function FaqCreate(Request $request){
+        $question = $request->query('question');
+        $answer = $request->query('answer');
+
+        if (!$question) {
+            return response()->json(['error' => 'question required'], 400);
+        }
+
+        if (!$answer) {
+            return response()->json(['error' => 'answer required'], 400);
+        }
+
+        $response = Http::withToken(session('token'))
+            ->post(env('API_URL').'/faq/create', [
+                'question' => $question,
+                'answer' => $answer,
+            ]);
+
+        return response()->json(
+            $response->json(),
+            $response->status()
+        );
     }
 
     public function FaqDelete(Request $request, $id = null){
@@ -143,7 +158,7 @@ class ViewController extends Controller
         }
 
         $response = Http::withToken(session('token'))
-            ->delete("http://127.0.0.1:9000/api/faq/delete/{$id}");
+            ->delete(env('API_URL').'/faq/delete/'.$id);
 
         return response()->json((array) $response->json(), $response->status());
     }
@@ -155,7 +170,7 @@ class ViewController extends Controller
         }
 
         $response = Http::withToken(session('token'))
-            ->put("http://127.0.0.1:9000/api/faq/activate/{$id}");
+            ->put(env('API_URL').'/faq/activate/'.$id);
 
         return response()->json((array) $response->json(), $response->status());
     }
@@ -167,7 +182,7 @@ class ViewController extends Controller
         }
 
         $response = Http::withToken(session('token'))
-            ->put("http://127.0.0.1:9000/api/faq/deactivate/{$id}");
+            ->put(env('API_URL').'/faq/deactivate/'.$id);
 
         $body = $response->json() ?? [];
 
@@ -182,7 +197,7 @@ class ViewController extends Controller
             ]);
         
 
-            $login = Http::post('http://127.0.0.1:9000/api/login', [
+            $login = Http::post(env('API_URL').'/login', [
                 'name' => $validated['name'],
                 'password' => $validated['password']
             ]);
@@ -229,7 +244,7 @@ class ViewController extends Controller
         ]);
 
         $chatbot = Http::withToken(session('token')) 
-            ->post('http://127.0.0.1:9000/api/nan', [
+            ->post(env('API_URL').'/nan', [
                 'question'    => $validated['question'],
                 'faqRejected' => $validated['faqRejected'] ?? false,
             ]);
