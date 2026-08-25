@@ -8,8 +8,6 @@ import '../../css/faq.css';
 
 /* TO ADD
 
-Add create question function
-
 Add update question function
 
 Max questions shown per page
@@ -44,7 +42,8 @@ export default function FaqAdmin(props){
             return;
         }
 
-        setFaqs((prev) => [...prev, faq]);
+        setFaqs((prev) => [faq, ...prev]);
+        
     };
 
     return(

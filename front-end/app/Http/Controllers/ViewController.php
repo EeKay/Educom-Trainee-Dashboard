@@ -158,7 +158,7 @@ class ViewController extends Controller
         }
 
         $response = Http::withToken(session('token'))
-            ->delete(env('API_URL').'/faq/delete/{$id}');
+            ->delete(env('API_URL').'/faq/delete/'.$id);
 
         return response()->json((array) $response->json(), $response->status());
     }
@@ -170,7 +170,7 @@ class ViewController extends Controller
         }
 
         $response = Http::withToken(session('token'))
-            ->put(env('API_URL').'/faq/activate/{$id}');
+            ->put(env('API_URL').'/faq/activate/'.$id);
 
         return response()->json((array) $response->json(), $response->status());
     }
@@ -182,7 +182,7 @@ class ViewController extends Controller
         }
 
         $response = Http::withToken(session('token'))
-            ->put(env('API_URL').'/faq/deactivate/{$id}');
+            ->put(env('API_URL').'/faq/deactivate/'.$id);
 
         $body = $response->json() ?? [];
 
