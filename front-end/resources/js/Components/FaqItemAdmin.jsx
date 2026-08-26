@@ -58,6 +58,10 @@ export default function FaqItemAdmin({id, question, answer, isActive, onToggled,
         }
     };
 
+    const handleUpdate = async () => {
+        // handle update
+    };
+
     return(
         <div className="faq-item">
             <div className="faq-item-row">
@@ -97,6 +101,11 @@ export default function FaqItemAdmin({id, question, answer, isActive, onToggled,
                 >
                     {deleting ? '' : '✕'}
                 </button>
+
+                <button>
+                  {/* add the update option   */}
+                </button>
+
             </div>
 
             <div className={`faq-item-answer ${isOpen ? 'faq-item-answer-open' : ''}`}>

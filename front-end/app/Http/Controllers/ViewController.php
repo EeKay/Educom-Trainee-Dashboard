@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\DashboardApiService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use inertia\inertia;
+use Inertia\Inertia;
 use Illuminate\Support\Facades\Log;
 
 class ViewController extends Controller

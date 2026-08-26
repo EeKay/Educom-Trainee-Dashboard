@@ -31,7 +31,9 @@ export default function DashboardAdmin(props) {
   const [resultStats, setResultStats] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const [selectedUserId, setSelectedUserId] = useState(null);
+  const [selectedUserId, setSelectedUserId] = useState(
+    props.currentUser?.id ?? null
+  );
 
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
@@ -76,37 +78,57 @@ export default function DashboardAdmin(props) {
   return (
     <div>
       <Navbar />
+
       <div className="dashboard-container">
-        <div style={{ display: 'flex', gap: '40px', alignItems: 'stretch', width: '100%' }}>
-          <ProfileCard user={currentUser} monthlySpend={monthlyStats.spend} />
-          <div style={{ flex: 1 }}>
+
+        <div className="dashboard-top-row">
+          <div className="dashboard-profile">
+            <ProfileCard
+              user={currentUser}
+              monthlySpend={monthlyStats.spend}
+            />
+          </div>
+          <div className="dashboard-leaderboard">
             <LeaderboardAdmin
               users={leaderboardUsers}
               onSelectUser={selectUser}
-              currentUser={selectedUserId} // local state, so the highlight is instant
+              currentUser={selectedUserId}
             />
           </div>
         </div>
 
-        <div style={{ display: 'flex', gap: '48px', width: '100%' }}>
-          <div style={{ flex: '0 0 220px' }}>
-            <StatCard label="total today" tokens={dailyStats.tokens} spend={dailyStats.spend} color="red" />
-          </div>
-          <div style={{ flex: '0 0 220px' }}>
-            <StatCard label="total this week" tokens={weeklyStats.tokens} spend={weeklyStats.spend} color="blue" />
-          </div>
-          <div style={{ flex: 1 }}>
-            <DateRangeCard
-              modelStats={modelStats}
-              resultStats={resultStats}
-              onRangeChange={handleRangeChange}
-              maxDate={formatDate(new Date())}
-              currentUser={selectedUserId}
-              loading={loading}
+        <div className="dashboard-bottom-row">
+          <div className="dashboard-stat">
+            <StatCard
+              label="total today"
+              tokens={dailyStats.tokens}
+              spend={dailyStats.spend}
+              color="red"
             />
-          </div>
+        </div>
+
+        <div className="dashboard-stat">
+          <StatCard
+            label="total this week"
+            tokens={weeklyStats.tokens}
+            spend={weeklyStats.spend}
+            color="blue"
+          />
+        </div>
+
+        <div className="dashboard-date-range">
+          <DateRangeCard
+            modelStats={modelStats}
+            resultStats={resultStats}
+            onRangeChange={handleRangeChange}
+            maxDate={formatDate(new Date())}
+            currentUser={selectedUserId}
+            loading={loading}
+          />
         </div>
       </div>
+
+    </div>
       <ChatBot />
     </div>
   );

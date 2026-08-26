@@ -21,5 +21,6 @@ Route::put('/faq/activate/{id?}', [FaqController::class, 'FaqActivate'])->name('
 Route::put('/faq/deactivate/{id?}', [FaqController::class, 'FaqDeactivate'])->name('faqDeactivate');
 Route::delete('/faq/delete/{id?}', [FaqController::class, 'FaqDelete'])->name('faqDelete');
 Route::post('/faq/create', [FaqController::class, 'FaqCreate'])->name('faqCreate');
+//Route::post('/faq/update', [FaqController::class, 'FaqUpdate'])->name('faqUpdate');
 
 

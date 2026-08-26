@@ -45,10 +45,7 @@ class FaqController extends Controller
                 'answer' => $answer,
             ]);
 
-        return response()->json(
-            $response->json(),
-            $response->status()
-        );
+        return response()->json((array) $response->json(), $response->status());
     }
 
     public function FaqDelete(Request $request, $id = null){
@@ -87,5 +84,24 @@ class FaqController extends Controller
 
         return response()->json($body, $response->status());
     }
+
+    // TODO fix the update 
+    // public function FaqUpdate(Request $request, $id = null)
+    // {
+    //    if (!$id){
+    //     return response()->json(['error' => 'id is required'], 400);
+    //    } 
+
+    //    $response = Http::withToken(session('token'))
+    //     ->post(config('app.API_URL').'/faq/update',[
+    //         'question' => $question,
+    //         'answer' => $answer,
+    //     ]);
+
+    //     return Inertia::render('FaqAdmin', [
+    //         'question' => $question,
+    //         'answer' => $answer;
+    //     ]);
+    // }
 }
 

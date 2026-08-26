@@ -1,4 +1,8 @@
 .navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -19,9 +23,16 @@
 }
 
 .logo-text {
+  display: inline-flex;
   font-weight: bold;
   font-size: 20px;
   color: #1a1a1a;
+}
+
+.logo-letter {
+  display: inline-block;
+  transition: transform 0.1s ease-out;
+  transform-origin: bottom center;
 }
 
 .nav-links {
