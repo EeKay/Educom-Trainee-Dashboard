@@ -1,8 +1,7 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use App\Services\DashboardApiService;
+use App\Services\DashboardApiService as DashboardApiService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Inertia\Inertia;
@@ -13,6 +12,7 @@ class ViewController extends Controller
     public function Dashboard(Request $request){
         $today = date('Y-m-d');
         $token = session('token');
+        $currentUser = session('user_id');
 
         $users = Http::withToken($token)->get(config('app.API_URL').'/users');
         $users = (array) $users->json();
@@ -28,21 +28,21 @@ class ViewController extends Controller
 
         $users_leaderboard = Http::withToken($token)->get(config('app.API_URL').'/ai/spend/month');
         $users_leaderboard = (array) $users_leaderboard->json();
-                
-                
+
         return Inertia::render('Dashboard', [
-            'users' => $users, 
-            'user_daily_usage' => $user_daily_usage, 
+            'currentUser' => $currentUser,
+            'users' => $users,
+            'user_daily_usage' => $user_daily_usage,
             'user_weekly_usage' => $user_weekly_usage,
             'user_monthly_usage' => $user_monthly_usage,
-            'users_leaderboard' => $users_leaderboard
+            'users_leaderboard' => $users_leaderboard,
         ]);
     }
-    public function DashboardAdmin(Request $request, $currentUser = 2){
-        
+
+    public function DashboardAdmin(Request $request, $currentUser = null){
         $today = date('Y-m-d');
         $token = session('token');
-
+        $currentUser = $currentUser ?? session('user_id');
 
         $users = Http::withToken($token)->get(config('app.API_URL').'/users');
         $users = (array) $users->json();
@@ -58,10 +58,10 @@ class ViewController extends Controller
 
         $users_leaderboard = Http::withToken($token)->get(config('app.API_URL').'/ai/spend/month');
         $users_leaderboard = (array) $users_leaderboard->json();
-                
+
         return Inertia::render('DashboardAdmin', [
-            'users' => $users, 
-            'user_daily_usage' => $user_daily_usage, 
+            'users' => $users,
+            'user_daily_usage' => $user_daily_usage,
             'user_weekly_usage' => $user_weekly_usage,
             'user_monthly_usage' => $user_monthly_usage,
             'users_leaderboard' => $users_leaderboard,
@@ -73,35 +73,36 @@ class ViewController extends Controller
         $startDate = $request->query('start_date');
         $endDate = $request->query('end_date');
 
-    if (!$startDate || !$endDate) {
-        return response()->json(['error' => 'start_date and end_date are required'], 400);
+        if (!$startDate || !$endDate) {
+            return response()->json(['error' => 'start_date and end_date are required'], 400);
         }
 
-    $rangeUsage = Http::withToken(session('token'))->get(config('app.API_URL').'/ai/spend/period/daily/user/'
-        . '?start_date=' . $startDate . '&end_date=' . $endDate);
+        $rangeUsage = Http::withToken(session('token'))->get(config('app.API_URL').'/ai/spend/period/daily/user/'
+            . '?start_date=' . $startDate . '&end_date=' . $endDate);
 
-    return response() -> json((array) $rangeUsage->json());
+        return response()->json((array) $rangeUsage->json());
     }
 
-    public function RangeUsageAdmin(Request $request, $currentUser=2){
-        $currentUser = $request->query('current_user', 2);
+    public function RangeUsageAdmin(Request $request){
+        $currentUser = $request->query('current_user');
         $startDate = $request->query('start_date');
         $endDate = $request->query('end_date');
 
         if (!$startDate || !$endDate) {
             return response()->json(['error' => 'start_date and end_date are required'], 400);
-            }
+        }
 
         $rangeUsage = Http::withToken(session('token'))->get(config('app.API_URL').'/ai/spend/period/daily/user/'.$currentUser
             . '?start_date=' . $startDate . '&end_date=' . $endDate);
-        return response() -> json((array) $rangeUsage->json());
+
+        return response()->json((array) $rangeUsage->json());
     }
 
     public function Login(Request $request, DashboardApiService $api){
         if(!$request->isMethod('post')) {
             return Inertia::render('Login', [
                 'token' => null,
-                'errorMessage' => null, 
+                'errorMessage' => null,
             ]);
         }
 
@@ -109,7 +110,7 @@ class ViewController extends Controller
             'name'    => 'required|string',
             'password' => 'required|string',
         ]);
-        
+
         $result = $api->login($validated['name'], $validated['password']);
 
         if(!$result['ok']){
@@ -122,6 +123,7 @@ class ViewController extends Controller
         session([
             'token' => $result['token'],
             'role' => $result['role'],
+            'user_id' => $result['id'],
         ]);
 
         return match ($result['role']){
@@ -129,7 +131,7 @@ class ViewController extends Controller
             'trainee' => redirect('/dashboard'),
             default => Inertia::render('Login', [
                 'token' => null,
-                'errorMessage' => 'Logged in, but role'.$result['role'].'is not recognized.',
+                'errorMessage' => 'Logged in, but role '.$result['role'].' is not recognized.',
             ]),
         };
     }
@@ -141,7 +143,7 @@ class ViewController extends Controller
             'faqRejected' => 'sometimes|boolean',
         ]);
 
-        $chatbot = Http::withToken(session('token')) //naar dashboardapiservice
+        $chatbot = Http::withToken(session('token'))
             ->post(config('app.API_URL').'/nan', [
                 'question'    => $validated['question'],
                 'faqRejected' => $validated['faqRejected'] ?? false,
@@ -149,10 +151,7 @@ class ViewController extends Controller
 
         Log::info('Nan workflow status: ' . $chatbot->status());
         Log::info('Nan workflow body: ' . $chatbot->body());
-        $chatbot = (array) $chatbot->json();
 
-        return response()->json($chatbot);
+        return response()->json((array) $chatbot->json());
     }
 }
-
-

@@ -6,7 +6,7 @@ import StatCard from '../Components/StatCard';
 import DateRangeCard from '../Components/DateRangeCard';
 import ChatBot from '../Components/ChatBot';
 import '../../css/dashboard.css';
-import { setLayoutProps } from '@inertiajs/react';
+import {usePage} from '@inertiajs/react';
 
 function formatDate(date) {
   return date.toISOString().split('T')[0];
@@ -14,7 +14,8 @@ function formatDate(date) {
 
 export default function Dashboard(props) {
   const users = props.users;
-  const currentUser = 2; //hardcoded for now, but will be changed to token from the session 
+  const { auth } = usePage().props;
+  const currentUser = auth.id;
 
   const monthlyStats = props.user_monthly_usage;
   const dailyStats = props.user_daily_usage;

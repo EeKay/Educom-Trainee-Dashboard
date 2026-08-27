@@ -14,7 +14,7 @@ function formatDate(date) {
 
 export default function DashboardAdmin(props) {
   const users = props.users;
-  const currentUser = props.currentUser; // server-confirmed selected user (used by ProfileCard, which needs real fetched data)
+  const currentUser = props.currentUser;
 
   const monthlyStats = props.user_monthly_usage;
   const dailyStats = props.user_daily_usage;
@@ -32,7 +32,7 @@ export default function DashboardAdmin(props) {
   const [loading, setLoading] = useState(false);
 
   const [selectedUserId, setSelectedUserId] = useState(
-    props.currentUser?.id ?? null
+    props.currentUser ?? null
   );
 
   const [startDate, setStartDate] = useState('');

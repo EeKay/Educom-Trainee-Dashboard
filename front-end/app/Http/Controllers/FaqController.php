@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use inertia\inertia;
+use Inertia\Inertia;
 
 class FaqController extends Controller
 {
@@ -28,16 +28,12 @@ class FaqController extends Controller
     }
 
     public function FaqCreate(Request $request){
-        $question = $request->query('question');
-        $answer = $request->query('answer');
-
-        if (!$question) {
-            return response()->json(['error' => 'question required'], 400);
-        }
-
-        if (!$answer) {
-            return response()->json(['error' => 'answer required'], 400);
-        }
+        $validated = $request->validate([
+            'question' => 'required|string',
+            'answer' => 'required|string',
+        ]);
+        $question = $validated['question'];
+        $answer = $validated['answer'];
 
         $response = Http::withToken(session('token'))
             ->post(config('app.API_URL').'/faq/create', [
