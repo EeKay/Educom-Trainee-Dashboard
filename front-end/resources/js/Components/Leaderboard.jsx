@@ -1,81 +1,180 @@
+import { useEffect, useRef, useState } from "react";
 import "../../css/leaderboard.css";
+import userIcon from "../../img/icon.png";
 
-export default function Leaderboard({ users, currentUserId }) {
+const MIN_SLOT_WIDTH = 120;
+const BASE_GAP = 90;
+const YOU_GAP_BONUS = 16;
+const EDGE_PADDING = 50;
+
+// Push entries apart when they get too close
+function resolveCollisions(idealPositions, entries) {
+  const n = idealPositions.length;
+  const positions = [...idealPositions];
+
+  const gapBefore = (i) =>
+    BASE_GAP +
+    (entries[i].isYou || entries[i - 1].isYou
+      ? YOU_GAP_BONUS
+      : 0);
+
+  // Forward pass
+  for (let i = 1; i < n; i++) {
+    if (
+      positions[i] - positions[i - 1] <
+      gapBefore(i)
+    ) {
+      positions[i] =
+        positions[i - 1] + gapBefore(i);
+    }
+  }
+
+  // Backward pass
+  for (let i = n - 2; i >= 0; i--) {
+    if (
+      positions[i + 1] - positions[i] <
+      gapBefore(i + 1)
+    ) {
+      positions[i] =
+        positions[i + 1] - gapBefore(i + 1);
+    }
+  }
+
+  return positions;
+}
+
+export default function Leaderboard({
+  users,
+  currentUserId,
+}) {
+  const scrollRef = useRef(null);
+  const [containerWidth, setContainerWidth] = useState(0);
+
+  useEffect(() => {
+    if (!scrollRef.current) return;
+
+    const ro = new ResizeObserver((entries) => {
+      setContainerWidth(
+        entries[0].contentRect.width
+      );
+    });
+
+    ro.observe(scrollRef.current);
+
+    return () => ro.disconnect();
+  }, []);
+
   if (!users?.length) return null;
 
-  // Lowest tokens = furthest left
+  // Lowest tokens = furthest left = best
   const sortedUsers = [...users].sort(
     (a, b) => a.tokensUsed - b.tokensUsed
   );
+
   const best = sortedUsers[0].tokensUsed;
-  const worst = sortedUsers[sortedUsers.length - 1].tokensUsed;
+  const worst =
+    sortedUsers[sortedUsers.length - 1].tokensUsed;
+
   const range = worst - best || 1;
 
-  // Group users that land on the exact same token value,
-  // so we know how many share a spot and each one's index within that group
-  const groups = {};
-  sortedUsers.forEach((user) => {
-    if (!groups[user.tokensUsed]) groups[user.tokensUsed] = [];
-    groups[user.tokensUsed].push(user);
+  // Tie-aware ranking
+  let rank = 0;
+  let lastTokens = null;
+
+  const ranked = sortedUsers.map((user, i) => {
+    if (user.tokensUsed !== lastTokens) {
+      rank = i + 1;
+      lastTokens = user.tokensUsed;
+    }
+
+    return {
+      ...user,
+      rank,
+      isYou: user.id === currentUserId,
+    };
   });
 
-  const AVATAR_SPACING_PX = 50;
+  const naturalWidth =
+    EDGE_PADDING * 2 +
+    Math.max(0, ranked.length - 1) * BASE_GAP +
+    78;
+
+  const trackWidth = Math.max(
+    containerWidth,
+    ranked.length * MIN_SLOT_WIDTH
+  );
+
+  const idealPositions = ranked.map(
+    (user) =>
+      EDGE_PADDING +
+      ((user.tokensUsed - best) / range) *
+        (trackWidth - EDGE_PADDING * 2)
+  );
+
+  const positions = resolveCollisions(
+    idealPositions,
+    ranked
+  );
 
   return (
+
     <div className="leaderboard">
-      <h2 className="leaderboard-title"><b>Leaderboard</b></h2>
+      <h2 className="leaderboard-title">
+        <b>Leaderboard</b>
+      </h2>
+
       <div className="leaderboard-track">
-        <div className="leaderboard-marker">
-          <div className="leaderboard-start" />
-        </div>
-        <div className="leaderboard-timeline">
-          <div className="leaderboard-line" />
-          {sortedUsers.map((user) => {
-            const percent = (user.tokensUsed - best) / range;
-            const left = 10 + percent * 80;
-            const isCurrent = user.id === currentUserId;
+        <div
+          className="leaderboard-scroll"
+          ref={scrollRef}
+        >
+          <div
+            className="leaderboard-timeline"
+            style={{ width: trackWidth }}
+          >
+            <div className="leaderboard-line" />
 
-            // find this user's position within their same-token group
-            const group = groups[user.tokensUsed];
-            const indexInGroup = group.findIndex((u) => u.id === user.id);
-            const groupSize = group.length;
+            <div className="leaderboard-start" />
 
-            // center the group around 0, spacing each member out evenly
-            const offsetPx =
-              groupSize > 1
-                ? (indexInGroup - (groupSize - 1) / 2) * AVATAR_SPACING_PX
-                : 0;
-
-            return (
+            {ranked.map((user, i) => (
               <div
                 key={user.id}
                 className={`leaderboard-entry ${
-                  isCurrent ? "leaderboard-entry-you" : ""
+                  user.isYou
+                    ? "leaderboard-entry-you"
+                    : ""
                 }`}
                 style={{
-                  left: `${left}%`,
-                  transform: `translateX(${offsetPx}px)`,
+                  left: positions[i],
+                  animationDelay: `${i * 40}ms`,
                 }}
+                title={user.name}
               >
                 <div className="leaderboard-avatar-wrapper">
-                  <img
-                    src={"https://placecats.com/200/200"}
-                    alt={user.name}
-                    className="leaderboard-avatar"
-                  />
+                  <div className="leaderboard-avatar-frame">
+                    <img 
+                      src={userIcon}
+                      alt={user.name}
+                      className="leaderboard-avatar"
+                    />
+                  </div>
+
                   <div className="leaderboard-tooltip">
-                    {user.tokensUsed} tokens
+                    {user.tokensUsed.toLocaleString()} tokens
                   </div>
                 </div>
+
                 <div className="leaderboard-name">
-                  {user.name.split(" ")[0]}
+                  {(user.name || "Unknown").split(" ")[0]}
                 </div>
               </div>
-            );
-          })}
-          <div className="leaderboard-end" />
+            ))}
+
+            <div className="leaderboard-end" />
+          </div>
         </div>
       </div>
+
     </div>
   );
 }

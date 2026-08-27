@@ -1,13 +1,14 @@
 import { Link } from '@inertiajs/react';
 import {useState} from 'react';
 import '../../css/user-menu.css';
+import userIcon from '../../img/icon.png';
 
 export default function UserMenu() {
     const[isOpen, setIsOpen] = useState(false);
   return (
     <div className = "user-menu">
         <button className = "user-avatar" onClick={() => setIsOpen(!isOpen)}>
-            <img src="https://placecats.com/200/200" alt="User Avatar" />
+            <img src= {userIcon} alt="User Avatar" />
         </button>
 
     {/* //work in progress */}

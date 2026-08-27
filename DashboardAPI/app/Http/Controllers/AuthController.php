@@ -21,7 +21,13 @@ class AuthController extends Controller
         if (!$user || !Hash::check($fields['password'], $user->password)) {
             return response([
                 'message' => 'Wrong credentials'
-            ]);
+            ], 401);
+        }
+
+        if ($user->active == false) {
+            return response([
+                'message' => 'User not active'
+            ], 401);
         }
         
         $token = $user->createToken('token', [$user->role])->plainTextToken;
@@ -38,30 +44,14 @@ class AuthController extends Controller
         'lax'
         );
 
-        return response()->json(['token' => $token, 'role' => $user->role, 'message' => 'Logged in'])->cookie($cookie);
+        return response()->json(['token' => $token, 'role' => $user->role, 'id' => $user->id, 'message' => 'Logged in'])->cookie($cookie);
     }
 
     public function logout(Request $request) {
         
-        $user = $this->getUser($request);
-        if ($user == null) {
-            return response()->json(['message' => 'No API key provided']);
-        }
-        $user->tokens()->delete();
+        $request->user()->tokens()->delete();
 
         return response()->json(['message' => 'Logged out'])
             ->withoutCookie('access_token', '/', null, false, true, false, 'lax');
-    }
-
-    public function getUser(Request $request) {
-        $token = \Laravel\Sanctum\PersonalAccessToken::findToken($request->bearerToken());
-        if ($token == null) 
-        {
-            $token = \Laravel\Sanctum\PersonalAccessToken::findToken($request->cookie('access_token'));
-        }
-        if ($token == null) {
-            return null;
-        }
-        return $user = $token->tokenable;
     }
 }

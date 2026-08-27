@@ -11,7 +11,7 @@ class FaqController extends Controller
     */
     public function getFaqEntries()
     {
-        return \App\Models\Faq::latest()->get()->toJson(JSON_PRETTY_PRINT);
+        return \App\Models\Faq::where('is_active', true)->latest()->get()->toJson();
     }
 
     /*
@@ -22,14 +22,16 @@ class FaqController extends Controller
     */
     public function create(Request $request) 
     {
-        //TODO remove default values, default values for testing purposes only
-        $question = $request->input('question', 'Who am I?');
-        $answer = $request->input('answer', 'Dunno');
-        \App\Models\Faq::create([
-                        'question' => $question,
-                        'answer' => $answer,
+        $fields = $request->validate([
+            'question' => 'required',
+            'answer' => 'required'
+        ]);
+        $faq = \App\Models\Faq::create([
+                        'question' => $fields['question'],
+                        'answer' => $fields['answer'],
                         'is_active' => true 
                     ]);
+        return json_encode($faq);
     }
 
     /*
@@ -41,13 +43,15 @@ class FaqController extends Controller
     */
     public function update(Request $request, string $id)
     {
-        //TODO remove default values, default values for testing purposes only
-        $question = $request->input('question', 'Who am I?');
-        $answer = $request->input('answer', 'Or maybe I do');
-        \App\Models\Faq::where('id', $id)->update([
-                                        'question' => $question,
-                                        'answer' => $answer
+        $fields = $request->validate([
+            'question' => 'required',
+            'answer' => 'required'
+        ]);
+        $faq = \App\Models\Faq::where('id', $id)->update([
+                                        'question' => $fields['question'],
+                                        'answer' => $fields['answer'],
                                     ]);
+        return json_encode($faq);
     }
 
     /*

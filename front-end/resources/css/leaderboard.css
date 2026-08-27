@@ -1,5 +1,6 @@
 .leaderboard {
   width: 100%;
+  min-width: 0;
   padding: 32px 40px;
   box-sizing: border-box;
   font-family: Helvetica, Arial, sans-serif;
@@ -10,105 +11,104 @@
   font-size: 28px;
 }
 
-.leaderboard-row {
-  display: flex;
-  align-items: flex-start;
-}
-
-.leaderboard-marker {
-    width: 40px;
-    position: relative;
-    flex-shrink: 0;
-    height: 100px;
-    z-index: 10;
-}
-
 .leaderboard-track {
-    display: flex;
-    align-items: center;     
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.leaderboard-scroll {
+  width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .leaderboard-timeline {
-    position: relative;
-    flex: 1;
-    height: 100px;
+  position: relative;
+  height: 140px;
 }
 
 .leaderboard-line {
-    position: absolute;
-    left: 0;
-    right: 0px;
-    top: 29px;
-    height: 3px;
-    background: #F24452;
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: 69px;
+  height: 2px;
+  border-radius: 2px;
+  background: #F24452;
+  opacity: 0.85;
 }
 
 .leaderboard-start,
 .leaderboard-end {
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background: #43B5E8;
-    top: 21px;    
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 62px;
+  border-radius: 50%;
+  background: #43B5E8;
+  z-index: 2;
 }
 
-.leaderboard-start{
-  right: -9px;
+.leaderboard-start {
+  left: 0;
 }
 
-.leaderboard-end{
-  right: -9px;
+.leaderboard-end {
+  right: 0;
 }
 
 .leaderboard-entry {
   position: absolute;
-  top: 0;
+  top: 46px;
   transform: translateX(-50%);
+
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  width: 78px;
+
+  opacity: 0;
+  animation: leaderboard-pop 0.35s ease forwards;
+}
+
+.leaderboard-avatar-frame {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 3px solid #F24452;
+  background: white;
+  overflow: hidden;
+  display: block;
+  cursor: pointer;
+}
+
+.leaderboard-entry-you .leaderboard-avatar-frame {
+  width: 58px;
+  height: 58px;
+  min-width: 58px;
+  min-height: 58px;
+  border-color: #43B5E8;
+}
+
+.leaderboard-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .leaderboard-avatar-wrapper {
   position: relative;
 }
 
-.leaderboard-avatar {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid #F24452;
-  background: white;
-  cursor: pointer;
-  transition: transform .15s;
-}
-
-.leaderboard-avatar:hover {
-  transform: scale(.94);
-}
-
-.leaderboard-entry-you .leaderboard-avatar {
-  border-color: #43B5E8;
-  width: 75px;
-  height: 75px;
-  position: relative;
-}
-
-.leaderboard-entry-you {
-  top: -5px;
-}
-
-.leaderboard-name {
-  margin-top: 10px;
-  color: #F24452;
-  font-weight: bold;
-  font-size: 18px;
-}
-
-.leaderboard-entry-you .leaderboard-name {
-  color: #43B5E8;
+.leaderboard-avatar-wrapper:hover .leaderboard-tooltip {
+  opacity: 1;
 }
 
 .leaderboard-tooltip {
@@ -127,37 +127,35 @@
   pointer-events: none;
 }
 
-.leaderboard-entry-you .leaderboard-tooltip{
-    position: absolute;
-  bottom: calc(100% + 8px);
-  left: 50%;
-  transform: translateX(-50%);
-  background: #43B5E8;
-  color: white;
-  padding: 6px 10px;
-  border-radius: 6px;
+.leaderboard-name {
+  margin-top: 8px;
+
+  color: #F24452;
+  font-weight: 600;
+  font-size: 13px;
+
+  max-width: 74px;
+
   white-space: nowrap;
-  font-size: 12px;
-  opacity: 0;
-  transition: opacity .15s;
-  pointer-events: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  text-align: center;
 }
 
-.leaderboard-avatar-wrapper:hover .leaderboard-tooltip {
-  opacity: 1;
+.leaderboard-entry-you .leaderboard-name {
+  color: #43B5E8;
+  font-weight: 700;
 }
 
-.stat-card,
-.profile-card,
-.leaderboard,
-.date-range-card {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
 
-.stat-card:hover,
-.profile-card:hover,
-.leaderboard:hover,
-.date-range-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+@keyframes leaderboard-pop {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
 }

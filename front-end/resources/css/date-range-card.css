@@ -1,14 +1,24 @@
 .date-range-card {
   display: flex;
   flex-direction: column;
+
   gap: 10px;
+
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
   border-radius: 12px;
+
   padding: 40px;
-  width: 550px;
+
+  width: 100%;
+  min-width: 0;
+
   height: 400px;
-  color: white;
+
   box-sizing: border-box;
+
+  color: white;
+
   cursor: pointer;
 }
 
@@ -22,9 +32,13 @@
 
 .date-range-fields {
   display: flex;
-  flex-direction: row;
-  gap: 20px;
+
+  flex-wrap: wrap;
+
+  gap: 12px;
+
   align-items: center;
+
   width: 100%;
 }
 
@@ -38,6 +52,12 @@
   background-color: #3DAEDA;
   border-radius: 6px;
   padding: 6px 10px;
+}
+
+.date-range-row,
+.date-type-row {
+  min-width: 0;
+  flex: 1 1 auto;
 }
 
 .date-range-text {
