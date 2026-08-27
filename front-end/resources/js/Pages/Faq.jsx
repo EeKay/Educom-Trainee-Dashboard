@@ -8,7 +8,7 @@ import '../../css/faq.css';
 export default function Faq(props){
 
     const [searchPrompt, setSearchPrompt] = useState('');
-    const faqs = props.faqs;
+    const faqs = Array.isArray(props.faqs) ? props.faqs : [];
 
 
     const filteredFaqs = faqs.filter((faq) =>
