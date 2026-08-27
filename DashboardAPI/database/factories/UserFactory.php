@@ -28,7 +28,7 @@ class UserFactory extends Factory
             'team' => 'Trainees Eindhoven',
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
-            'key_alias' => 'educom_openclaw_key_paulhoi541gmailcom',
+            'litellm_key_alias' => 'educom_openclaw_key_paulhoi541gmailcom',
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
         ];

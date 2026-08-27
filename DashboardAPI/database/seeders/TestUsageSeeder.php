@@ -8,7 +8,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
 
-class UsageSeeder extends Seeder
+class TestUsageSeeder extends Seeder
 {
     use WithoutModelEvents;
     
@@ -18,20 +18,22 @@ class UsageSeeder extends Seeder
     public function run(): void
     {
         $user = User::factory()->create([
+            'id' => '1',
             'team' => 'test_team1',
             'name' => 'test_name1',
             'role' => 'trainee',
             'email' => 'test_email1',
-            'key_alias' => 'test_key1',
+            'litellm_key_alias' => 'test_key1',
             'password' => '12345678'
         ]);
 
         $user1 = User::factory()->create([
+            'id' => '2',
             'team' => 'test_team2',
             'name' => 'test_name2',
             'role' => 'trainee',
             'email' => 'test_email2',
-            'key_alias' => 'test_key2',
+            'litellm_key_alias' => 'test_key2',
             'password' => '12345678'
         ]);
 

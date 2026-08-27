@@ -8,13 +8,16 @@ use App\Http\Controllers\nanController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-//Updates database with AI usage data of the specified period from LiteLLM API
-//params: request -> {'start_date', 'end_date'}
-Route::get('/ai/fetch/period', [UsageController::class, 'fetchUsagePeriod']);//for internal use
 
-//Updates database with today's AI usage data from LiteLLM API
-//params: none
-Route::get('/ai/fetch', [UsageController::class, 'fetchUsage']);//for internal use
+Route::group(['middleware' => ['cookie.filter', 'auth:sanctum','ability:admin']], function() {
+    //Updates database with AI usage data of the specified period from LiteLLM API
+    //params: request -> {'start_date', 'end_date'}
+    Route::get('/ai/fetch/period', [UsageController::class, 'fetchUsagePeriod']);
+
+    //Updates database with today's AI usage data from LiteLLM API
+    //params: none
+    Route::get('/ai/fetch', [UsageController::class, 'fetchUsage']);
+});
 
 
 
@@ -166,13 +169,9 @@ Route::group(['middleware' => ['cookie.filter', 'auth:sanctum','ability:admin']]
 //params: request->{'name', 'password'} 
 Route::post('/login', [AuthController::class, 'login']);
 
-//logout
-//params: none
-Route::get('/logout', [AuthController::class, 'logout']);
-
-
-
-
-
-//API call for testing purposes only, do not call
-Route::get('/addme', [UserController::class, 'AddMe']);
+Route::group(['middleware' => ['cookie.filter', 'auth:sanctum','ability:admin,trainee']], function() {
+    
+    //logout
+    //params: none
+    Route::post('/logout', [AuthController::class, 'logout']);
+});

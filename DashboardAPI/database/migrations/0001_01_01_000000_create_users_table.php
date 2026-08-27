@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('name');
             $table->enum('role', [ 'admin', 'trainee'])->default('trainee');
             $table->string('email')->unique();
-            $table->string('key_alias');
+            $table->string('litellm_key_alias');
+            $table->boolean('active')->default(true);
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

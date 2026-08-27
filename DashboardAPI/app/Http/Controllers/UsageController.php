@@ -5,81 +5,31 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
+use App\Services\Contracts\FetchServiceInterface;
 
 class UsageController extends Controller
 {
+    protected $fetchService;
+
+    public function __construct(FetchServiceInterface $fetchService)
+    {
+        $this->fetchService = $fetchService;
+    }
+
     public function fetchUsagePeriod(Request $request) 
     {
-        $start_date = $request->input('start_date', Carbon::now()->format('Y-m-d'));
-        $end_date = $request->input('end_date', Carbon::now()->format('Y-m-d'));
+        $start_date = $request->input('start_date', null);
+        $end_date = $request->input('end_date', null);
 
-        //get list of teams
-        $response = Http::withToken(config('app.API_KEY'))->get('https://ai.educom.nu/team/list');
-        $teams = (array)$response->json();
+        return $this->fetchService->fetchUsagePeriod($start_date, $end_date);
+    }
 
-        //loop through teams to get each trainee's ai usage data
-        foreach ($teams as $team) {
-
-            //retrieve AI usage data from LiteLLM API
-            $response = Http::withToken(config('app.API_KEY'))->get('https://ai.educom.nu/team/daily/activity', [
-                'team_ids' => $team['team_id'], 
-                'start_date' => $start_date,
-                'end_date' => $end_date,
-                'page_size' => 10000
-                ]);
-            $response = (array)$response->json();
-
-            //If team has no usage data skip to next team
-            if(empty($response['results'])) {
-                continue;
-            }
-
-            foreach ($response['results'] as $data) {
-
-                //get date associated with usage data
-                $date = date($data['date']);
-                    
-                //get all models that were used
-                $models = (array)$data['breakdown']['models'];
-                foreach ($models as $key => $model) {
-                    foreach ($model['api_key_breakdown'] as $userData) {
-                            
-                        //retrieve user from database
-                        $user = \App\Models\User::where('key_alias', $userData['metadata']['key_alias'])->first();
-
-                        //create entry if not yet present, otherwise update entry
-                        if ($user !== null)
-                        {
-                            if (!\App\Models\Usage::where('user_id', $user->id)->where('model', $key)->where('date', $date)->exists())
-                            {
-                                $user->Usage()->create([
-                                    'date' => $date,
-                                    'model' => $key,
-                                    'spend' => round($userData['metrics']['spend'], 5, PHP_ROUND_HALF_UP), 
-                                    'tokens' => $userData['metrics']['total_tokens']
-                                    ]);
-                            } else 
-                            {
-                                \App\Models\Usage::where('user_id', $user->id)
-                                                    ->where('model', $key)
-                                                    ->where('date', $date)
-                                                    ->update([
-                                                        'spend' => round($userData['metrics']['spend'], 5, PHP_ROUND_HALF_UP), 
-                                                        'tokens' => $userData['metrics']['total_tokens']
-                                                    ]);
-                            }
-                        } else
-                        {
-                            //TODO user not found
-                        }
-                    }
-                }
-            }
-        }
-        return('succes');
+    public function fetchUsage()
+    {
+        return $this->fetchService->fetchUsage();
     }
     
-    public function fetchUsage()
+    public function ffetchUsage()
     {
         //get list of teams
         $response = Http::withToken(config('app.API_KEY'))->get('https://ai.educom.nu/team/list');
@@ -111,7 +61,7 @@ class UsageController extends Controller
                 foreach ($model['api_key_breakdown'] as $userData) {
                     
                     //retrieve user from database
-                    $user = \App\Models\User::where('key_alias', $userData['metadata']['key_alias'])->first();
+                    $user = \App\Models\User::where('litellm_key_alias', $userData['metadata']['key_alias'])->first();
 
                     //create entry if not yet present, otherwise update entry
                     if ($user !== null)
