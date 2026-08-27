@@ -21,7 +21,13 @@ class AuthController extends Controller
         if (!$user || !Hash::check($fields['password'], $user->password)) {
             return response([
                 'message' => 'Wrong credentials'
-            ]);
+            ], 401);
+        }
+
+        if ($user->active == false) {
+            return response([
+                'message' => 'User not active'
+            ], 401);
         }
         
         $token = $user->createToken('token', [$user->role])->plainTextToken;
