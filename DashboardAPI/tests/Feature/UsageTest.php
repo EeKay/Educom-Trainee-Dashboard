@@ -11,9 +11,12 @@ use Carbon\Carbon;
 
 pest()->use(RefreshDatabase::class);
 
+beforeEach(function () {
+    $this->seed(TestUsageSeeder::class);
+});
+
 //test getTotalSpend output
 test('getTotalSpend', function () {
-    $this->seed(TestUsageSeeder::class);
     Sanctum::actingAs(
         User::where('id', 1)->first(),
         ['trainee']
@@ -43,7 +46,6 @@ test('getTotalSpend', function () {
 
 //test getUserSpend output
 test('getUserSpend', function () {
-    $this->seed(TestUsageSeeder::class);
     Sanctum::actingAs(
         User::where('id', 1)->first(),
         ['admin']
@@ -86,7 +88,6 @@ test('getUserSpend', function () {
 
 //test getCurrentUserSpend output
 test('getCurrentUserSpend', function () {
-    $this->seed(TestUsageSeeder::class);
     Sanctum::actingAs(
         User::where('id', 1)->first(),
         ['trainee']
@@ -131,7 +132,6 @@ test('getCurrentUserSpend', function () {
 test('getTotalSpendPeriod', function () {
     $id = 1;
 
-    $this->seed(TestUsageSeeder::class);
     Sanctum::actingAs(
         User::where('id', $id)->first(),
         ['trainee']
@@ -161,7 +161,6 @@ test('getTotalSpendPeriod', function () {
 test('getUserSpendPeriod', function () {
     $id = 2;
 
-    $this->seed(TestUsageSeeder::class);
     Sanctum::actingAs(
         User::where('id', $id)->first(),
         ['admin']
@@ -191,7 +190,6 @@ test('getUserSpendPeriod', function () {
 test('getCurrentUserSpendPeriod', function () {
     $id = 2;
 
-    $this->seed(TestUsageSeeder::class);
     Sanctum::actingAs(
         User::where('id', $id)->first(),
         ['trainee']
@@ -221,7 +219,6 @@ test('getCurrentUserSpendPeriod', function () {
 test('getUserSpendPeriodDaily', function () {
     $id = 1;
 
-    $this->seed(TestUsageSeeder::class);
     Sanctum::actingAs(
         User::where('id', $id)->first(),
         ['admin']
@@ -270,7 +267,6 @@ test('getUserSpendPeriodDaily', function () {
 test('getCurrentUserSpendPeriodDaily', function () {
     $id = 1;
 
-    $this->seed(TestUsageSeeder::class);
     Sanctum::actingAs(
         User::where('id', $id)->first(),
         ['trainee']
@@ -320,7 +316,6 @@ test('getTotalSpendMonth', function () {
     $id = 1;
 
     Carbon::setTestNow(Carbon::create(2026, 1, 31, 0));
-    $this->seed(TestUsageSeeder::class);
     Sanctum::actingAs(
         User::where('id', $id)->first(),
         ['trainee']
@@ -350,7 +345,6 @@ test('getUserSpendMonth', function () {
     $id = 1;
 
     Carbon::setTestNow(Carbon::create(2026, 1, 31, 0));
-    $this->seed(TestUsageSeeder::class);
     Sanctum::actingAs(
         User::where('id', $id)->first(),
         ['admin']
@@ -391,7 +385,6 @@ test('getCurrentUserSpendMonth', function () {
     $id = 1;
 
     Carbon::setTestNow(Carbon::create(2026, 1, 31, 0));
-    $this->seed(TestUsageSeeder::class);
     Sanctum::actingAs(
         User::where('id', $id)->first(),
         ['trainee']
@@ -432,7 +425,6 @@ test('getTotalSpendWeek', function () {
     $id = 1;
 
     Carbon::setTestNow(Carbon::create(2026, 1, 31, 0));
-    $this->seed(TestUsageSeeder::class);
     Sanctum::actingAs(
         User::where('id', $id)->first(),
         ['trainee']
@@ -463,7 +455,6 @@ test('getUserSpendWeek', function () {
     $id = 1;
 
     Carbon::setTestNow(Carbon::create(2026, 1, 31, 0));
-    $this->seed(TestUsageSeeder::class);
     Sanctum::actingAs(
         User::where('id', $id)->first(),
         ['admin']
@@ -499,7 +490,6 @@ test('getCurrentUserSpendWeek', function () {
     $id = 1;
 
     Carbon::setTestNow(Carbon::create(2026, 1, 31, 0));
-    $this->seed(TestUsageSeeder::class);
     Sanctum::actingAs(
         User::where('id', $id)->first(),
         ['trainee']
