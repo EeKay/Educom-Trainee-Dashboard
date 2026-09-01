@@ -37,3 +37,10 @@ DashboardAPI/node_modules
 front-end/node_modules
 DashboardAPI/vendor
 front-end/vendor
+
+# Vite / Laravel generated — never commit (hot restores localhost:5173 on the VPS)
+front-end/public/hot
+front-end/public/build
+front-end/storage/logs
+front-end/bootstrap/cache/*.php
+DashboardAPI/bootstrap/cache/*.php
