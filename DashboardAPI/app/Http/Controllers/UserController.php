@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -16,44 +17,25 @@ class UserController extends Controller
 
     public function create(Request $request)
     {
-        $fields = $request->validate([
+        $request->validate([
             'team' => 'required',
             'name' => 'required',
             'email' => 'required',
             'key_alias' => 'required',
             'password' => 'required'
         ]);
-        $fields['role'] = $request->input('role', 'trainee');
 
-        \App\Models\User::create([
-            'team' => $fields['team'],
-            'name' => $fields['name'],
-            'role' => $fields['role'],
-            'email' => $fields['email'],
-            'key_alias' => $fields['key_alias'],
-            'password' => $fields['password']
-        ]);
+
+        \App\Models\User::create($request->all());
     }
 
     public function update(Request $request, string $id)
     {
-        $fields = $request->validate([
-            'team' => 'required',
-            'name' => 'required',
-            'role' => 'required',
-            'email' => 'required',
-            'key_alias' => 'required',
-            'password' => 'required'
-        ]);
-
-        \App\Models\User::where('id', $id)->update([
-                                        'team' => $fields['team'],
-                                        'name' => $fields['name'],
-                                        'role' => $fields['role'],
-                                        'email' => $fields['email'],
-                                        'key_alias' => $fields['key_alias'],
-                                        'password' => $fields['password']
-                                    ]);
+        if(isset($request['password'])) {
+            $password = $request['password'];
+            $request['password'] = Hash::make($request['password']);
+        }
+        \App\Models\User::where('id', $id)->update($request->all());
     }
 
     public function delete(string $id) 

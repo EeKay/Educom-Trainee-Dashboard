@@ -11,9 +11,7 @@ class nanController extends Controller
     /*
     * Contact n8n workflow
     * params
-    * int traineeId
     * string question
-    * int sessionId
     * boolean faqRejected
     */
     public function contactWorkflow(Request $request) 
@@ -25,8 +23,7 @@ class nanController extends Controller
 
         $user = $request->user();
 
-        //dd($fields);
-        $response = Http::withHeaders(['n8n-secret' => config('app.NAN_KEY')])->post('https://ai.educom.nu/t/23090/webhook-test/helpdesk-chat', [
+        $response = Http::withHeaders(['n8n-secret' => config('app.NAN_KEY')])->post(config('NAN_URL').'/helpdesk-chat', [
             'traineeId' => $user->id,
             'question' => $fields['question'],
             'timestamp' => Carbon::now(),
@@ -43,7 +40,7 @@ class nanController extends Controller
     {
         $user = $request->user();
 
-        $response = Http::withHeaders(['n8n-secret' => config('app.NAN_KEY')])->post('https://ai.educom.nu/t/23090/webhook-test/n8n-reset-request', [
+        $response = Http::withHeaders(['n8n-secret' => config('app.NAN_KEY')])->post(config('NAN_URL').'/n8n-reset-request', [
             'email' => $user->email
         ]);
         return $response->json();

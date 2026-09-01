@@ -21,7 +21,13 @@ class AuthController extends Controller
         if (!$user || !Hash::check($fields['password'], $user->password)) {
             return response([
                 'message' => 'Wrong credentials'
-            ]);
+            ], 401);
+        }
+
+        if ($user->active == false) {
+            return response([
+                'message' => 'User not active'
+            ], 401);
         }
         
         $token = $user->createToken('token', [$user->role])->plainTextToken;
@@ -38,7 +44,7 @@ class AuthController extends Controller
         'lax'
         );
 
-        return response()->json(['token' => $token, 'role' => $user->role, 'message' => 'Logged in'])->cookie($cookie);
+        return response()->json(['token' => $token, 'role' => $user->role, 'id' => $user->id, 'message' => 'Logged in'])->cookie($cookie);
     }
 
     public function logout(Request $request) {

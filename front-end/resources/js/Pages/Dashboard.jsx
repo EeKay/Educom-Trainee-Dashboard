@@ -6,7 +6,7 @@ import StatCard from '../Components/StatCard';
 import DateRangeCard from '../Components/DateRangeCard';
 import ChatBot from '../Components/ChatBot';
 import '../../css/dashboard.css';
-import { setLayoutProps } from '@inertiajs/react';
+import {usePage} from '@inertiajs/react';
 
 function formatDate(date) {
   return date.toISOString().split('T')[0];
@@ -14,7 +14,8 @@ function formatDate(date) {
 
 export default function Dashboard(props) {
   const users = props.users;
-  const currentUser = 2; //hardcoded for now, but will be changed to token from the session 
+  const { auth } = usePage().props;
+  const currentUser = auth.id;
 
   const monthlyStats = props.user_monthly_usage;
   const dailyStats = props.user_daily_usage;
@@ -59,32 +60,53 @@ console.log('monthlyStats:', monthlyStats);
   return (
     <div>
       <Navbar />
-      <div className="dashboard-container">
-        <div style={{ display: 'flex', gap: '40px', alignItems: 'stretch', width: '100%' }}>
-          <ProfileCard user={currentUser} monthlySpend={monthlyStats.spend} />
-          <div style={{ flex: 1 }}>
-            <Leaderboard users={leaderboardUsers} currentUserId={currentUser} />
-          </div>
+        <div className="dashboard-container">
+
+        <div className="dashboard-top-row">
+          <ProfileCard
+            user={currentUser}
+            monthlySpend={monthlyStats.spend}
+          />
+
+          <Leaderboard
+            users={leaderboardUsers}
+            currentUserId={currentUser}
+          />
         </div>
-      
-        <div style={{ display: 'flex', gap: '48px', width: '100%' }}>
-          <div style={{ flex: '0 0 220px' }}>
-            <StatCard label="total today" tokens={dailyStats.tokens} spend={dailyStats.spend} color="red" />
+
+          <div className="dashboard-bottom-row">
+
+            <div className="dashboard-stat">
+              <StatCard
+                label="total today"
+                tokens={dailyStats.tokens}
+                spend={dailyStats.spend}
+                color="red"
+              />
+            </div>
+
+            <div className="dashboard-stat">
+              <StatCard
+                label="total this week"
+                tokens={weeklyStats.tokens}
+                spend={weeklyStats.spend}
+                color="blue"
+              />
+            </div>
+
+            <div className="dashboard-date-range">
+              <DateRangeCard
+                modelStats={modelStats}
+                resultStats={resultStats}
+                onRangeChange={handleRangeChange}
+                currentUser={currentUser}
+                maxDate={formatDate(new Date())}
+              />
+            </div>
+
           </div>
-          <div style={{ flex: '0 0 220px' }}>
-            <StatCard label="total this week" tokens={weeklyStats.tokens} spend={weeklyStats.spend} color="blue" />
-          </div>
-          <div style={{ flex: 1 }}>
-            <DateRangeCard
-              modelStats={modelStats}
-              resultStats={resultStats}
-              onRangeChange={handleRangeChange}
-              currentUser={currentUser}
-              maxDate={formatDate(new Date())}
-            />
-          </div>
+
         </div>
-      </div>
       <ChatBot />
     </div>
   )

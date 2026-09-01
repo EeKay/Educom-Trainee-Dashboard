@@ -1,24 +1,184 @@
 .dashboard-container {
+  width: 100%;
   max-width: 1200px;
-  margin: 0 auto;
-  margin-top: 50px;
+
+  margin: 50px auto 0;
   padding: 40px 32px;
+
+  box-sizing: border-box;
+
   display: flex;
   flex-direction: column;
   gap: 32px;
-}
 
-.dashboard-container {
   animation: fadeInUp 0.4s ease;
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
+
+/* =========================
+   TOP ROW
+   ========================= */
+
+.dashboard-top-row {
+  display: grid;
+
+  grid-template-columns: 220px minmax(0, 1fr);
+
+  gap: 40px;
+
+  width: 100%;
+
+  align-items: stretch;
+}
+
+.dashboard-profile {
+  width: 220px;
+  min-width: 220px;
+}
+
+.dashboard-leaderboard {
+  width: 100%;
+  min-width: 0;
+}
+
+
+/* =========================
+   BOTTOM ROW
+   ========================= */
+
+.dashboard-bottom-row {
+  display: grid;
+
+  grid-template-columns:
+    220px
+    220px
+    minmax(0, 1fr);
+
+  gap: 40px;
+
+  width: 100%;
+
+  align-items: stretch;
+}
+
+.dashboard-stat {
+  width: 220px;
+  min-width: 220px;
+}
+
+.dashboard-date-range {
+  width: 100%;
+  min-width: 0;
+}
+
+
+/* =========================
+   DATE RANGE
+   ========================= */
+
+.date-range-card {
+  width: 100%;
+  min-width: 0;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================
+   TABLET
+   ========================= */
+
+@media (max-width: 950px) {
+
+  .dashboard-container {
+    padding: 32px 24px;
+    margin-top: 32px;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  /*
+   * Keep profile beside leaderboard.
+   * The leaderboard gets the remaining space.
+   */
+  .dashboard-top-row {
+    grid-template-columns: 200px minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .dashboard-profile {
+    width: 200px;
+    min-width: 200px;
+  }
+
+  /*
+   * Put the two stat cards beside each other,
+   * then put the chart underneath.
+   */
+  .dashboard-bottom-row {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(0, 1fr);
+
+    gap: 24px;
+  }
+
+  .dashboard-stat {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .dashboard-date-range {
+    grid-column: 1 / -1;
+  }
+}
+
+
+/* =========================
+   SMALL TABLET / MOBILE
+   ========================= */
+
+@media (max-width: 700px) {
+
+  .dashboard-container {
+    padding: 24px 16px;
+    margin-top: 24px;
+
+    gap: 24px;
+  }
+
+  /*
+   * Profile goes above leaderboard.
+   */
+  .dashboard-top-row {
+    grid-template-columns: 1fr;
+
+    gap: 24px;
+  }
+
+  .dashboard-profile {
+    width: 220px;
+    min-width: 220px;
+  }
+
+  .dashboard-leaderboard {
+    width: 100%;
+    min-width: 0;
+  }
+
+  /*
+   * Stats become one column.
+   */
+  .dashboard-bottom-row {
+    grid-template-columns: 1fr;
+
+    gap: 20px;
+  }
+
+  .dashboard-stat {
+    min-width:0;
+    width: 100%;
+  }
+
+  .dashboard-date-range {
+    grid-column: auto;
   }
 }

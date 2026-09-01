@@ -48,7 +48,7 @@ export default function AddQuestion({ onSubmitted }) {
                 'POST'
             );
 
-            // If your Laravel API returns { data: {...} }
+            // If Laravel API returns { data: {...} }
             const faq = newFaq?.data ?? newFaq;
 
             onSubmitted?.(faq);
